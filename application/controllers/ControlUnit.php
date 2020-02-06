@@ -674,11 +674,5 @@ class ControlUnit extends CI_Controller
 
     public function view()
     {
-        $data['where'] = array(
-            't_city' => 'bulandshahr',
-            'upcoming' => '1'
-        );
-        $data['upcoming_tournaments'] = $this->userDatabase->selectAllFromTableWhere('tournament_table',$data['where'],'*');
-        print_r($data['upcoming_tournaments']);
     }
 }
