@@ -674,5 +674,16 @@ class ControlUnit extends CI_Controller
 
     public function view()
     {
+
+        if ($this->session->has_userdata('logged_in')) {
+            $result = $this->session->userdata('logged_in');
+            $data['user_id'] = $result['user_id'];
+            $data['user_info'] = $this->userDatabase->fetchUserInfo($result['user_id']);
+            $data['user_stats'] = $this->userDatabase->getImpStats($result['user_id']);
+            $this->load->view('user/profile', $data);
+        } else {
+            $this->load->view('authenticate/login');
+        }
+
     }
 }
