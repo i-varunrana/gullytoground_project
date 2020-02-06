@@ -18,7 +18,7 @@
             </div>
             <div class="second-box">
                 <div class="head">
-                    <strong class="title">Login</strong>
+                    <strong class="title">Login Page</strong>
                 </div>
                 <div class="login-panel base">
                     <form id="login-form" method="POST">
