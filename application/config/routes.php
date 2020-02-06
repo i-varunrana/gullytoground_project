@@ -49,6 +49,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'welcome';
+$route['default_controller'] = 'ControlUnit';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+
+$route['home']='ControlUnit/homePage';
+$route['profile']='ControlUnit/profilePage';
+$route['settings']='ControlUnit/settingsPage';
+$route['stats']='ControlUnit/statsPage';
+$route['tournaments']='ControlUnit/tournamentsPage';
+$route['my-tournaments']='ControlUnit/myTournamentsPage';
+$route['add-tournament']='ControlUnit/addTournamentPage';
+$route['team']='ControlUnit/myTeamPage';
+$route['create-team']='ControlUnit/createTeamPage';
+$route['team-players/(:any)']='ControlUnit/teamPlayersPage/$1';
+$route['add-players/(:any)']='ControlUnit/addPlayersPage/$1';
+

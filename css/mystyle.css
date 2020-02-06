@@ -1,0 +1,403 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 200;
+}
+
+.hide {
+    display: none;
+}
+
+.login-section {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.login-section .first-box {
+    width: 70%;
+    height: 100%;
+    background-color: rgba(50, 50, 50, 1);
+}
+
+.login-section .first-box .logo {
+    position: relative;
+    width: 130px;
+    height: 130px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background-color: #fff;
+    border-radius: 50%;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.075);
+}
+
+.login-section .first-box .logo img {
+    z-index: 1;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.login-section .second-box {
+    width: 30%;
+    height: 100%;
+    padding: 4rem 2rem 1.5rem;;
+}
+
+.login-section .second-box .head {
+    padding: 1rem 0;
+}
+
+.login-section .second-box .head strong {
+    font-size: 1.9rem;
+    letter-spacing: 0.08rem;
+    color: #333;
+}
+
+.login-section .second-box .base{
+    padding: 1rem 0;
+}
+
+.login-section .second-box .base .reset-btn button{
+    margin-top: 14px; 
+    width: 100%;
+    padding: 0.5rem 0;
+    border: 0;
+    border-radius: 6px;
+    background-image: linear-gradient(to right, #cd5c5c , #dc8c8c);
+    font-size: 0.9rem;
+    letter-spacing: 0.04rem;
+    color: white;
+}
+
+.login-section .second-box .base .back-to-login {
+    margin-top: 20px;
+}
+
+.login-section .second-box .base .back-to-login a {
+    text-decoration: underline;
+    color:#68c5b8;
+}
+
+.login-section .second-box .base .back-to-login p {
+    font-size: 0.8rem;
+    color: #333;
+    text-align: center;
+}
+
+.login-section .second-box .base .input-field {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 0.5rem 0;
+}
+
+.login-section .second-box .base .input-field .fa {
+    padding: 0.62rem 1.2rem;;
+    border-radius: 6px 0 0 6px;
+    background-image: linear-gradient(to right, #7fce9a , #68c5b8);
+    color: white;
+}
+.login-section .second-box .base .input-field .fa-key {
+    padding: 0.62rem 1rem;
+    border-radius: 6px 0 0 6px;
+    background-color: #68c5b8;
+    color: white;
+}
+
+.login-section .second-box .base .input-field label {
+    display: block;
+    font-size: 0.9rem;
+    margin-bottom: 0.4rem;
+    letter-spacing: 0.08rem;
+    color: #222;
+}
+
+.login-section .second-box .base .input-field input {
+
+    width: 100%;
+    padding: 0.5rem 0.5rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 0 6px 6px 0;
+    font-size: 0.9rem;
+    letter-spacing: 0.06rem;
+}
+
+.login-section .second-box .base .login-btn {
+    margin-top: 1.2rem;
+    padding: 0;
+}
+
+.login-section .second-box .base .login-btn button {
+    width: 100%;
+    padding: 0.6rem 1.6rem;
+    border: 0;
+    border: 1px solid #68c5b8;
+    border-radius: 6px;
+    color: #68c5b8;
+    font-size: 0.89rem;
+    letter-spacing: 0.08rem;
+}
+
+.login-section .second-box .base .login-btn button:hover {
+    background-image: linear-gradient(to right, #7fce9a , #68c5b8);
+    color: white;
+}
+
+.login-section .second-box .base .forget-pass {
+    margin-top: 5px;
+    padding-left: 4px;
+}
+
+.login-section .second-box .base .forget-pass a {
+    font-size: 0.7rem;
+    color: #c5686d;
+    text-decoration: none;
+}
+
+.login-section .second-box .base .new-account a {
+    text-decoration: underline;
+    color:#56beb8;
+}
+
+.login-section .second-box .base .new-account p {
+    margin-top: 25px; 
+    text-align: center;
+    font-size: 0.7rem;
+    color: #333;
+}
+
+/* media queries */
+@media screen and (max-width: 800px){
+    .login-section {
+        flex-wrap: wrap;
+    }
+    .login-section .first-box {
+        width: 100%;
+        height: 120px;
+        background-size: 35%;
+        border-radius: 6px 6px 0 0;
+    }
+    .login-section .first-box .logo {
+        width: 100px;
+        height: 100px;
+        top: 100%;
+        transform: translate(-50%,-50%);
+    }
+    .login-section .second-box {
+        padding: 2rem;
+        width: 100%;
+    }
+    .login-section .second-box .base .new-account p {
+        margin-top: 45px; 
+    }
+    
+}
+
+/* Register Page */
+.register-section {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.register-section .first-box {
+    width: 70%;
+    height: 100%;
+    background-color: rgba(50, 50, 50, 1);
+}
+
+.register-section .first-box .logo {
+    position: relative;
+    width: 130px;
+    height: 130px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background-color: #fff;
+    border-radius: 50%;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.075);
+}
+
+.register-section .first-box .logo img {
+    z-index: 1;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.register-section .second-box {
+    width: 30%;
+    height: 100%;
+    padding: 3rem 2rem;
+}
+
+.register-section .second-box .head {
+    padding: 1rem 0;
+}
+
+.register-section .second-box .head strong {
+    font-size: 1.9rem;
+    letter-spacing: 0.08rem;
+    color: #333;
+}
+
+.register-section .second-box .base{
+    padding: 1rem 0;
+}
+
+.dp-wrapper {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #777;
+}
+
+.register-section .second-box .base .otp-msg{
+    font-size: 0.75rem;
+    color: #68c5b8;
+}
+
+.register-section .second-box .base .info-msg {
+    font-size: 0.75rem;
+    color: #68c5b8;
+}
+
+.register-section .second-box .base .sent-msg {
+    font-size: 0.75rem;
+    color: #68c5b8;
+}
+
+.register-section .second-box .base .input-field {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 0;
+}
+
+.register-section .second-box .base .input-field .fa {
+    padding: 0.62rem 1.2rem;
+    border-radius: 6px 0 0 6px;
+    background-image: linear-gradient(to right, #7fce9a , #68c5b8);
+    color: white;
+}
+
+.register-section .second-box .base .input-field .fa-key {
+    padding: 0.62rem 1.1rem;
+    border-radius: 6px 0 0 6px;
+    background-image: linear-gradient(to right, #7fce9a , #68c5b8);
+    color: white;
+}
+
+.register-section .second-box .base .input-field label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+    letter-spacing: 0.08rem;
+    color: #222;
+}
+
+.register-section .second-box .base .input-field input {
+
+    width: 100%;
+    padding: 0.5rem 0.5rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 0 6px 6px 0;
+    background: transparent;
+    font-size: 0.9rem;
+    letter-spacing: 0.06rem;
+}
+
+.register-section .second-box .base .row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+}
+
+.select-container {
+    width: 141px !important;
+    padding: 8px 8px;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px; 
+    position: relative;
+    box-sizing: border-box;
+}
+
+.select-container select {
+    width: 90%;
+    border: 0;
+    background: transparent;
+    font-size: 14px;
+    outline: none;
+    color: #333;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+}
+
+.register-section .second-box .base .btn {
+    display: flex;
+    justify-content: center;
+}
+
+.register-section .second-box .base .have-account {
+    margin-top: 20px;
+ }
+
+.register-section .second-box .base .have-account p {
+    text-align: center;
+    font-size: 0.74rem;
+ }
+
+ .register-section .second-box .base .have-account a {
+    color: #68c5b8;
+ }
+
+.register-section .second-box .base .register-btn button{
+    width: 100%;
+    margin-top: 12px;
+    padding: 0.5rem 2rem;
+    border: 0;
+    border: 1px solid #68c5b8;
+    border-radius: 4px;
+    color: #68c5b8;
+    font-size: 0.89rem;
+}
+
+.register-section .second-box .base .register-btn button:hover{
+    background-color: #68c5b8;
+    color: white;
+}
+
+/* media queries */
+@media screen and (max-width: 800px){
+    .register-section {
+        flex-wrap: wrap;
+    }
+    .register-section .first-box {
+        width: 100%;
+        height: 120px;
+        background-size: 35%;
+        border-radius: 6px 6px 0 0;
+    }
+    .register-section .first-box .logo {
+        width: 100px;
+        height: 100px;
+        top: 100%;
+        transform: translate(-50%,-50%);
+    }
+    .register-section .second-box {
+        padding: 2rem;
+        width: 100%;
+    }
+    
+}

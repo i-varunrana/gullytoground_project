@@ -1,0 +1,674 @@
+  /*        my styles          */
+
+  .grid {
+    display: flex;
+  }
+
+  .column {
+    flex-direction: column;
+  }
+
+  .x-center {
+    justify-content: center;
+  }
+
+  .y-center {
+    align-items: center;
+  }
+  
+  .background-dark {
+    background-color: #333;
+  }
+  
+  .light-text {
+    color:#455a64;
+  }
+  
+  .bold {
+    font-weight: 600;
+  }
+  
+  .blue {
+    color:#03a9f3;;
+  }
+  
+  .violet {
+    color:#ab8ce4;
+  }
+  
+  .wrap {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    width:95%;
+  }
+  
+  .small-text {
+    font-size: 0.8rem;
+  }
+  
+  .extra-small-text {
+    font-size: 0.74rem;;
+  }
+
+/* image carousel css */
+  .mySlides {
+    display: none;
+  }
+
+  .mySlides img {
+    width: 425px;
+    height: 495px;
+  }
+
+  /* Next & previous buttons */
+
+  .next {
+    cursor: pointer;
+    position: relative;
+    top: -250px;
+    left: 333px;
+    padding: 16px;
+    margin-top: -22px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+  }
+  .prev {
+    cursor: pointer;
+    position: relative;
+    top: -250px;
+    width: auto;
+    padding: 16px;
+    margin-top: -22px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+  }
+
+  /* Position the "next button" to the right */
+  .next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+  }
+
+  /* On hover, add a black background color with a little bit see-through */
+  .prev:hover, .next:hover {
+    background-color: rgba(0,0,0,0.3);
+  }
+
+  /* The dots/bullets/indicators */
+  .dot {
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+  }
+
+  
+
+  /* Fading animation */
+  .fade {
+    -webkit-animation-name: fade;
+    -webkit-animation-duration: 1.5s;
+    animation-name: fade;
+    animation-duration: 1.5s;
+  }
+
+  @-webkit-keyframes fade {
+    from {opacity: .4} 
+    to {opacity: 1}
+  }
+
+  @keyframes fade {
+    from {opacity: .4} 
+    to {opacity: 1}
+  }
+
+
+  /* Tournament Card */
+  .tournament-card {
+    background-color: white;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  }
+
+  
+  .tournament-bg {
+    width: 100%;
+    height: 130px;
+    background-image: url('http://localhost/gullytoground/images/banner/default.jpg');
+    background-size: cover;
+    border-radius: 6px 6px 0 0;
+  
+  }
+  
+  .in-row {
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+  
+  .player-card {
+    margin: 0 0.5rem;
+    width: 110px;
+    height: 130px;
+    background-color: #444;
+    border-radius: 0 0 3px 3px;
+  }
+  
+  .player-card img {
+    object-fit: fill;
+    width: 110px;
+    height: 110px;
+  }
+  
+  .player-card .player-name {
+    top: 0px;
+    padding: 0 0.7rem;
+    text-align: center;
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 600;
+    display: inline-block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  
+  .performance-float-chart {
+    height: 444px;
+  }
+  
+  .myprofile-category {
+    padding: 0 0; }
+    
+    .myprofile-category ul li {
+      width: 48%;
+      padding: 0 15px;
+      font-size: 0.69rem;
+      display: inline-block; }
+    .myprofile-category ul li:only-child {
+      width: 100%; }
+      .myprofile-category ul li h5 { 
+        font-weight: 600;
+        color:#58C9F9;
+      }
+  
+  .w-30 {
+    width: 31%;
+  } 
+  
+  .mystat-card {
+    margin: 4px 4px 0 0;
+  }
+  
+  .profile-edit-btn {
+    color: #00c292;
+  }
+  
+  .form-control-label , .input-group-text {
+    font-size: 0.8rem;
+  }
+  
+  .form-control , .custom-file-label {
+    font-size: 0.85rem;;
+  }
+
+  .demo__card-cont {
+    position: relative;
+    width: 100%;
+    height: 18rem;
+    margin: 0 auto 1.5rem;
+  }
+  .demo__card {
+    z-index: 2;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    border-radius: 6px;
+    -webkit-transform-origin: 50% 100%;
+    transform-origin: 50% 100%;
+  }
+  
+  .demo__card:first-child {
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  }
+  .demo__card.reset {
+    transition: -webkit-transform 0.3s;
+    transition: transform 0.3s;
+    transition: transform 0.3s, -webkit-transform 0.3s;
+    -webkit-transform: translateX(0) !important;
+            transform: translateX(0) !important;
+  }
+  .demo__card.reset .demo__card__choice {
+    transition: opacity 0.3s;
+    opacity: 0 !important;
+  }
+  .demo__card.inactive {
+    transition: -webkit-transform 0.3s;
+    transition: transform 0.3s;
+    transition: transform 0.3s, -webkit-transform 0.3s;
+  }
+  .demo__card.to-left {
+    -webkit-transform: translateX(-30rem) rotate(-30deg) !important;
+            transform: translateX(-30rem) rotate(-30deg) !important;
+  }
+  .demo__card.to-right {
+    -webkit-transform: translate(30rem) rotate(30deg) !important;
+            transform: translate(30rem) rotate(30deg) !important;
+  }
+  .demo__card.below {
+    z-index: 1;
+  }
+  
+  .demo__card__drag {
+    z-index: 5;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    cursor: -webkit-grab;
+    cursor: grab;
+  }
+
+  /* LEFT AND RIGHT SIDE ARROW FOR SWIPE CARDS IN TOURNAMENT AND PLAYERS STARTS*/
+  .left-arrow {
+    position: absolute;
+    z-index: 11;
+    left: 6px;
+    top: 110px;
+  }
+  .right-arrow {
+    position: absolute;
+    z-index: 11;
+    right: 6px;
+    top: 110px;
+  }
+
+  /* LEFT AND RIGHT SIDE ARROW FOR SWIPE CARDS IN TOURNAMENT AND PLAYERS END */
+
+  /* ADD USER PROFILE PIC CSS */
+  .add-image-icon {
+    position: relative;
+  }
+
+  .plus-icon, .team-plus-icon {
+    position: absolute;
+    top: -44px;
+    right: 6px;
+    font-size: 1.3rem;
+    padding: 0.3rem 0.4rem;
+    background-color: white;
+    border-radius: 50%;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+  }
+
+  /* ADD USER PROFILE PIC CSS END*/
+
+  /* ADD TOURNAMENT CSS */
+
+  .caps {
+    text-transform: capitalize;
+  }
+
+  #add-tournament {
+    cursor: pointer;
+  }
+
+  .add-tournament-bg {
+    height: 170px;
+    background-color: #ccc;
+    margin-bottom: 22px;
+  }
+
+  .add-banner {
+    width: 100%;
+    height: 170px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.89rem;
+    font-weight: 600;
+  }
+
+  .bnr {
+    width: 100%;
+    height: 170px;
+    object-fit: contain;
+  }
+
+  .modal-body .upload-section {
+    padding: 1rem 0;
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid #ccc;
+  }
+
+  .modal-body .upload-section div {
+    width: 150px;
+    height: 40px;
+    padding: 0.9rem;
+    border: 1px dashed #999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .modal-body .library {
+    padding: 1rem;
+  }
+
+  .modal-body .library .title {
+    font-size: 0.89rem;
+    font-weight: 600;
+  }
+
+  .modal-body .library .content .banner {
+    padding: 0.2rem;
+    margin: 0.5rem;
+  }
+
+
+
+  /* ADD TOURNAMENT CSS END*/
+
+  /* MY TEAM CSS START*/
+
+  .h-min-6 {
+    min-height: 600px;
+  }
+
+  .team-card {
+    margin: 1rem 0.5rem;
+    padding: 1.6rem;
+    background-color: #fff;
+    border-radius: 3px;
+    border-radius: 0 8px 16px rgba(0,0,0,0.075);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border-top: 6px solid salmon;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  }
+
+  .team-card .delete-team-btn {
+    position: absolute;
+    font-size: 1.3rem;
+    top: 37px;
+    right: 45px;
+  }
+
+  .team-card .delete-team-btn:hover {
+    font-size: 1.4rem;
+    color: #DC143C;
+  }
+
+  .team-card .team-img {
+    padding-right: 2rem;
+  }
+
+  .team-card .team-img img {
+    padding: 0.2rem;
+    background-color: #ccc;
+    border-radius: 50%;
+  }
+
+  .team-card .team-details .name {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #4e5665;
+    width: 190px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .team-card .team-details .cont {
+    margin-top: 12px;
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .team-card .team-details .captain {
+    display: flex;
+    justify-content: flex-start ;
+    align-items: center;
+  }
+
+  .team-card .team-details .captain .icon img {
+    display: inline;
+  }
+
+  .team-card .team-details .captain .captain-name {
+    margin-left: 6px;
+    display: inline;
+    color: #4e5665;
+    width: 100px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .team-card .team-details .city {
+    margin-left: 12px;
+    display: flex;
+    justify-content: flex-start ;
+    align-items: center;
+  }
+
+  .team-card .team-details .city .fa {
+    color: #666;
+  }
+
+  .team-card .team-details .city .city-name {
+    margin-left: 5px;
+    display: inline;
+    color: #4e5665;
+    width: 100px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+   
+  
+
+  .create-team-btn {
+    margin-top: 5rem;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  .create-team-btn a {
+    padding: 0.6rem 2rem;
+    border: 0;
+    border: 1px solid #03a9f3;
+    color: #03a9f3;
+  }
+
+  .create-team-btn a:hover {
+    background-color: #03a9f3;
+    color: white;
+  }
+
+  .btn-lg {
+    font-size: 1rem;
+  }
+
+  /* MY TEAM CSS END*/
+
+
+
+   /* MY TEAM PLAYERS CSS */
+
+  .no-player-added {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .players-card {
+    padding: 0;
+    border-radius: 4px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  }
+
+  .players-card .head {
+    padding-top: 4rem;
+    height: 180px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .players-card .head .name {
+    margin-top: 8px;
+  }
+
+  .players-card .head .name p {
+    text-transform: capitalize;
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: 600;
+  }
+
+  .players-card .body .user-info {
+    margin: 0 2rem;
+    padding-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.89rem;
+    color: #4e5665;
+  }
+
+  .players-card .body .user-info .basic-info .city {
+    padding-top: 4px;
+  }
+
+  .players-card .body .user-info .add-btn button {
+    border: 0;
+    background-color: lightseagreen;
+    border-radius: 8px;
+    padding: 0.6rem 1.8rem;
+    color: white;
+  }
+
+  .players-card .body .user-info .add-btn button:hover {
+    transition: all 500ms ease-in;
+    background-color: #198e88;
+  }
+
+  .players-card .body .user-stats {
+    background-color: #ccc;
+    margin-top: 20px;
+    padding: 20px 0;
+    border-radius: 0 0 4px 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+  }
+
+  .players-card .body .user-stats .field {
+    margin: 0 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .players-card .body .user-stats .field span {
+    display: block;
+  }
+
+  .players-card .body .user-stats .field span.name {
+    font-size: 0.9rem;
+    color: #4e5665;
+  }
+
+  .team-player-card {
+    border-radius: 4px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  }
+
+  .team-player-card .head {
+    padding: 1.2rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .team-player-card .head .right-half, .team-player-card .left-half {
+    margin: 0 1rem;
+  }
+
+  .team-player-card .head .left-half .name {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #4e5665;
+  }
+
+  .team-player-card .head .left-half .playing-role {
+    font-size: 1rem;
+    color: #4e5665;
+  }
+
+  .team-player-card .body {
+    padding: 0.5rem 1rem;
+    border-top: 1px solid #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .team-player-card .body .city {
+    font-size: 1rem;
+    color: #4e5665;
+  }
+
+  
+   /* MY TEAM PLAYERS CSS END */
+
+
+  .search-player-wrapper .search-player {
+    position: relative;
+    left: 4px;
+    border: 0;
+    padding: 0.4rem 1.6rem;
+    border-bottom: 1px solid #ccc;
+
+  }
+
+  .search-player-wrapper .search-player-btn {
+    padding: 0.4rem 1.6rem;
+    border-bottom: 1px solid #ccc;
+  }
+
+  .search-player-wrapper .search-player-btn:hover {
+    transition: all 1000ms ease-in;
+    background-color: lightseagreen;
+    color: white;
+  }
+
+
+  
