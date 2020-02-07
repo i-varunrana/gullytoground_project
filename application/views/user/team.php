@@ -2,13 +2,16 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="">
+<!--<![endif]-->
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>G2G</title>
     <meta name="description" content="Gullytoground">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
 
     <link rel="shortcut icon" href="<?php echo base_url(); ?>images/icons/favicon.png">
 
@@ -27,16 +30,16 @@
 </head>
 
 <body>
-     <!-- Left Panel -->
+    <!-- Left Panel -->
     <aside id="left-panel" class="left-panel">
         <nav class="navbar navbar-expand-sm navbar-default">
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li class="active">
-                        <a href="<?php echo base_url('home');?>"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
+                        <a href="<?php echo base_url('home'); ?>"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url('profile');?>"> <i class="menu-icon fa fa-user"></i>My Profile</a>
+                        <a href="<?php echo base_url('profile'); ?>"> <i class="menu-icon fa fa-user"></i>My Profile</a>
                     </li><!-- /.menu-title -->
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-soccer-ball-o"></i>Tournaments</a>
@@ -63,8 +66,8 @@
         <header id="header" class="header">
             <div class="top-left">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="./"><img src="<?php echo base_url(); ?>images/icon/logo-icon.png" alt="Logo" width="32"></a>
-                    <a class="navbar-brand hidden" href="./"><img src="<?php echo base_url(); ?>images/icon/logo-icon.png" alt="Logo" width="32"></a>
+                    <a class="navbar-brand" href="<?php echo base_url('home'); ?>"><img src="<?php echo base_url(); ?>images/icon/logo-icon.png" alt="Logo" width="32"></a>
+                    <a class="navbar-brand hidden" href="<?php echo base_url('home'); ?>"><img src="<?php echo base_url(); ?>images/icon/logo-icon.png" alt="Logo" width="32"></a>
                     <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
                 </div>
             </div>
@@ -104,17 +107,21 @@
 
                     <div class="user-area dropdown float-right">
                         <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img class="user-avatar rounded-circle" src="<?php if($user_dp[0]->image_address == ''){ echo base_url()."images/profile_pic/default.png"; } else { echo base_url().$user_dp[0]->image_address; }?>" alt="User Avatar">
+                            <img class="user-avatar rounded-circle" src="<?php if ($user_dp[0]->image_address == '') {
+                                                                                echo base_url() . "images/profile_pic/default.png";
+                                                                            } else {
+                                                                                echo base_url() . $user_dp[0]->image_address;
+                                                                            } ?>" alt="User Avatar">
                         </a>
 
                         <div class="user-menu dropdown-menu">
-                            <a class="nav-link" href="<?php echo base_url('profile');?>"><i class="fa fa- user"></i>My Profile</a>
+                            <a class="nav-link" href="<?php echo base_url('profile'); ?>"><i class="fa fa- user"></i>My Profile</a>
 
                             <a class="nav-link" href="#"><i class="fa fa- user"></i>Notifications <span class="count">13</span></a>
 
                             <a class="nav-link" href="<?php echo base_url('settings'); ?>"><i class="fa fa -cog"></i>Settings</a>
 
-                            <a class="nav-link" href="<?php echo base_url('ControlUnit/userLogout');?>"><i class="fa fa-power -off"></i>Logout</a>
+                            <a class="nav-link" href="<?php echo base_url('ControlUnit/userLogout'); ?>"><i class="fa fa-power -off"></i>Logout</a>
                         </div>
                     </div>
 
@@ -127,53 +134,104 @@
             <!-- Animated -->
             <div class="animated fadeIn">
                 <!-- Widgets  -->
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col-md-12">
                         <div class="card-header bg-white br-0">
                             <strong class="card-title inline-block">My Team</strong>
                         </div>
                         <div class="card-body card-block">
-                                <div class="row">
-                                    <?php  
-                                        foreach ($user_teams as $team){  
-                                    ?>
+                            <div class="row">
+                                <?php
+                                foreach ($user_teams as $team) {
+                                ?>
 
                                     <div class="col-md-6">
-                                            <div class="team-card" data-id="<?php echo $team->team_id; ?>">
-                                                <i class="fa fa-trash delete-team-btn" data-id="<?php echo $team->team_id; ?>"></i>
-                                                <div class="team-img">
-                                                    <img src="<?php echo base_url();?>images/profile_pic/default.png" alt="team img" width="95">
+                                        <div class="team-card" data-id="<?php echo $team->team_id; ?>">
+                                            <i class="fa fa-trash delete-team-btn" data-id="<?php echo $team->team_id; ?>"></i>
+                                            <div class="team-img">
+                                                <img src="<?php echo base_url(); ?>images/profile_pic/default.png" alt="team img" width="95">
+                                            </div>
+                                            <div class="team-details">
+                                                <div class="name">
+                                                    <?php echo $team->team_name; ?>
                                                 </div>
-                                                <div class="team-details">
-                                                    <div class="name">
-                                                        <?php echo $team->team_name;?>
-                                                    </div>
-                                                    <div class="cont">
+                                                <div class="cont">
                                                     <div class="captain">
-                                                        <div class="icon"><img src="<?php echo base_url();?>images/icon/admin.png" alt="" width="16"></div>
-                                                        <div class="captain-name"><?php echo $team->admin_name;?></div>
+                                                        <div class="icon"><img src="<?php echo base_url(); ?>images/icon/admin.png" alt="" width="16"></div>
+                                                        <div class="captain-name"><?php echo $team->admin_name; ?></div>
                                                     </div>
                                                     <div class="city">
                                                         <i class="fa fa-map-marker"></i>
-                                                        <div class="city-name"><?php echo $team->team_city;?></div>
-                                                    </div>
+                                                        <div class="city-name"><?php echo $team->team_city; ?></div>
                                                     </div>
                                                 </div>
-                                            </div>  
+                                            </div>
+                                        </div>
                                     </div>
-                                    <?php  
-                                        }  
-                                    ?>
-                                </div>      
-                        </div>
+
+                                    <div class="col-md-6">
+                                        <div class="card">
+                                            <div class="card-header border-0">
+                                                <i class="fa fa-trash delete-team-btn float-right"></i>
+                                            </div>
+                                            <div class="card-body">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php
+                                }
+                                ?>
+                            </div>
                         </div>
                     </div>
+                </div> -->
+                <div class="row">
+                    <div class="col-md-12 mb-3">
+                        <strong class="card-title">My Team</strong>
+                    </div>
+                </div>
+                <div class="row">
+                    <?php
+                        foreach ($user_teams as $team) {
+                    ?>
+                    <div class="col-md-6">
+                        <div class="card teams" data-id="<?php echo $team->team_id; ?>">
+                            <i class="fa fa-trash delete-team-btn" data-id="<?php echo $team->team_id; ?>"></i>
+                            <div class="card-body p-2">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="w-25">
+                                        <img class="rounded-circle bg-light" src="<?php echo $team->team_dp ?>" alt="team img" width="75">
+                                    </div>
+                                    <div class="w-75">
+                                        <strong class="card-title mb-0 d-block"><?php echo $team->team_name; ?></strong>
+                                        <p class="card-title mb-0 d-block small-text text-dark">3 Players</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="d-flex justify-content-between pr-3 pl-3">
+                                    <div class="team-admin pr-3">
+                                        <img src="<?php echo base_url(); ?>images/icon/admin.png" alt="" width="12">&nbsp;<small><?php echo $team->admin_name; ?></small>
+                                    </div>
+                                    <div class="team-city">
+                                        <i class="fa fa-map-marker" style="font-size: 0.85rem"></i>&nbsp;<small><?php echo $team->team_city; ?></small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <?php
+                    }
+                    ?>
+                </div>
+                <div class="row">
                     <div class="col-md-12">
                         <div class="create-team-btn">
-                            <a href="<?php echo base_url('create-team');?>">CREATE YOUR TEAM</a>
+                            <a href="<?php echo base_url('create-team'); ?>">CREATE YOUR TEAM</a>
                         </div>
                     </div>
-                </div> 
+                </div>
             </div>
             <!-- .animated -->
         </div>
@@ -197,24 +255,24 @@
     <!-- /#right-panel -->
 
     <div class="modal fade" id="scrollmodal" tabindex="-1" role="dialog" aria-labelledby="scrollmodalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="scrollmodalLabel">Create you Team</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                             
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                            <button type="button" class="btn btn-primary">Confirm</button>
-                        </div>
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="scrollmodalLabel">Create you Team</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary">Confirm</button>
                 </div>
             </div>
         </div>
+    </div>
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
@@ -225,4 +283,5 @@
     <script src="<?php echo base_url(); ?>js/main.js"></script>
     <script src="<?php echo base_url(); ?>js/userscript.js"></script>
 </body>
+
 </html>

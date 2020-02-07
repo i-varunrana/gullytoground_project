@@ -67,8 +67,8 @@
         <header id="header" class="header">
             <div class="top-left">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="./"><img src="<?php echo base_url(); ?>images/icon/logo-icon.png" alt="Logo" width="32"></a>
-                    <a class="navbar-brand hidden" href="./"><img src="<?php echo base_url(); ?>images/icon/logo-icon.png" alt="Logo" width="32"></a>
+                    <a class="navbar-brand" href="<?php echo base_url('home'); ?>"><img src="<?php echo base_url(); ?>images/icon/logo-icon.png" alt="Logo" width="32"></a>
+                    <a class="navbar-brand hidden" href="<?php echo base_url('home'); ?>"><img src="<?php echo base_url(); ?>images/icon/logo-icon.png" alt="Logo" width="32"></a>
                     <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
                 </div>
             </div>
@@ -134,8 +134,60 @@
         <div class="content">
             <!-- Animated -->
             <div class="animated fadeIn">
-                <!-- Widgets  -->
                 <div class="row">
+                    <div class="col-md-12 mb-3">
+                        <strong class="card-title">Team <?php echo $team_info[0]['team_name']; ?></strong>
+                        <strong class="card-title float-right"><?php echo $total_players ?> Players</strong>
+                    </div>
+                </div>
+                <div class="row">
+                    <?php
+                        if (isset($team_players)) {
+                            foreach ($team_players as $players) {
+                    ?>
+                    <div class="col-md-6">
+                        <div class="card teams">
+                            <i class="fa fa-trash delete-team-btn"></i>
+                            <div class="card-body p-2">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="w-25">
+                                        <img class="rounded-circle bg-light" src="<?php echo base_url() . $players->image_address; ?>" alt="team img" width="75">
+                                    </div>
+                                    <div class="w-75">
+                                        <strong class="card-title mb-0 d-block"><?php echo $players->full_name; ?></strong>
+                                        <p class="card-title mb-0 d-block small-text text-dark"><?php echo $players->playing_role; ?>&nbsp;<?php echo $players->batting_style; ?></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="col-md-12">
+                                    <div class="team-city">
+                                        <i class="fa fa-map-marker" style="font-size: 0.85rem"></i>&nbsp;<small><?php echo $players->city; ?></small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <?php
+                    } }
+                    else {
+                    ?>
+                    <div class="col-md-12">
+                        <p style="text-align: center">0 Player Added</p>
+                    </div>
+                    <?php
+                        }
+                    ?>
+                </div>
+                <div class="row">
+                <div class="col-md-12">
+                    <div class="create-team-btn">
+                        <a href="<?php echo base_url('add-players' . '/' . $team_id); ?>">ADD PLAYERS</a>
+                    </div>
+                 </div>
+                </div>
+                <!-- Widgets  -->
+                <!-- <div class="row">
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header bg-white br-0 d-flex justify-content-between">
@@ -183,7 +235,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
             <!-- .animated -->
         </div>

@@ -65,8 +65,8 @@
         <header id="header" class="header">
             <div class="top-left">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="./"><img src="<?php echo base_url(); ?>images/icon/logo-icon.png" alt="Logo" width="32"></a>
-                    <a class="navbar-brand hidden" href="./"><img src="<?php echo base_url(); ?>images/icon/logo-icon.png" alt="Logo" width="32"></a>
+                    <a class="navbar-brand" href="<?php echo base_url('home'); ?>"><img src="<?php echo base_url(); ?>images/icon/logo-icon.png" alt="Logo" width="32"></a>
+                    <a class="navbar-brand hidden" href="<?php echo base_url('home'); ?>"><img src="<?php echo base_url(); ?>images/icon/logo-icon.png" alt="Logo" width="32"></a>
                     <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
                 </div>
             </div>
@@ -130,6 +130,28 @@
             <div class="animated fadeIn">
                 <!-- Widgets  -->
                 <div class="row">
+                    <div class="col-md-12 mb-3">
+                        <strong class="card-title">Add Players</strong>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 col-sm-4 mb-3">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control search-player" placeholder="Search Mobile No.." aria-label="Recipient's username" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary search-player-btn" type="button">Search</button>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="card-body" class="card-body card-block">
+
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="row">
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header bg-white br-0 d-flex justify-content-between">
@@ -144,7 +166,7 @@
                             </div>
                         </div>
                     </div>
-                </div> 
+                </div>  -->
             </div>
             <!-- .animated -->
         </div>

@@ -281,7 +281,7 @@ $(document).ready(function () {
 /*****  CLICK ON TEAM CARDS   *****/
 
 $(document).ready(function () {
-    $('.team-card').click(function (e) {
+    $('.teams').click(function (e) {
         e.preventDefault();
         e.stopPropagation();
         var teamId = $(this).attr('data-id');

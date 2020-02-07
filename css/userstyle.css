@@ -397,7 +397,7 @@
   }
 
   .team-card {
-    margin: 1rem 0.5rem;
+    margin: 0.5rem 0;
     padding: 1.6rem;
     background-color: #fff;
     border-radius: 3px;
@@ -409,11 +409,13 @@
     box-shadow: 0 8px 16px rgba(0,0,0,0.2);
   }
 
-  .team-card .delete-team-btn {
+  .delete-team-btn {
     position: absolute;
-    font-size: 1.3rem;
-    top: 37px;
-    right: 45px;
+    font-size: 1.1rem;
+    top: 12px;
+    right: 12px;
+    cursor: pointer;
+    z-index: 1;
   }
 
   .team-card .delete-team-btn:hover {
@@ -421,12 +423,9 @@
     color: #DC143C;
   }
 
-  .team-card .team-img {
-    padding-right: 2rem;
-  }
-
-  .team-card .team-img img {
+  .team-pic img {
     padding: 0.2rem;
+    margin-right: 0.7rem;
     background-color: #ccc;
     border-radius: 50%;
   }
