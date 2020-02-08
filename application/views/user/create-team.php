@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>css/cs-skin-elastic.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>css/style.css">
-    <link rel="stylesheet" href="<?php echo base_url(); ?>css/userstyle.css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>css/userstyle.css?v=<?php echo $update_css_js; ?>">
     <link rel="stylesheet" href="<?php echo base_url(); ?>css/croppie.css">
     <script>
         const BASE_URL = "<?php echo base_url(); ?>";
@@ -267,7 +267,7 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="<?php echo base_url(); ?>js/main.js"></script>
-    <script src="<?php echo base_url(); ?>js/userscript.js"></script>
+    <script src="<?php echo base_url(); ?>js/userscript.js?v=<?php echo $update_css_js; ?>"></script>
     <script src="<?php echo base_url(); ?>js/croppie.js"></script>
     <script src="<?php echo base_url(); ?>js/crop-team-dp.js"></script>
 </body>

@@ -20,13 +20,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>css/cs-skin-elastic.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>css/style.css">
-    <link rel="stylesheet" href="<?php echo base_url(); ?>css/userstyle.css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>css/userstyle.css?v=<?php echo $update_css_js[0]['datetime']; ?>">
     <script>
         const BASE_URL = "<?php echo base_url(); ?>";
     </script>
 </head>
 
 <body>
+<?php echo $user_info[0]['full_name'];?>
    <!-- Left Panel -->
    <aside id="left-panel" class="left-panel">
         <nav class="navbar navbar-expand-sm navbar-default">
@@ -43,7 +44,7 @@
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-soccer-ball-o"></i><a href="<?php echo base_url('tournaments'); ?>">Tournaments</a></li>
                             <li><i class="fa fa-soccer-ball-o"></i><a href="<?php echo base_url('my-tournaments'); ?>">My Tournaments</a></li>
-                            <li><i class="fa fa-soccer-ball-o"></i><a id="add-tournament" data-name="<?php echo $user_info[0]->full_name; ?>">Add A Tournaments</a></li>
+                            <li><i class="fa fa-soccer-ball-o"></i><a id="add-tournament" data-name="<?php echo $user_info[0]['full_name'];?>">Add A Tournaments</a></li>
                         </ul>
                     </li>
                     <li>
@@ -104,7 +105,7 @@
 
                     <div class="user-area dropdown float-right">
                         <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img class="user-avatar rounded-circle" src="<?php if($user_dp[0]->image_address == ''){ echo base_url()."images/profile_pic/default.png"; } else { echo base_url().$user_dp[0]->image_address; }?>" alt="User Avatar">
+                            <img class="user-avatar rounded-circle" src="<?php if($user_info[0]['image_address'] == ''){ echo base_url()."images/profile_pic/default.png"; } else { echo base_url().$user_info[0]['image_address']; }?>" alt="User Avatar">
                         </a>
 
                         <div class="user-menu dropdown-menu">
@@ -547,6 +548,6 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="<?php echo base_url(); ?>js/main.js"></script>
-    <script src="<?php echo base_url(); ?>js/userscript.js"></script>
+    <script src="<?php echo base_url(); ?>js/userscript.js?v=<?php echo $update_css_js[0]['datetime']; ?>"></script>
 </body>
 </html>

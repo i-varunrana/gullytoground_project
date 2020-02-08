@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>css/cs-skin-elastic.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>css/style.css">
-    <link rel="stylesheet" href="<?php echo base_url(); ?>css/userstyle.css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>css/userstyle.css?v=<?php echo $update_css_js[0]['datetime']; ?>">
     <link rel="stylesheet" href="<?php echo base_url(); ?>css/croppie.css">
     <script>
         const BASE_URL = "<?php echo base_url(); ?>";
@@ -313,7 +313,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="<?php echo base_url(); ?>js/main.js"></script>
-    <script src="<?php echo base_url(); ?>js/userscript.js"></script>
+    <script src="<?php echo base_url(); ?>js/userscript.js?v=<?php echo $update_css_js[0]['datetime']; ?>"></script>
     <script src="<?php echo base_url(); ?>js/croppie.js"></script>
     <script src="<?php echo base_url(); ?>js/crop-banner.js"></script>
     <script>

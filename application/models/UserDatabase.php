@@ -246,6 +246,27 @@ Class UserDatabase extends CI_Model {
         return $query->result();
     }
 
+    //FETCH CSS AND JS
+    public function fetchUpdateDateTime(){
+        $this->db->select('*');
+        $this->db->from('login_table');
+        $this->db->where("id","1");
+        $this->db->limit(1);
+        $query = $this->db->get();
+        if ($query->num_rows() == 1) {
+            return $query->result();
+        } else {
+            return false;
+        }
+        
+    }
+
+    //UPDATE CSS AND JS
+    public function updateCssandJs($tableName=null,$data=null){
+        $this->db->update($tableName,$data);
+		return $this->db->affected_rows() ? TRUE  : FALSE;
+    }
+
 
 // ----------------------------------------------------------------------------------------  //
 

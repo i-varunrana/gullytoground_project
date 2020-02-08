@@ -50,6 +50,8 @@ class ControlUnit extends CI_Controller
         if ($this->session->has_userdata('logged_in')) {
             $result = $this->session->userdata('logged_in');
             $data['user_id'] = $result['user_id'];
+            $where = array('id'=>'1');
+            $data['update_css_js'] = $this->userDatabase->selectAllFromTableWhere('update_app_table',$where,'datetime');
             $data['profile_complete'] = $this->isProfileCompleted($result['user_id']);
             $data['user_info'] = $this->userDatabase->fetchUserInfo($result['user_id']);
             $data['tournaments'] = $this->userDatabase->fetchTournamentInMyCity($data['user_info'][0]->city);
@@ -66,6 +68,8 @@ class ControlUnit extends CI_Controller
         if ($this->session->has_userdata('logged_in')) {
             $result = $this->session->userdata('logged_in');
             $data['user_id'] = $result['user_id'];
+            $where = array('id'=>'1');
+            $data['update_css_js'] = $this->userDatabase->selectAllFromTableWhere('update_app_table',$where,'datetime');
             $data['user_info'] = $this->userDatabase->fetchUserInfo($result['user_id']);
             $data['user_stats'] = $this->userDatabase->getImpStats($result['user_id']);
             $this->load->view('user/profile', $data);
@@ -79,6 +83,8 @@ class ControlUnit extends CI_Controller
     {
         if ($this->session->has_userdata('logged_in')) {
             $result = $this->session->userdata('logged_in');
+            $where = array('id'=>'1');
+            $data['update_css_js'] = $this->userDatabase->selectAllFromTableWhere('update_app_table',$where,'datetime');
             $data['where'] = array('user_id' => $result['user_id']);
             $data['user_info'] = $this->userDatabase->selectAllFromTableWhere('user_account_table', $data['where'], 'user_id,full_name,city,image_address');
             $data['where'] = array(
@@ -102,6 +108,8 @@ class ControlUnit extends CI_Controller
     {
         if ($this->session->has_userdata('logged_in')) {
             $result = $this->session->userdata('logged_in');
+            $where = array('id'=>'1');
+            $data['update_css_js'] = $this->userDatabase->selectAllFromTableWhere('update_app_table',$where,'datetime');
             $data['where'] = array('user_id' => $result['user_id']);
             $data['user_info'] = $this->userDatabase->selectAllFromTableWhere('user_account_table', $data['where'], 'user_id,full_name,image_address');
             $this->load->view('user/my-tournaments', $data);
@@ -115,6 +123,8 @@ class ControlUnit extends CI_Controller
     {
         if ($this->session->has_userdata('logged_in')) {
             $result = $this->session->userdata('logged_in');
+            $where = array('id'=>'1');
+            $data['update_css_js'] = $this->userDatabase->selectAllFromTableWhere('update_app_table',$where,'datetime');
             $data['where'] = array('user_id' => $result['user_id']);
             $data['user_info'] = $this->userDatabase->selectAllFromTableWhere('user_account_table', $data['where'], 'user_id,full_name,image_address');
             $this->load->view('user/add-tournament', $data);
@@ -128,6 +138,8 @@ class ControlUnit extends CI_Controller
     {
         if ($this->session->has_userdata('logged_in')) {
             $result = $this->session->userdata('logged_in');
+            $where = array('id'=>'1');
+            $data['update_css_js'] = $this->userDatabase->selectAllFromTableWhere('update_app_table',$where,'datetime');
             $data['user_info'] = $this->userDatabase->fetchUserInfo($result['user_id']);
             $data['user_dp'] = $this->userDatabase->getUserDp($result['user_id']);
             $data['user_teams'] = $this->userDatabase->fetchUserTeam($result['user_id']);
@@ -142,6 +154,8 @@ class ControlUnit extends CI_Controller
     {
         if ($this->session->has_userdata('logged_in')) {
             $result = $this->session->userdata('logged_in');
+            $where = array('id'=>'1');
+            $data['update_css_js'] = $this->userDatabase->selectAllFromTableWhere('update_app_table',$where,'datetime');
             $data['user_info'] = $this->userDatabase->fetchUserInfo($result['user_id']);
             $data['user_dp'] = $this->userDatabase->getUserDp($result['user_id']);
             $this->load->view('user/create-team', $data);
@@ -155,6 +169,8 @@ class ControlUnit extends CI_Controller
     {
         if ($this->session->has_userdata('logged_in')) {
             $result = $this->session->userdata('logged_in');
+            $where = array('id'=>'1');
+            $data['update_css_js'] = $this->userDatabase->selectAllFromTableWhere('update_app_table',$where,'datetime');
             //Fetch Team Player Ids
             $data['team_id'] = $teamId;
             $data['where'] = array('team_id' => $teamId);
@@ -183,6 +199,8 @@ class ControlUnit extends CI_Controller
         if ($this->session->has_userdata('logged_in')) {
             $data['team_id'] = $teamId;
             $result = $this->session->userdata('logged_in');
+            $where = array('id'=>'1');
+            $data['update_css_js'] = $this->userDatabase->selectAllFromTableWhere('update_app_table',$where,'datetime');
             $data['user_info'] = $this->userDatabase->fetchUserInfo($result['user_id']);
             $data['user_dp'] = $this->userDatabase->getUserDp($result['user_id']);
             $this->load->view('user/add-players', $data);
@@ -198,6 +216,8 @@ class ControlUnit extends CI_Controller
         if ($this->session->has_userdata('logged_in')) {
             $result = $this->session->userdata('logged_in');
             $data['user_id'] = $result['user_id'];
+            $where = array('id'=>'1');
+            $data['update_css_js'] = $this->userDatabase->selectAllFromTableWhere('update_app_table',$where,'datetime');
             $data['user_info'] = $this->userDatabase->fetchUserInfo($result['user_id']);
             $this->load->view('user/settings', $data);
         } else {
@@ -210,7 +230,10 @@ class ControlUnit extends CI_Controller
     {
         if ($this->session->has_userdata('logged_in')) {
             $result = $this->session->userdata('logged_in');
-            $data['user_dp'] = $this->userDatabase->getUserDp($result['user_id']);
+            $where = array('id'=>'1');
+            $data['update_css_js'] = $this->userDatabase->selectAllFromTableWhere('update_app_table',$where,'datetime');
+            $data['where'] = array('user_id' => $result['user_id']);
+            $data['user_info'] = $this->userDatabase->selectAllFromTableWhere('user_account_table', $data['where'], 'user_id,full_name,image_address');
             $data['user_stats'] = $this->userDatabase->fetchUserStats($result['user_id']);
             $this->load->view('user/stats', $data);
         } else {
@@ -685,5 +708,18 @@ class ControlUnit extends CI_Controller
             $this->load->view('authenticate/login');
         }
 
+    }
+
+    public function updateCssAndJs(){
+        $dateTime = date("Y-m-d,h:i:s");
+        $tableName = "update_app_table";
+        $data = array('datetime'=>$dateTime);
+        $result = $this->userDatabase->updateCssandJs($tableName,$data);
+        if($result){
+            echo $result;
+        }
+        else{
+            echo "failed";
+        }
     }
 }
