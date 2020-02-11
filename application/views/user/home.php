@@ -21,7 +21,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
-    <link rel="stylesheet" href="<?php echo base_url(); ?>css/swiper.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>css/cs-skin-elastic.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>css/style.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>css/userstyle.css?v=<?php echo $update_css_js[0]['datetime']; ?>">
@@ -206,7 +205,6 @@
                     <div class="row ov-h">
 
                         <div class="col-md-12">
-
                             <div class="left-arrow">
                                 <img src="<?php echo base_url(); ?>images/icon/left_arrow.png" alt="swipe left">
                             </div>
@@ -220,7 +218,7 @@
 
                                     <!-- tournament cards -->
                                     <div class="demo__card border">
-                                        <img class="card-img-top" src="<?php echo base_url().$tournament->t_banner_path; ?>" alt="Card image cap">
+                                        <img class="card-img-top" src="<?php echo base_url().$tournament->t_banner_path; ?>" alt="" style="max-height: 150px">
                                         <div class="card-body no-padding">
                                             <div class="card-text pl-3 pr-3 pb-1 pt-1">
                                                 <h5 class="mt-2 mb-2 light-text bold"><?php echo $tournament->t_name; ?></h5>
@@ -667,28 +665,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script src="<?php echo base_url(); ?>js/swiper.min.js"></script>
     <script src="<?php echo base_url(); ?>js/main.js"></script>
     <script src="<?php echo base_url(); ?>js/userscript.js?v=<?php echo $update_css_js[0]['datetime']; ?>"></script>
     <script src="<?php echo base_url(); ?>js/card-swipe.js"></script>
-    <script>
-        var swiper = new Swiper('.swiper-container', {
-            effect: 'coverflow',
-            grabCursor: true,
-            centeredSlides: true,
-            slidesPerView: 'auto',
-            coverflowEffect: {
-                rotate: 30,
-                stretch: 0,
-                depth: 200,
-                modifier: 1,
-                slideShadows: true,
-            },
-            pagination: {
-                el: '.swiper-pagination',
-            },
-        });
-    </script>
 </body>
 
 </html>

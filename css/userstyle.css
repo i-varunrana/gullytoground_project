@@ -1,5 +1,9 @@
   /*        my styles          */
 
+  .max-h-130 {
+    max-height: 130px;
+  }
+
   .wh-30 {
     width: 30px;
     height: 30px;

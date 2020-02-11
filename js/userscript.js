@@ -161,7 +161,7 @@ $(document).ready(function () {
         $('#add-banner-img').addClass('bnr');
         $('.add-tournament-bg').css('background-color', 'white');
         $('#add-banner-img').attr('src', BASE_URL + imgPath);
-        $('.register-tournament-btn').attr('data-img', BASE_URL + imgPath);
+        $('.register-tournament-btn').attr('data-img',imgPath);
         $(".add-banner-img").load(location.href + " .upload-dp>*", "");
     })
 });
