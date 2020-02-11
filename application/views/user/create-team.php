@@ -20,8 +20,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>css/cs-skin-elastic.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>css/style.css">
-    <link rel="stylesheet" href="<?php echo base_url(); ?>css/userstyle.css?v=<?php echo $update_css_js; ?>">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>css/userstyle.css?v=<?php echo $update_css_js[0]['datetime']; ?>">
     <link rel="stylesheet" href="<?php echo base_url(); ?>css/croppie.css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>css/states-and-districts.css">
     <script>
         const BASE_URL = "<?php echo base_url(); ?>";
     </script>
@@ -146,14 +147,22 @@
                                 </div>
 
                                 <form class="create-team-form" method="POST">
-                                    <div class="col-md-12">
-                                    <div class="form-group"><label for="name" class=" form-control-label">Team Name</label><input type="text" id="team_name" name="team_name" placeholder="name" class="form-control text-capitalize"></div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                        <div class="form-group"><label for="name" class=" form-control-label">Team Name</label><input type="text" id="team_name" name="team_name" placeholder="name" class="form-control text-capitalize" required minlength="3"></div>
+                                        </div>
                                     </div>
+                                    <div class="row">
                                     <div class="col-md-12">
-                                    <div class="form-group"><label for="date-of-birth" class=" form-control-label">City</label><input type="text" id="team_city" name="team_city" placeholder="city" class="form-control"></div>
+                                        <div class="autocomplete">
+                                        <div class="form-group"><label for="City" class=" form-control-label">City</label><input type="text" id="cityInput" name="team_city" placeholder="city" class="form-control caps" required minlength="3"></div>
+                                        </div>
                                     </div>
-                                    <div class="col-md-12">
-                                    <button type="submit" class="btn btn-success btn-lg btn-block mt-3 register-team-btn" data-img="">ADD TEAM</button>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                        <button type="submit" class="btn btn-success btn-lg btn-block mt-3 register-team-btn" data-img="">ADD TEAM</button>
+                                        </div>
                                     </div>
                                 </form>
                             </div>
@@ -231,24 +240,6 @@
                                     <div class="col-md-3 team-pic d-flex justify-content-center" data-id="" data-value="images/team/avatar3.png">
                                         <img class="rounded-circle bg-light" src="<?php echo base_url();?>images/team/avatar3.png" alt="" width="90" height="90">
                                     </div>
-                                    <div class=" col-md-3 team-pic d-flex justify-content-center" data-id="" data-value="images/team/avatar4.png">
-                                        <img class="rounded-circle bg-light" src="<?php echo base_url();?>images/team/avatar4.png" alt="" width="90" height="90">
-                                    </div>
-                                    <div class="col-md-3 team-pic d-flex justify-content-center" data-id="" data-value="images/team/avatar5.png">
-                                        <img class="rounded-circle bg-light" src="<?php echo base_url();?>images/team/avatar5.png" alt="" width="90" height="90">
-                                    </div>
-                                    <div class="col-md-3 team-pic d-flex justify-content-center" data-id="" data-value="images/team/avatar6.png">
-                                        <img class="rounded-circle bg-light" src="<?php echo base_url();?>images/team/avatar6.png" alt="" width="90" height="90">
-                                    </div>
-                                    <div class=" col-md-3 team-pic d-flex justify-content-center" data-id="" data-value="images/team/avatar7.png">
-                                        <img class="rounded-circle bg-light" src="<?php echo base_url();?>images/team/avatar7.png" alt="" width="90" height="90">
-                                    </div>
-                                    <div class="col-md-3 team-pic d-flex justify-content-center" data-id="" data-value="images/team/avatar8.png">
-                                        <img class="rounded-circle bg-light" src="<?php echo base_url();?>images/team/avatar8.png" alt="" width="90" height="90">
-                                    </div>
-                                    <div class="col-md-3 team-pic d-flex justify-content-center" data-id="" data-value="images/team/avatar9.png">
-                                        <img class="rounded-circle bg-light" src="<?php echo base_url();?>images/team/avatar9.png" alt="" width="90" height="90">
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -267,8 +258,9 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="<?php echo base_url(); ?>js/main.js"></script>
-    <script src="<?php echo base_url(); ?>js/userscript.js?v=<?php echo $update_css_js; ?>"></script>
+    <script src="<?php echo base_url(); ?>js/userscript.js?v=<?php echo $update_css_js[0]['datetime']; ?>"></script>
     <script src="<?php echo base_url(); ?>js/croppie.js"></script>
     <script src="<?php echo base_url(); ?>js/crop-team-dp.js"></script>
+    <script src="<?php echo base_url(); ?>js/states-and-districts.js" type="text/javascript"></script>
 </body>
 </html>

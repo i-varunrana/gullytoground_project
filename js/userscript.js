@@ -1,6 +1,6 @@
 /* -------    SETTING PAGE ---> UPDATE DP / UPDATE FORM SCRIPT [START] -------- */
 
-/***** ON CLICK PLUS ICON OPEN INPUT FILE *******/
+/***** ON CLICK PLUS ICON OPENS INPUT FILE *******/
 $(document).ready(function () {
     $('.plus-icon').click(function (e) {
         e.preventDefault();
@@ -186,9 +186,12 @@ $(document).ready(function () {
             type: "POST",
             data: form_data + '&' + $.param(data),
             success: function (response) {
-                if (response) {
+                if (response == 'incomplete') {
+                    swal("Incomplete Fields", "Please fill all required fields", "warning");
+                }else if(response){
                     swal("Good Job!", "You successfully register a tournament", "success");
-                } else {
+                }
+                 else {
                     swal("Please try again!", "error");
                 }
 
@@ -231,7 +234,7 @@ $(document).ready(function () {
         $('#scrollmodal').modal('hide');
         var imgPath = $('.team-pic[data-id="1"]').attr("data-value");
         $('.upload-team-dp').attr('src', BASE_URL + imgPath);
-        $('.register-team-btn').attr('data-img', BASE_URL + imgPath);
+        $('.register-team-btn').attr('data-img',imgPath);
         $(".upload-team-dp").load(location.href + " .upload-team-dp>*", "");
     })
 });
@@ -244,7 +247,6 @@ $(document).ready(function () {
 $(document).ready(function () {
     $(".create-team-form").submit(function (e) {
         e.preventDefault();
-        console.log("in");
         var form_data = $(this).serialize();
         var button_content = $(this).find('button[type=submit]');
         var data = {
@@ -257,7 +259,15 @@ $(document).ready(function () {
             data: form_data + '&' + $.param(data),
             success: function (response) {
                 console.log(response);
-                if (response) {
+                if(response == 'incomplete'){
+                    swal({
+                        title: "Incomplete Fields",
+                        text: "Please fill all required fields",
+                        icon: "warning",
+                        button: "ok",
+                    });
+                }
+                else if (response) {
                     button_content.html('ADD TEAM');
                     window.location = BASE_URL + "team-players/" + response;
                 }
@@ -458,3 +468,23 @@ function addToTeam(btn) {
 
 
 /* -------    MY TEAM PAGE ---> UPDATE TEAM DP / REGITER TEAM FORM SCRIPT [END] -------- */
+
+
+/* -------    VIEW TOURNAMENT PAGE ---> UPDATE TEAM DP / REGITER TEAM FORM SCRIPT [START] -------- */
+
+/*****   OPEN VIEW TOURNAMENT  *****/
+
+$(document).ready(function () {
+    $('.tournament-card').click(function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        //Tournament ID
+        var tId = $(this).attr('data-id');
+        console.log("open tournament ",tId);
+        window.location = BASE_URL + "view-tournament/" + tId;
+
+    })
+});
+
+
+/* -------    VIEW TOURNAMENT PAGE ---> UPDATE TEAM DP / REGITER TEAM FORM SCRIPT [END] -------- */

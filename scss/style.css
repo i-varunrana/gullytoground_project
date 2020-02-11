@@ -1627,6 +1627,10 @@ header .form-inline {
     border-right: 1px solid #e6e6e6;
     display: inline-block; }
 
+.weather-category ul li:last-child {
+ border-right: 0;
+}    
+
 .twt-feed.blue-bg {
   background: #58C9F3; }
 

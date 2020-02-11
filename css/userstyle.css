@@ -1,5 +1,24 @@
   /*        my styles          */
 
+  .wh-30 {
+    width: 30px;
+    height: 30px;
+  }
+
+  .wh-35 {
+    width: 35px;
+    height: 35px;
+  }
+
+  .wh-40 {
+    width: 40px;
+    height: 40px;
+  }
+
+  .br-green {
+    border-right: 4px solid #66bb6a;
+  }
+
   .grid {
     display: flex;
   }
@@ -42,13 +61,17 @@
     overflow: hidden;
     width:95%;
   }
+
+  .medium-text {
+    font-size: 0.95rem;
+  }
   
   .small-text {
-    font-size: 0.8rem;
+    font-size: 0.79rem;
   }
   
   .extra-small-text {
-    font-size: 0.74rem;;
+    font-size: 0.65rem;;
   }
 
 /* image carousel css */
@@ -146,10 +169,18 @@
   .tournament-bg {
     width: 100%;
     height: 130px;
-    background-image: url('http://localhost/gullytoground/images/banner/default.jpg');
+    background-image: url('http://localhost/gullytoground/images/banner/default1.jpg');
     background-size: cover;
     border-radius: 6px 6px 0 0;
   
+  }
+
+  .tournament-detail-bg {
+    width: 100%;
+    height: 140px;
+    background-image: url('http://localhost/gullytoground/images/banner/tournament-bg.jpg');
+    background-size: cover;
+    border-radius: 6px 6px 0 0;
   }
   
   .in-row {
@@ -668,6 +699,4 @@
     background-color: lightseagreen;
     color: white;
   }
-
-
   

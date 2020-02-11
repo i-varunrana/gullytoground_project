@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="<?php echo base_url(); ?>css/style.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>css/userstyle.css?v=<?php echo $update_css_js[0]['datetime']; ?>">
     <link rel="stylesheet" href="<?php echo base_url(); ?>css/croppie.css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>css/states-and-districts.css">
     <script>
         const BASE_URL = "<?php echo base_url(); ?>";
     </script>
@@ -148,7 +149,9 @@
                                 </div>
                                 <div class="row">
                                 <div class="col-md-12">
-                                    <div class="form-group"><label for="City" class=" form-control-label">City</label><input type="text" id="city" name="t_city" placeholder="city" class="form-control caps" required></div>
+                                    <div class="autocomplete">
+                                    <div class="form-group"><label for="City" class=" form-control-label">City</label><input type="text" id="cityInput" name="t_city" placeholder="city" class="form-control caps" required></div>
+                                    </div>
                                 </div>
                                 </div>
                                 <div class="row">
@@ -316,6 +319,7 @@
     <script src="<?php echo base_url(); ?>js/userscript.js?v=<?php echo $update_css_js[0]['datetime']; ?>"></script>
     <script src="<?php echo base_url(); ?>js/croppie.js"></script>
     <script src="<?php echo base_url(); ?>js/crop-banner.js"></script>
+    <script src="<?php echo base_url(); ?>js/states-and-districts.js" type="text/javascript"></script>
     <script>
         $('.datepicker').datepicker({
             format: 'dd-M-yyyy',

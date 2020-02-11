@@ -131,88 +131,151 @@
         <div class="content">
             <!-- Animated -->
             <div class="animated fadeIn">
-
+                <!-- Widgets  -->
                 <div class="row">
-                    <div class="col-lg-6">
-                        <div class="card">
-                            <div class="card-header bg-white">
-                                <h4>Tournaments</h4>
-                            </div>
-                            <div class="card-body">
-
-                                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                                    <li class="nav-item">
-                                        <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Upcoming</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Ongoing</a>
-                                    </li>
-                                </ul>
-                                <div class="tab-content" id="pills-tabContent">
-                                    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-                                    <div class="row mt-4">
-
-                                            <?php
-                                                if(!empty($upcoming_tournaments)){
-                                                foreach ($upcoming_tournaments as $tournament){  
-                                            ?>
-                                                <div class="col-md-6">
-                                                    <div class="card tournament-card" data-id="<?php echo $tournament['t_id']; ?>">
-                                                        <div class="card-body no-padding">
-                                                            <div class="tournament-bg">
-                                                            </div>
-                                                            <div class="card-text p-3">
-                                                                <h5 class="mt-2 mb-2 light-text bold"><?php echo $tournament['t_name']; ?></h5>
-                                                                <div class="mb-1 light-text small-text"><i class="fa fa-calendar blue"></i>&nbsp; <?php echo $tournament['t_start_date']; ?> to <?php echo $tournament['t_end_date']; ?></div>
-                                                                <div class="light-text small-text"><i class="fa fa-map-marker blue"></i>&nbsp;&nbsp;<?php echo ucfirst($tournament['t_city']); ?></div>
-                                                                <hr>
-                                                                <div class="light-text wrap pl-1 small-text"><?php echo $tournament['t_ground']; ?> , <?php echo ucfirst($tournament['t_city']); ?></div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            <?php
-                                                }
-                                            }  
-                                            ?>  
-
-                                            </div> 
-                                        
-                                     </div>
-                                    <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-                                    <div class="row mt-4">
-                                            <?php  
-                                                if(!empty($ongoing_tournaments)){
-                                                foreach ($ongoing_tournaments as $tournament){  
-                                            ?>
-                                                <div class="col-md-6">
-                                                    <div class="card tournament-card">
-                                                        <div class="card-body no-padding">
-                                                            <div class="tournament-bg">
-                                                            </div>
-                                                            <div class="card-text p-3">
-                                                                <h5 class="mt-2 mb-2 light-text bold"><?php echo $tournament['t_name']; ?></h5>
-                                                                <div class="mb-1 light-text small-text"><i class="fa fa-calendar blue"></i>&nbsp; <?php echo $tournament['t_start_date']; ?> to <?php echo $tournament['t_end_date']; ?></div>
-                                                                <div class="light-text small-text"><i class="fa fa-map-marker blue"></i>&nbsp;&nbsp;<?php echo ucfirst($tournament['t_city']); ?></div>
-                                                                <hr>
-                                                                <div class="light-text wrap pl-1 small-text"><?php echo $tournament['t_ground']; ?> , <?php echo ucfirst($tournament['t_city']); ?></div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            <?php  
-                                                }  
-                                            }
-                                            ?>   
-
-                                            </div>
+                    <div class="col-md-12">
+                        <div class="card p-2 br-green">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="d-flex justify-content-start align-items-center">
+                                    <div class="wh-35 rounded-circle d-flex justify-content-center align-items-center bg-flat-color-3">
+                                        <img src="<?php echo base_url(); ?>images/icon/trophy.png" alt="trophy icon">
+                                    </div>
+                                    <div class="ml-2">
+                                        Tournament Details
                                     </div>
                                 </div>
-
+                                <div class="small-text text-up text-dark fw-b">
+                                    <?php echo ($tournament[0]['upcoming'] == true) ? 'upcoming' : 'ongoing'; ?>
+                                </div>
                             </div>
                         </div>
                     </div>
-
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- <div class="card">
+                            <div class="tournament-detail-bg"></div>
+                            <div class="d-flex justify-content-between align-items-center pt-3 pb-3 pr-4 pl-4">
+                                <div class="fw-b text-dark">
+                                    <?php echo $tournament[0]['t_name']; ?>
+                                </div>
+                                <div class="request-btn">
+                                    <button class="btn bg-flat-color-3 text-white small-text">REQUEST</button>
+                                </div>
+                            </div>
+                        </div> -->
+                        <div class="card">
+                            <img class="card-img-top" src="<?php echo base_url().$tournament[0]['t_banner_path']?>" alt="Card image cap">
+                            <div class="card-body d-flex justify-content-between align-items-center">
+                                <h4 class="card-title"><?php echo $tournament[0]['t_name']; ?></h4>
+                                <div class="request-btn">
+                                    <button class="btn bg-flat-color-3 text-white small-text">REQUEST</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card p-3">
+                            <div class="d-flex justify-content-start align-items-center">
+                                <img class="mr-3" src="<?php echo base_url();?>images/icon/prize.png" alt="" width="32">
+                                <div>
+                                    <span class="color-gray small-text d-block">Prize Money</span>
+                                    <span class="fw-b text-dark medium-text d-block">Rs. 7000 /-</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                    <div class="card p-3">
+                            <div class="d-flex justify-content-start align-items-center">
+                                <img class="mr-3" src="<?php echo base_url();?>images/icon/money.png" alt="" width="32">
+                                <div>
+                                    <span class="color-gray small-text d-block">Entry Fees</span>
+                                    <span class="fw-b text-dark medium-text d-block">Rs. 1200 /-</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                    <div class="card p-3">
+                            <div class="d-flex justify-content-start align-items-center">
+                                <img class="mr-3" src="<?php echo base_url();?>images/icon/calendar.png" alt="" width="32">
+                                <div>
+                                    <span class="color-gray small-text d-block">Tournament Start</span>
+                                    <span class="fw-b text-dark medium-text d-block"><?php echo $tournament[0]['t_start_date']?></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header bg-white">
+                                <strong class="text-dark">Details</strong>
+                            </div>
+                            <div class="card-body">
+                                <div class="myprofile-category twt-category">
+                                    <ul>
+                                        <li>
+                                            <h5 class="caps"><?php echo $tournament[0]['t_type'] ?></h5>
+                                            TPYE
+                                        </li>
+                                        <li>
+                                            <h5 class="caps"><?php echo $tournament[0]['t_ball_type'] ?></h5>
+                                            BALL TYPE
+                                        </li>
+                                    </ul>
+                                    <ul>
+                                        <li>
+                                            <h5 class="caps"><?php echo $tournament[0]['t_city'] ?></h5>
+                                            CITY
+                                        </li>
+                                        <li>
+                                            <h5 class="caps"><?php echo $tournament[0]['t_ground'] ?></h5>
+                                            GROUND
+                                        </li>
+                                    </ul>
+                                    <ul>
+                                        <li>
+                                            <h5><?php echo $tournament[0]['t_overs'] ?></h5>
+                                            OVERS
+                                        </li>
+                                        <li>
+                                            <h5><?php ?></h5>
+                                            PARTICIPANTS
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header bg-white">
+                                <strong class="text-dark">Organizer Details</strong>
+                            </div>
+                            <div class="card-body">
+                                <div class="myprofile-category twt-category">
+                                    <ul>
+                                        <li>
+                                            <h5 class="caps"><?php echo $tournament[0]['t_organizer_name']; ?></h5>
+                                            ORGANIZER NAME
+                                        </li>
+                                        <li>
+                                            <h5><?php echo $tournament[0]['t_organizer_number']; ?></h5>
+                                            ORGANIZER PHONE
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <!-- .animated -->
         </div>

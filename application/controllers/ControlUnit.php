@@ -56,6 +56,7 @@ class ControlUnit extends CI_Controller
             $data['user_info'] = $this->userDatabase->fetchUserInfo($result['user_id']);
             $data['tournaments'] = $this->userDatabase->fetchTournamentInMyCity($data['user_info'][0]->city);
             $data['user_stats'] = $this->userDatabase->getImpStats($result['user_id']);
+            $data['featured_players'] = $this->getFeaturedPlayers();
             $this->load->view('user/home', $data);
         } else {
             $this->load->view('authenticate/login');
@@ -128,6 +129,23 @@ class ControlUnit extends CI_Controller
             $data['where'] = array('user_id' => $result['user_id']);
             $data['user_info'] = $this->userDatabase->selectAllFromTableWhere('user_account_table', $data['where'], 'user_id,full_name,image_address');
             $this->load->view('user/add-tournament', $data);
+        } else {
+            $this->load->view('authenticate/login');
+        }
+    }
+
+    //View Tournament
+    public function viewTournamentPage($tournamentId){
+        if ($this->session->has_userdata('logged_in')) {
+            $result = $this->session->userdata('logged_in');
+            $where = array('id'=>'1');
+            $data['update_css_js'] = $this->userDatabase->selectAllFromTableWhere('update_app_table',$where,'datetime');
+            $where = array('t_id'=>$tournamentId);
+            $join = array('user_stats_table', 'user_stats_table.user_id = user_account_table.user_id');
+            $data['tournament'] = $this->userDatabase->selectAllFromTableWhere('tournament_table',$where,'*');
+            $data['where'] = array('user_id' => $result['user_id']);
+            $data['user_info'] = $this->userDatabase->selectAllFromTableWhere('user_account_table', $data['where'], 'user_id,full_name,image_address');
+            $this->load->view('user/view-tournament', $data);
         } else {
             $this->load->view('authenticate/login');
         }
@@ -478,8 +496,7 @@ class ControlUnit extends CI_Controller
                 !empty($this->input->post('t_name')) && !empty($this->input->post('t_city')) && !empty($this->input->post('t_ground')) &&
                 !empty($this->input->post('t_organizer_name')) && !empty($this->input->post('t_organizer_number')) &&
                 !empty($this->input->post('t_type')) && !empty($this->input->post('t_ball_type')) && !empty($this->input->post('t_overs')) &&
-                !empty($this->input->post('t_start_date')) && !empty($this->input->post('t_end_date')) && !empty($this->input->post('t_info')) &&
-                !empty($this->input->post('banner_path'))
+                !empty($this->input->post('t_start_date')) && !empty($this->input->post('t_end_date')) && !empty($this->input->post('t_info'))
             ) {
 
                 $tId = rand(100000000000, 999999999999);
@@ -500,8 +517,7 @@ class ControlUnit extends CI_Controller
                     't_start_date' => $this->input->post('t_start_date'),
                     't_end_date' => $this->input->post('t_end_date'),
                     't_info' => $this->input->post('t_info'),
-                    't_banner_path' => $this->input->post('banner_path'),
-                    'upcoming' => '1'
+                    't_banner_path' => empty($this->input->post('banner_path')) ? '' : $this->input->post('banner_path')
                 );
 
                 if ($this->userDatabase->registerTournament($data['update'])) {
@@ -509,6 +525,8 @@ class ControlUnit extends CI_Controller
                 } else {
                     echo false;
                 }
+            } else {
+                echo 'incomplete';
             }
         } else {
             $this->load->view('authenticate/login');
@@ -523,7 +541,7 @@ class ControlUnit extends CI_Controller
     public function registerTeam()
     {
         if ($this->session->has_userdata('logged_in')) {
-            if (!empty($this->input->post('team_name')) && !empty($this->input->post('team_city')) && !empty($this->input->post('team_dp'))) {
+            if (!empty($this->input->post('team_name')) && !empty($this->input->post('team_city'))) {
 
                 $result = $this->session->userdata('logged_in');
                 $data['user_info'] = $this->userDatabase->fetchUserInfo($result['user_id']);
@@ -536,7 +554,7 @@ class ControlUnit extends CI_Controller
                     'admin_name' => $data['user_info'][0]->full_name,
                     'team_name' => $this->input->post('team_name'),
                     'team_city' => $this->input->post('team_city'),
-                    'team_dp' => $this->input->post('team_dp'),
+                    'team_dp' => empty($this->input->post('team_dp')) ? '' : $this->input->post('team_dp'),
                 );
 
                 if ($this->userDatabase->registerUserTeam($data['create'])) {
@@ -545,7 +563,7 @@ class ControlUnit extends CI_Controller
                     echo false;
                 }
             } else {
-                echo 'false';
+                echo 'incomplete';
             }
         } else {
             $this->load->view('authenticate/login');
@@ -722,4 +740,16 @@ class ControlUnit extends CI_Controller
             echo "failed";
         }
     }
+
+    /* ------ CUSTOM MODAL FUNCITONS STARTS -------- */
+
+    public function getFeaturedPlayers(){
+        $tableName = 'user_account_table';
+        $where = null;
+        $columns = array('user_account_table.user_id', 'full_name', 'playing_role', 'batting_style', 'city', 'image_address', 'matches', 'runs', 'wickets');
+        $join = array('user_stats_table', 'user_stats_table.user_id = user_account_table.user_id');
+        return $this->userDatabase->selectAllFromTableJoinWhere($tableName, $join, $where, $columns);
+    }
+
+    /* ------ CUSTOM MODAL FUNCITONS END -------- */
 }

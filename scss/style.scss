@@ -1636,6 +1636,11 @@ header .form-inline {
         display: inline-block;
     }
 }
+
+.weather-category ul li:last-child {
+    border-right: 0;
+}
+
 .twt-feed.blue-bg {
     background: #58C9F3;
 }

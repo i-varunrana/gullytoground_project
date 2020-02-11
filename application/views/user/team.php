@@ -191,7 +191,7 @@
                         <strong class="card-title">My Team</strong>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row">    
                     <?php
                         foreach ($user_teams as $team) {
                     ?>
@@ -201,10 +201,10 @@
                             <div class="card-body p-2">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="w-25">
-                                        <img class="rounded-circle bg-light" src="<?php echo $team->team_dp ?>" alt="team img" width="75">
+                                        <img class="rounded-circle bg-light" src="<?php echo empty($team->team_dp) ? base_url().'images/team/avatar3.png' : base_url().$team->team_dp ?>" alt="team img" width="75">
                                     </div>
                                     <div class="w-75">
-                                        <strong class="card-title mb-0 d-block"><?php echo $team->team_name; ?></strong>
+                                        <strong class="card-title mb-0 d-block caps"><?php echo $team->team_name; ?></strong>
                                         <p class="card-title mb-0 d-block small-text text-dark">3 Players</p>
                                     </div>
                                 </div>
@@ -215,7 +215,7 @@
                                         <img src="<?php echo base_url(); ?>images/icon/admin.png" alt="" width="12">&nbsp;<small><?php echo $team->admin_name; ?></small>
                                     </div>
                                     <div class="team-city">
-                                        <i class="fa fa-map-marker" style="font-size: 0.85rem"></i>&nbsp;<small><?php echo $team->team_city; ?></small>
+                                        <i class="fa fa-map-marker" style="font-size: 0.85rem"></i>&nbsp;<small class="caps"><?php echo $team->team_city; ?></small>
                                     </div>
                                 </div>
                             </div>

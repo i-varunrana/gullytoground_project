@@ -64,4 +64,5 @@ $route['team']='ControlUnit/myTeamPage';
 $route['create-team']='ControlUnit/createTeamPage';
 $route['team-players/(:any)']='ControlUnit/teamPlayersPage/$1';
 $route['add-players/(:any)']='ControlUnit/addPlayersPage/$1';
+$route['view-tournament/(:any)']='ControlUnit/viewTournamentPage/$1';
 
