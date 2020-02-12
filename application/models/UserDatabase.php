@@ -174,11 +174,14 @@ Class UserDatabase extends CI_Model {
 
     //Fetch My Teams
     public function fetchUserTeam($userId) {
-        $this->db->select('*');
-        $this->db->from('team_table');
-        $this->db->where('admin_id',$userId);
-        $query = $this->db->get();
-        return $query->result();
+        // $this->db->select('*');
+        // $this->db->from('team_table');
+        // $this->db->where('admin_id',$userId);
+        // $query = $this->db->get();
+        // return $query->result();
+		$query = "SELECT * FROM team_table LEFT JOIN (SELECT COUNT(*) as total_players ,team_id as relation_id FROM team_relation_table GROUP by team_id) as t1 on t1.relation_id = team_table.team_id WHERE admin_id = '" . $userId . "'";
+		$query = $this->db->query($query)->result_array();
+		return $this->db->affected_rows() ? $query : false;
     } 
 
     //Fetch Users
@@ -233,8 +236,10 @@ Class UserDatabase extends CI_Model {
 
     //------------------  insert all ----------------------//
     public function saveIntoDatabase($tableName=null,$data=null) {
+        $this->db->trans_start();
         $this->db->insert($tableName,$data);
-		return $this->db->affected_rows() ? TRUE : FALSE;
+        $this->db->trans_complete();
+		return $this->db->trans_status() ? TRUE : FALSE;
     }
     //------------------  insert all ----------------------//
 
@@ -265,6 +270,16 @@ Class UserDatabase extends CI_Model {
     public function updateCssandJs($tableName=null,$data=null){
         $this->db->update($tableName,$data);
 		return $this->db->affected_rows() ? TRUE  : FALSE;
+    }
+
+    //FETCH TOTAL TEAM PLAYERS
+    public function getTotalTeamPlayers($teamId){
+        $this->db->select('user_id');
+        $this->db->from('team_relation_table');
+        $this->db->where("team_id",$teamId);
+        $query = $this->db->get();
+        $result = $query->result();
+        return count($result);
     }
 
 

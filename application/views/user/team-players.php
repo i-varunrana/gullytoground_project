@@ -137,7 +137,7 @@
                 <div class="row">
                     <div class="col-md-12 mb-3">
                         <strong class="card-title">Team <?php echo $team_info[0]['team_name']; ?></strong>
-                        <strong class="card-title float-right"><?php echo $total_players ?> Players</strong>
+                        <strong class="card-title float-right"><?php echo $totalPlayers ?> Players</strong>
                     </div>
                 </div>
                 <div class="row">

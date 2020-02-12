@@ -2,7 +2,10 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="">
+<!--<![endif]-->
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -36,10 +39,10 @@
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li class="active">
-                        <a href="<?php echo base_url('home');?>"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
+                        <a href="<?php echo base_url('home'); ?>"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url('profile');?>"> <i class="menu-icon fa fa-user"></i>My Profile</a>
+                        <a href="<?php echo base_url('profile'); ?>"> <i class="menu-icon fa fa-user"></i>My Profile</a>
                     </li><!-- /.menu-title -->
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-soccer-ball-o"></i>Tournaments</a>
@@ -106,17 +109,17 @@
 
                     <div class="user-area dropdown float-right">
                         <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img class="user-avatar rounded-circle" src="<?php echo base_url().$user_info[0]['image_address'];?>" alt="User Avatar">
+                            <img class="user-avatar rounded-circle" src="<?php echo base_url() . $user_info[0]['image_address']; ?>" alt="User Avatar">
                         </a>
 
                         <div class="user-menu dropdown-menu">
-                            <a class="nav-link" href="<?php echo base_url('profile');?>"><i class="fa fa- user"></i>My Profile</a>
+                            <a class="nav-link" href="<?php echo base_url('profile'); ?>"><i class="fa fa- user"></i>My Profile</a>
 
                             <a class="nav-link" href="#"><i class="fa fa- user"></i>Notifications <span class="count">13</span></a>
 
                             <a class="nav-link" href="<?php echo base_url('settings'); ?>"><i class="fa fa -cog"></i>Settings</a>
 
-                            <a class="nav-link" href="<?php echo base_url('ControlUnit/userLogout');?>"><i class="fa fa-power -off"></i>Logout</a>
+                            <a class="nav-link" href="<?php echo base_url('ControlUnit/userLogout'); ?>"><i class="fa fa-power -off"></i>Logout</a>
                         </div>
                     </div>
 
@@ -137,76 +140,76 @@
                             <div class="card-body card-block">
                                 <div class="add-tournament-bg grid column x-center y-center">
                                     <div class="add-banner">
-                                        <img id="add-banner-img" src="<?php echo base_url();?>images/icon/add_bg.png" alt="add banner" data-toggle="modal" data-target="#scrollmodal">
-                                        <div class="add-banner-text">ADD BANNER</div> 
+                                        <img id="add-banner-img" src="<?php echo base_url(); ?>images/icon/add_bg.png" alt="add banner" data-toggle="modal" data-target="#scrollmodal">
+                                        <div class="add-banner-text">ADD BANNER</div>
                                     </div>
                                 </div>
                                 <form class="tournament-register-form" method="POST">
-                                <div class="row">    
-                                <div class="col-md-12">
-                                    <div class="form-group"><label for="name" class=" form-control-label">Tournament Name</label><input type="text" id="name" name="t_name" placeholder="tournament name" class="form-control" required></div>
-                                </div>
-                                </div>
-                                <div class="row">
-                                <div class="col-md-12">
-                                    <div class="autocomplete">
-                                    <div class="form-group"><label for="City" class=" form-control-label">City</label><input type="text" id="cityInput" name="t_city" placeholder="city" class="form-control caps" required></div>
-                                    </div>
-                                </div>
-                                </div>
-                                <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group"><label for="Ground" class=" form-control-label">Ground</label><input type="text" id="ground" name="t_ground" placeholder="ground" class="form-control caps" required></div>
-                                </div>
-                                </div>
-                                <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group"><label for="Organizer Name" class=" form-control-label">Organizer Name*</label><input type="text" id="organizer-name" name="t_organizer_name" placeholder="organizer name" class="form-control caps" required></div>
-                                </div>
-                                </div>
-                                <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group"><label for="Organizer Number" class=" form-control-label">Organizer Number</label><input type="text" id="organizer-number" name="t_organizer_number" placeholder="organizer number" class="form-control" required></div>
-                                </div>
-                                </div>
-                                <div class="row">
-                                <div class="col-md-12 mb-3">
-                                    <div class="form-check-inline form-check"><label for="terms" class=" form-check-label"></label><input type="checkbox" id="terms" class="form-check-input" required>Allow player to contact me on whatsApp for Team Registration</div>
-                                </div>
-                                </div>
-                                <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group"><label for="Tournament Type" class="form-control-label">Tournament Type</label>
-                                        <select name="t_type" class="form-control" required>
-                                            <option value="open">Open</option>
-                                            <option value="corporate">Corporate</option>
-                                            <option value="community">Community</option>
-                                            <option value="school">School</option>
-                                            <option value="other">Other</option>
-                                        </select>
-                                    </div>
-                                    </div>
-                                </div>
                                     <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group"><label for="Ball Type" class="form-control-label">Ball Type</label>
-                                            <select name="t_ball_type" class="form-control" required>
-                                                <option value="tennis">Tennis</option>
-                                                <option value="leather">Leather</option>
-                                                <option value="other">Other</option>
-                                            </select>    
+                                        <div class="col-md-12">
+                                            <div class="form-group"><label for="name" class=" form-control-label">Tournament Name</label><input type="text" id="name" name="t_name" placeholder="tournament name" class="form-control" required></div>
                                         </div>
                                     </div>
-                                    </div>
                                     <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group"><label for="Overs" class="form-control-label">Overs</label>
-                                            <select name="t_overs" class="form-control" required>
-                                                <option value="tennis">Limited Overs</option>
-                                                <option value="leather">Test Match</option>
-                                            </select>    
+                                        <div class="col-md-12">
+                                            <div class="autocomplete">
+                                                <div class="form-group"><label for="City" class=" form-control-label">City</label><input type="text" id="cityInput" name="t_city" placeholder="city" class="form-control caps" required></div>
+                                            </div>
                                         </div>
                                     </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group"><label for="Ground" class=" form-control-label">Ground</label><input type="text" id="ground" name="t_ground" placeholder="ground" class="form-control caps" required></div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group"><label for="Organizer Name" class=" form-control-label">Organizer Name*</label><input type="text" id="organizer-name" name="t_organizer_name" placeholder="organizer name" class="form-control caps" required></div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group"><label for="Organizer Number" class=" form-control-label">Organizer Number</label><input type="text" id="organizer-number" name="t_organizer_number" placeholder="organizer number" class="form-control" required></div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 mb-3">
+                                            <div class="form-check-inline form-check"><label for="terms" class=" form-check-label"></label><input type="checkbox" id="terms" class="form-check-input" required>Allow player to contact me on whatsApp for Team Registration</div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group"><label for="Tournament Type" class="form-control-label">Tournament Type</label>
+                                                <select name="t_type" class="form-control" required>
+                                                    <option value="open">Open</option>
+                                                    <option value="corporate">Corporate</option>
+                                                    <option value="community">Community</option>
+                                                    <option value="school">School</option>
+                                                    <option value="other">Other</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group"><label for="Ball Type" class="form-control-label">Ball Type</label>
+                                                <select name="t_ball_type" class="form-control" required>
+                                                    <option value="tennis">Tennis</option>
+                                                    <option value="leather">Leather</option>
+                                                    <option value="other">Other</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group"><label for="Overs" class="form-control-label">Overs</label>
+                                                <select name="t_overs" class="form-control" required>
+                                                    <option value="tennis">Limited Overs</option>
+                                                    <option value="leather">Test Match</option>
+                                                </select>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-6 col-md-4">
@@ -217,13 +220,13 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group"><label for="Additional Information" class=" form-control-label">Additional Information</label><textarea name="t_info" id="textarea-input" rows="7" placeholder="Add more details of the tournament, like Prizes, Awards, Entry Fees, Rules, etc." class="form-control"></textarea></div>
+                                        <div class="col-md-12">
+                                            <div class="form-group"><label for="Additional Information" class=" form-control-label">Additional Information</label><textarea name="t_info" id="textarea-input" rows="7" placeholder="Add more details of the tournament, like Prizes, Awards, Entry Fees, Rules, etc." class="form-control"></textarea></div>
+                                        </div>
                                     </div>
-                                    </div>
-                                        <button type="submit" class="btn btn-success btn-lg btn-block register-tournament-btn" data-img="">Register</button>
-                                    </div>
-                                </div>
+                                    <button type="submit" class="btn btn-success btn-lg btn-block register-tournament-btn" data-img="">Register</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -270,43 +273,43 @@
     </div>
 
     <div class="modal fade" id="scrollmodal" tabindex="-1" role="dialog" aria-labelledby="scrollmodalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="scrollmodalLabel">Upload Image</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="scrollmodalLabel">Upload Image</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="upload-section">
+                        <div class="add-tournament-banner">Upload</div>
+                        <input id="input-image" name="profile-pic" type="file" hidden>
+                    </div>
+                    <div class="library">
+                        <div class="title">
+                            Select from our Gallery
                         </div>
-                        <div class="modal-body">
-                            <div class="upload-section">
-                                <div class="add-tournament-banner">Upload</div>
-                                <input id="input-image" name="profile-pic" type="file" hidden>
+                        <div class="row content">
+                            <div class=" col-md-3 banner" data-id="" data-value="images/banner/default.jpg">
+                                <img src="<?php echo base_url(); ?>images/banner/default.jpg" alt="">
                             </div>
-                            <div class="library">
-                                <div class="title">
-                                    Select from our Gallery
-                                </div>
-                                <div class="row content">
-                                    <div class=" col-md-3 banner" data-id="" data-value="images/banner/default.jpg">
-                                        <img src="<?php echo base_url();?>images/banner/default.jpg" alt="">
-                                    </div>
-                                    <div class="col-md-3 banner" data-id="" data-value="images/banner/default1.jpg">
-                                        <img src="<?php echo base_url();?>images/banner/default1.jpg" alt="">
-                                    </div>
-                                    <div class="col-md-3 banner" data-id="" data-value="images/banner/default2.jpg">
-                                        <img src="<?php echo base_url();?>images/banner/default2.jpg" alt="">
-                                    </div>
-                                </div>
+                            <div class="col-md-3 banner" data-id="" data-value="images/banner/default1.jpg">
+                                <img src="<?php echo base_url(); ?>images/banner/default1.jpg" alt="">
                             </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                            <button id="save-img-btn" type="button" class="btn btn-primary">Save</button>
+                            <div class="col-md-3 banner" data-id="" data-value="images/banner/default2.jpg">
+                                <img src="<?php echo base_url(); ?>images/banner/default2.jpg" alt="">
+                            </div>
                         </div>
                     </div>
                 </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button id="save-img-btn" type="button" class="btn btn-primary">Save</button>
+                </div>
             </div>
+        </div>
+    </div>
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
@@ -326,4 +329,5 @@
         });
     </script>
 </body>
+
 </html>

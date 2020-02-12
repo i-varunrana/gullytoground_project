@@ -161,7 +161,7 @@
                                                                 <div class="mb-1 light-text small-text"><i class="fa fa-calendar blue"></i>&nbsp; 24-Aug-19 too 10-Nov-19</div>
                                                                 <div class="light-text small-text"><i class="fa fa-map-marker blue"></i>&nbsp;&nbsp; Bulandshahr</div>
                                                                 <hr>
-                                                                <div class="light-text wrap pl-1 extra-small-text">XYZ stadium near Bus stand, Bulandshahr</div>
+                                                                <div class="light-text wrap pl-1 small-text">XYZ stadium near Bus stand, Bulandshahr</div>
                                                             </div>
                                                         </div>
                                                     </div>

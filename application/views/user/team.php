@@ -196,26 +196,26 @@
                         foreach ($user_teams as $team) {
                     ?>
                     <div class="col-md-6">
-                        <div class="card teams" data-id="<?php echo $team->team_id; ?>">
-                            <i class="fa fa-trash delete-team-btn" data-id="<?php echo $team->team_id; ?>"></i>
+                        <div class="card teams" data-id="<?php echo $team['team_id']; ?>">
+                            <i class="fa fa-trash delete-team-btn" data-id="<?php echo $team['team_id']; ?>"></i>
                             <div class="card-body p-2">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="w-25">
-                                        <img class="rounded-circle bg-light" src="<?php echo empty($team->team_dp) ? base_url().'images/team/avatar3.png' : base_url().$team->team_dp ?>" alt="team img" width="75">
+                                        <img class="rounded-circle bg-light" src="<?php echo empty($team['team_dp']) ? base_url().'images/team/avatar3.png' : base_url().$team['team_dp'] ?>" alt="team img" width="75">
                                     </div>
                                     <div class="w-75">
-                                        <strong class="card-title mb-0 d-block caps"><?php echo $team->team_name; ?></strong>
-                                        <p class="card-title mb-0 d-block small-text text-dark">3 Players</p>
+                                        <strong class="card-title mb-0 d-block caps"><?php echo $team['team_name']; ?></strong>
+                                        <p class="card-title mb-0 d-block small-text text-dark"><?php echo empty($team['total_players']) ? "0" : $team['total_players']; ?> Players</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="card-footer">
                                 <div class="d-flex justify-content-between pr-3 pl-3">
                                     <div class="team-admin pr-3">
-                                        <img src="<?php echo base_url(); ?>images/icon/admin.png" alt="" width="12">&nbsp;<small><?php echo $team->admin_name; ?></small>
+                                        <img src="<?php echo base_url(); ?>images/icon/admin.png" alt="" width="12">&nbsp;<small><?php echo $team['admin_name']; ?></small>
                                     </div>
                                     <div class="team-city">
-                                        <i class="fa fa-map-marker" style="font-size: 0.85rem"></i>&nbsp;<small class="caps"><?php echo $team->team_city; ?></small>
+                                        <i class="fa fa-map-marker" style="font-size: 0.85rem"></i>&nbsp;<small class="caps"><?php echo $team['team_city']; ?></small>
                                     </div>
                                 </div>
                             </div>

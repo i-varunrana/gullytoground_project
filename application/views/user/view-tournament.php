@@ -153,23 +153,12 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <!-- <div class="card">
-                            <div class="tournament-detail-bg"></div>
-                            <div class="d-flex justify-content-between align-items-center pt-3 pb-3 pr-4 pl-4">
-                                <div class="fw-b text-dark">
-                                    <?php echo $tournament[0]['t_name']; ?>
-                                </div>
-                                <div class="request-btn">
-                                    <button class="btn bg-flat-color-3 text-white small-text">REQUEST</button>
-                                </div>
-                            </div>
-                        </div> -->
                         <div class="card">
-                            <img class="card-img-top" src="<?php echo base_url().$tournament[0]['t_banner_path']?>" alt="Card image cap">
+                            <img class="card-img-top" src="<?php echo base_url() . $tournament[0]['t_banner_path'] ?>" alt="Card image cap">
                             <div class="card-body d-flex justify-content-between align-items-center">
                                 <h4 class="card-title"><?php echo $tournament[0]['t_name']; ?></h4>
                                 <div class="request-btn">
-                                    <button class="btn bg-flat-color-3 text-white small-text">REQUEST</button>
+                                    <button class="btn bg-flat-color-3 text-white small-text" data-toggle="modal" data-target="#scrollmodal">REQUEST</button>
                                 </div>
                             </div>
                         </div>
@@ -179,7 +168,7 @@
                     <div class="col-md-4">
                         <div class="card p-3">
                             <div class="d-flex justify-content-start align-items-center">
-                                <img class="mr-3" src="<?php echo base_url();?>images/icon/prize.png" alt="" width="32">
+                                <img class="mr-3" src="<?php echo base_url(); ?>images/icon/prize.png" alt="" width="32">
                                 <div>
                                     <span class="color-gray small-text d-block">Prize Money</span>
                                     <span class="fw-b text-dark medium-text d-block">Rs. 7000 /-</span>
@@ -188,9 +177,9 @@
                         </div>
                     </div>
                     <div class="col-md-4">
-                    <div class="card p-3">
+                        <div class="card p-3">
                             <div class="d-flex justify-content-start align-items-center">
-                                <img class="mr-3" src="<?php echo base_url();?>images/icon/money.png" alt="" width="32">
+                                <img class="mr-3" src="<?php echo base_url(); ?>images/icon/money.png" alt="" width="32">
                                 <div>
                                     <span class="color-gray small-text d-block">Entry Fees</span>
                                     <span class="fw-b text-dark medium-text d-block">Rs. 1200 /-</span>
@@ -199,12 +188,12 @@
                         </div>
                     </div>
                     <div class="col-md-4">
-                    <div class="card p-3">
+                        <div class="card p-3">
                             <div class="d-flex justify-content-start align-items-center">
-                                <img class="mr-3" src="<?php echo base_url();?>images/icon/calendar.png" alt="" width="32">
+                                <img class="mr-3" src="<?php echo base_url(); ?>images/icon/calendar.png" alt="" width="32">
                                 <div>
                                     <span class="color-gray small-text d-block">Tournament Start</span>
-                                    <span class="fw-b text-dark medium-text d-block"><?php echo $tournament[0]['t_start_date']?></span>
+                                    <span class="fw-b text-dark medium-text d-block"><?php echo $tournament[0]['t_start_date'] ?></span>
                                 </div>
                             </div>
                         </div>
@@ -297,6 +286,61 @@
         <!-- /.site-footer -->
     </div>
     <!-- /#right-panel -->
+
+    <div class="modal fade" id="scrollmodal" tabindex="-1" role="dialog" aria-labelledby="scrollmodalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="scrollmodalLabel">Choose Team</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="library">
+                        <div class="row">
+                            <?php
+                            foreach ($user_teams as $team) {
+                            ?>
+                                <div class="col-md-6">
+                                    <div class="card select-team" data-id="<?php echo $team['team_id']; ?>" data-active="0">
+                                        <i class="fa fa-trash delete-team-btn" data-id="<?php echo $team['team_id']; ?>"></i>
+                                        <div class="card-body p-2">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div class="w-25">
+                                                    <img class="rounded-circle bg-light" src="<?php echo empty($team['team_dp']) ? base_url() . 'images/team/avatar3.png' : base_url() . $team['team_dp'] ?>" alt="team img" width="75">
+                                                </div>
+                                                <div class="w-75">
+                                                    <strong class="card-title mb-0 d-block caps"><?php echo $team['team_name']; ?></strong>
+                                                    <p class="card-title mb-0 d-block small-text text-dark"><?php echo empty($team['total_players']) ? "0" : $team['total_players']; ?> Players</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer">
+                                            <div class="d-flex justify-content-between pr-3 pl-3">
+                                                <div class="team-admin pr-3">
+                                                    <img src="<?php echo base_url(); ?>images/icon/admin.png" alt="" width="12">&nbsp;<small><?php echo $team['admin_name']; ?></small>
+                                                </div>
+                                                <div class="team-city">
+                                                    <i class="fa fa-map-marker" style="font-size: 0.85rem"></i>&nbsp;<small class="caps"><?php echo $team['team_city']; ?></small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php
+                            }
+                            ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button id="tournament-request-btn" type="button" class="btn btn-primary" data-id="<?echo $tournament[0]['t_id']; ?>">Request</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>

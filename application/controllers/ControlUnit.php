@@ -145,6 +145,7 @@ class ControlUnit extends CI_Controller
             $data['tournament'] = $this->userDatabase->selectAllFromTableWhere('tournament_table',$where,'*');
             $data['where'] = array('user_id' => $result['user_id']);
             $data['user_info'] = $this->userDatabase->selectAllFromTableWhere('user_account_table', $data['where'], 'user_id,full_name,image_address');
+            $data['user_teams'] = $this->userDatabase->fetchUserTeam($result['user_id']);
             $this->load->view('user/view-tournament', $data);
         } else {
             $this->load->view('authenticate/login');
@@ -204,6 +205,8 @@ class ControlUnit extends CI_Controller
             $data['user_info'] = $this->userDatabase->fetchUserInfo($result['user_id']);
             $data['where'] = array('team_id' => $teamId);
             $data['team_info'] = $this->userDatabase->selectAllFromTableWhere('team_table', $data['where'], 'team_name');
+            //Fetch total players
+            $data['totalPlayers'] = $this->userDatabase->getTotalTeamPlayers($teamId);
             $this->load->view('user/team-players', $data);
         } else {
             $this->load->view('authenticate/login');
@@ -634,34 +637,34 @@ class ControlUnit extends CI_Controller
 
     public function search_player_card($result, $teamId)
     {
-        $baseURL = base_url();
+        $imageAddress = empty($result[0]['image_address']) ? base_url()."images/profile_pic/default.png" : base_url().$result[0]['image_address'];
 
-        return '<div class="players-card col-md-6">
-        <div class="head">
-            <div class="player-dp">
-                <div class="player-img">
-                <img src="' . $baseURL . '' . $result[0]['image_address'] . '" alt="" width="110">
-                </div>
-                <div class="name">
-                    <p>' . $result[0]['full_name'] . '</p>
-                </div>
-           </div>
-        </div>
-        <div class="body">
-            <div class="user-info">
-                <div class="basic-info">
-                    <div class="playing-style"> <i class="fa fa-info-circle"></i>&nbsp;' . $result[0]['playing_role'] . '&nbsp;' . $result[0]['batting_style'] . ' </div>
-                    <div class="city"> <i class="fa fa-map-marker"></i>&nbsp;' . $result[0]['city'] . '</div>
-                </div>
-                <div class="add-btn"> <button class="add-to-team-btn" data-team="' . $teamId . '" data-player="' . $result[0]['user_id'] . '" onclick="addToTeam(this)"><i class="fa fa-plus"></i> ADD</button> </div>
+        return '<div class="players-card col-md-6 bg-white">
+            <div class="head">
+                <div class="player-dp">
+                    <div class="player-img">
+                    <img src="' . $imageAddress . '" alt="" width="110">
+                    </div>
+                    <div class="name">
+                        <p>' . $result[0]['full_name'] . '</p>
+                    </div>
             </div>
-            <div class="user-stats">
-                <div class="matches field"> <span class="name"> Total Matches </span> <span class="value"> ' . $result[0]['matches'] . ' </span> </div>
-                <div class="runs field"> <span class="name"> Total Runs </span> <span class="value"> ' . $result[0]['runs'] . ' </span> </div>
-                <div class="wickets field"> <span class="name"> Total Wickets </span> <span class="value"> ' . $result[0]['wickets'] . ' </span> </div>
             </div>
-        </div>
-    </div>';
+            <div class="body">
+                <div class="user-info">
+                    <div class="basic-info">
+                        <div class="playing-style"> <i class="fa fa-info-circle"></i>&nbsp;' . $result[0]['playing_role'] . '&nbsp;' . $result[0]['batting_style'] . ' </div>
+                        <div class="city"> <i class="fa fa-map-marker"></i>&nbsp;' . $result[0]['city'] . '</div>
+                    </div>
+                    <div class="add-btn"> <button class="add-to-team-btn" data-team="' . $teamId . '" data-player="' . $result[0]['user_id'] . '" onclick="addToTeam(this)"><i class="fa fa-plus"></i> ADD</button> </div>
+                </div>
+                <div class="user-stats">
+                    <div class="matches field"> <span class="name"> Total Matches </span> <span class="value"> ' . $result[0]['matches'] . ' </span> </div>
+                    <div class="runs field"> <span class="name"> Total Runs </span> <span class="value"> ' . $result[0]['runs'] . ' </span> </div>
+                    <div class="wickets field"> <span class="name"> Total Wickets </span> <span class="value"> ' . $result[0]['wickets'] . ' </span> </div>
+                </div>
+            </div>
+        </div>';
     }
 
     public function addPlayerToTeam()
@@ -752,4 +755,23 @@ class ControlUnit extends CI_Controller
     }
 
     /* ------ CUSTOM MODAL FUNCITONS END -------- */
+
+    public function requestToTournament(){
+        //$teamId = 'ba34504f2e33';
+        $teamId = $this->input->post('team_id');
+        $totalPlayers = $this->userDatabase->getTotalTeamPlayers($teamId);
+        if($totalPlayers >= 4){
+            $tournamentId = $this->input->post('tournament-id');
+            $tableName = 'user_account_table';
+            $data = array (
+                "tournament_id" => $tournamentId,
+                "team_id" => $teamId
+            );
+
+            if($this->userDatabase->saveIntoDatabase($tableName,$data)){ echo true; }else{ echo false; }
+            
+        }else {
+            echo "add-players";
+        }
+    }
 }

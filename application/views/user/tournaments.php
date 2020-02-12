@@ -159,8 +159,7 @@
                                                 <div class="col-md-6">
                                                     <div class="card tournament-card" data-id="<?php echo $tournament['t_id']; ?>">
                                                         <div class="card-body no-padding">
-                                                            <div class="tournament-bg">
-                                                            </div>
+                                                        <img class="card-img-top" src="<?php echo base_url().$tournament['t_banner_path']; ?>" alt="" style="max-height: 130px">
                                                             <div class="card-text p-3">
                                                                 <h5 class="mt-2 mb-2 light-text bold"><?php echo $tournament['t_name']; ?></h5>
                                                                 <div class="mb-1 light-text small-text"><i class="fa fa-calendar blue"></i>&nbsp; <?php echo $tournament['t_start_date']; ?> to <?php echo $tournament['t_end_date']; ?></div>
@@ -188,8 +187,7 @@
                                                 <div class="col-md-6">
                                                     <div class="card tournament-card">
                                                         <div class="card-body no-padding">
-                                                            <div class="tournament-bg">
-                                                            </div>
+                                                        <img class="card-img-top" src="<?php echo base_url().$tournament->t_banner_path; ?>" alt="" style="max-height: 130px">
                                                             <div class="card-text p-3">
                                                                 <h5 class="mt-2 mb-2 light-text bold"><?php echo $tournament['t_name']; ?></h5>
                                                                 <div class="mb-1 light-text small-text"><i class="fa fa-calendar blue"></i>&nbsp; <?php echo $tournament['t_start_date']; ?> to <?php echo $tournament['t_end_date']; ?></div>

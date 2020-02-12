@@ -486,5 +486,80 @@ $(document).ready(function () {
     })
 });
 
+/*****   OPEN VIEW TOURNAMENT  *****/
+
+
+/*****  CLICK ON TEAM CARDS   *****/
+
+$(document).ready(function () {
+    $('.select-team').click(function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        $('.select-team').css('border','none');
+        $('.select-team').attr('data-active','0');
+        $(this).css('border','2px solid #03a9f3');
+        $(this).attr('data-active','1');
+        //window.location = BASE_URL + "team-players/" + teamId;
+    })
+});
+
+/*****  /CLICK ON TEAM CARDS   *****/
+
+$(document).ready(function() {
+    $('#tournament-request-btn').click(function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var teamId = $(".select-team[data-active='1']").attr('data-id');
+        var tournamentId = $(this).attr('data-id');
+        $.ajax({
+            url: BASE_URL + "ControlUnit/requestToTournament",
+            type: "POST",
+            data: {"team_id":teamId, "tournament_id":tournamentId},
+            success: function (response) {
+                if (response == "add-players") {
+
+                    swal({
+                        title: "Sorry! Add More Players",
+                        text: "Team has less than 4 players",
+                        icon: "warning",
+                        buttons: ["CANCEL", "ADD PLAYERS"],
+                    })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            window.location = BASE_URL + "add-players/" + teamId;
+                        } else {
+                            //else code
+                        }
+                    });
+
+                }else if (response) {
+
+                    swal({
+                        title: "Request Sent Successfully",
+                        text: "We will contact you as soon as possible",
+                        icon: "success",
+                        button: "ok",
+                    }).then(function () {
+                        //window.location = BASE_URL + "home";
+                    });
+
+                }
+                else {
+
+                    swal({
+                        title: "Something Went Worng!",
+                        icon: "error",
+                        button: "ok",
+                    });
+
+                }
+            }
+        });
+    });
+})
+
 
 /* -------    VIEW TOURNAMENT PAGE ---> UPDATE TEAM DP / REGITER TEAM FORM SCRIPT [END] -------- */
+
+
+
