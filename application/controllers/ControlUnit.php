@@ -763,7 +763,7 @@ class ControlUnit extends CI_Controller
         $totalPlayers = $this->userDatabase->getTotalTeamPlayers($teamId);
         if($totalPlayers >= 4){
             $tournamentId = $this->input->post('tournament-id');
-            $tableName = 'user_account_table';
+            $tableName = 'tournaments_team_table';
             $data = array (
                 "tournament_id" => $tournamentId,
                 "team_id" => $teamId
