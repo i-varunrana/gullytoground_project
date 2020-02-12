@@ -130,6 +130,25 @@
             <div class="animated fadeIn">
                 <!-- Widgets  -->
                 <div class="row">
+                    <div class="col-md-12">
+                        <div class="card p-2 br-green">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="d-flex justify-content-start align-items-center">
+                                    <div class="wh-35 rounded-circle d-flex justify-content-center align-items-center bg-flat-color-3">
+                                        <img src="<?php echo base_url(); ?>images/icon/trophy.png" alt="trophy icon">
+                                    </div>
+                                    <div class="ml-2 caps">
+                                        <?php echo $team[0]['team_name']; ?> Team
+                                    </div>
+                                </div>
+                                <div class="small-text text-up text-dark fw-b">
+                                    <?php echo $totalPlayers; ?> Player(s)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-md-12 mb-3">
                         <strong class="card-title">Add Players</strong>
                     </div>

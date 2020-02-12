@@ -224,6 +224,9 @@ class ControlUnit extends CI_Controller
             $data['update_css_js'] = $this->userDatabase->selectAllFromTableWhere('update_app_table',$where,'datetime');
             $data['user_info'] = $this->userDatabase->fetchUserInfo($result['user_id']);
             $data['user_dp'] = $this->userDatabase->getUserDp($result['user_id']);
+            $where = array('team_id'=>$teamId);
+            $data['team'] = $this->userDatabase->selectAllFromTableWhere('team_table',$where,'team_name');
+            $data['totalPlayers'] = $this->userDatabase->getTotalTeamPlayers($teamId);
             $this->load->view('user/add-players', $data);
         } else {
             $this->load->view('authenticate/login');
