@@ -282,6 +282,25 @@ Class UserDatabase extends CI_Model {
         return count($result);
     }
 
+    //ADD PLAYER TO TEAM
+    public function addPlayerToTeam($userId, $teamId) {
+        $condition = "team_id =" . "'" . $teamId . "' AND " . "user_id =" . "'" . $userId . "'";
+        $this->db->select('*');
+        $this->db->from('team_relation_table');
+        $this->db->where($condition);
+        $this->db->limit(1);
+        $query = $this->db->get();
+        if ($query->num_rows() == 0) {
+            $data = array("team_id" => $teamId, "user_id" => $userId);
+            $this->db->trans_start();
+            $this->db->insert("team_relation_table",$data);
+            $this->db->trans_complete();
+            return $this->db->trans_status() ? TRUE : FALSE;
+        } else {
+            return "exist";
+        }
+    }
+
 
 // ----------------------------------------------------------------------------------------  //
 

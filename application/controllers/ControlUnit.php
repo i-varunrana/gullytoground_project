@@ -673,21 +673,19 @@ class ControlUnit extends CI_Controller
     public function addPlayerToTeam()
     {
         if ($this->session->has_userdata('logged_in')) {
-            $data = array(
-                'team_id' => $this->input->post('team_id'),
-                'user_id' => $this->input->post('user_id')
-            );
 
-            $result = $this->userDatabase->saveIntoDatabase('team_relation_table', $data);
+            $result = $this->userDatabase->addPlayerToTeam($this->input->post('user_id'), $this->input->post('team_id'));
 
             if ($result) {
-                echo true;
+                echo $result;
             } else {
                 echo false;
             }
         } else {
             $this->load->view('authenticate/login');
         }
+
+
     }
 
     public function isProfileCompleted($userId)

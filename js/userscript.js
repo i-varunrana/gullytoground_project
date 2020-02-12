@@ -397,7 +397,14 @@ $(document).ready(function () {
             type: "POST",
             data: $.param(data),
             success: function (response) {
-                if (response) {
+                if(response == "exist"){
+                    swal({
+                        title: "Already Exist",
+                        icon: "warning",
+                        button: "ok",
+                    });
+                }
+                else if (response) {
                     swal({
                         title: "Successfully Added",
                         text: "Player Added to your team",
@@ -440,7 +447,15 @@ function addToTeam(btn) {
         type: "POST",
         data: $.param(data),
         success: function (response) {
-            if (response) {
+            if(response == "exist"){
+                swal({
+                    title: "Already Exist",
+                    icon: "warning",
+                    button: "ok",
+                });
+                button_content.html('SEARCH');
+            }
+            else if (response) {
                 swal({
                     title: "Successfully Added",
                     text: "Player Added to your team",
