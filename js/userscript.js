@@ -555,7 +555,7 @@ $(document).ready(function() {
                         icon: "success",
                         button: "ok",
                     }).then(function () {
-                        //window.location = BASE_URL + "home";
+                        window.location = BASE_URL + "home";
                     });
 
                 }
