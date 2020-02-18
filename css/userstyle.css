@@ -540,12 +540,12 @@
     padding: 0.6rem 2rem;
     border: 0;
     border: 1px solid #03a9f3;
-    color: #03a9f3;
+    color: #03a9f3 !important;
   }
 
   .create-team-btn a:hover {
     background-color: #03a9f3;
-    color: white;
+    color: white !important;
   }
 
   .btn-lg {

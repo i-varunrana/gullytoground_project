@@ -145,7 +145,7 @@
                                     </div>
                                 </div>
                                 <div class="small-text text-up text-dark fw-b">
-                                    <?php  echo empty($requested_teams) ? "0" : count($requested_teams); ?> Teams
+                                    <?php echo empty($requested_teams) ? "0" : count($requested_teams); ?> Teams
                                 </div>
                             </div>
                         </div>
@@ -250,6 +250,13 @@
                     ?>
 
                 </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="create-team-btn">
+                            <a data-toggle="modal" data-target="#rejectedteammodal">REJECTED REQUEST</a>
+                        </div>
+                    </div>
+                </div>
             </div>
             <!-- .animated -->
         </div>
@@ -271,6 +278,65 @@
         <!-- /.site-footer -->
     </div>
     <!-- /#right-panel -->
+
+    <div class="modal fade" id="rejectedteammodal" tabindex="-1" role="dialog" aria-labelledby="scrollmodalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="scrollmodalLabel">Rejected Teams</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <?php
+                        if (!empty($rejected_teams)) {
+                            foreach ($rejected_teams as $rejected_team) {
+                                $team = $this->userDatabase->fetchTeamDetail($rejected_team['team_id']);
+                        ?>
+                                <div class="col-md-6">
+                                    <div class="card" data-toggle="modal" data-target="#scrollmodal">
+                                        <p class="card-title mb-0 d-block small-text text-dark total-player-pos"><?php echo empty($team[0]['total_players']) ? "0" : $team[0]['total_players']; ?> Players</p>
+                                        <div class="card-body p-2">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div class="w-25">
+                                                    <img class="rounded-circle bg-light" src="<?php echo empty($team[0]['team_dp']) ? base_url() . 'images/team/avatar3.png' : base_url() . $team[0]['team_dp'] ?>" alt="team img" width="75">
+                                                </div>
+                                                <div class="w-75">
+                                                    <strong class="card-title mb-0 d-block caps"><?php echo $team[0]['team_name']; ?></strong>
+                                                    <img src="<?php echo base_url(); ?>images/icon/admin.png" alt="" width="12">&nbsp;<small><?php echo $team[0]['admin_name']; ?></small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer p-0 pt-2 pb-2">
+                                            <div class="d-flex justify-content-between pr-3 pl-3">
+                                                <div class="team-city">
+                                                    <i class="fa fa-map-marker" style="font-size: 0.85rem"></i>&nbsp;<small class="caps"><?php echo $team[0]['team_city']; ?></small>
+                                                </div>
+                                                <div class="d-flex flex-columns">
+                                                    <div class="accept-request mr-2 d-block">
+                                                        <button class="accept-team-request" data-team-id="<?php echo $team[0]['team_id']; ?>" data-tournament-id="<?php echo $tournament_id; ?>">ACCEPT</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                        <?php
+                            }
+                        }
+                        ?>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="modal fade" id="scrollmodal" tabindex="-1" role="dialog" aria-labelledby="scrollmodalLabel" aria-hidden="true">
         <div class="modal-dialog modal-sm" role="document">
@@ -299,7 +365,7 @@
                     </div>
                     <div class="row mb-2">
                         <div class="col-md-12">
-                            <a class="btn btn-outline-info btn-lg btn-block" href="<?echo base_url("team-players/".$team[0]['team_id']); ?>">VISIT TEAM</a>
+                            <a class="btn btn-outline-info btn-lg btn-block" href="<? echo base_url("team-players/" . $team[0]['team_id']); ?>">VISIT TEAM</a>
                         </div>
                     </div>
                 </div>

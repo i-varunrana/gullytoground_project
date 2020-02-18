@@ -146,6 +146,8 @@ class ControlUnit extends CI_Controller
             $data['requested_teams'] = $this->userDatabase->selectAllFromTableWhere('tournaments_team_table',$data['where'],'team_id');
             $data['where'] = array('tournament_id' => $tournamentId, 'accepted' => '1', 'rejected' => '0');
             $data['participated_teams'] = $this->userDatabase->selectAllFromTableWhere('tournaments_team_table',$data['where'],'team_id');
+            $data['where'] = array('tournament_id' => $tournamentId, 'accepted' => '0', 'rejected' => '1');
+            $data['rejected_teams'] = $this->userDatabase->selectAllFromTableWhere('tournaments_team_table',$data['where'],'team_id');
             $this->load->view('user/view-my-tournament', $data);
         } else {
             $this->load->view('authenticate/login');
