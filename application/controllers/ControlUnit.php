@@ -142,8 +142,10 @@ class ControlUnit extends CI_Controller
             $data['update_css_js'] = $this->userDatabase->selectAllFromTableWhere('update_app_table',$where,'datetime');
             $data['where'] = array('user_id' => $result['user_id']);
             $data['user_info'] = $this->userDatabase->selectAllFromTableWhere('user_account_table', $data['where'], 'user_id,full_name,image_address');
-            $data['where'] = array('tournament_id' => $tournamentId);
+            $data['where'] = array('tournament_id' => $tournamentId, 'accepted' => '0', 'rejected' => '0');
             $data['requested_teams'] = $this->userDatabase->selectAllFromTableWhere('tournaments_team_table',$data['where'],'team_id');
+            $data['where'] = array('tournament_id' => $tournamentId, 'accepted' => '1', 'rejected' => '0');
+            $data['participated_teams'] = $this->userDatabase->selectAllFromTableWhere('tournaments_team_table',$data['where'],'team_id');
             $this->load->view('user/view-my-tournament', $data);
         } else {
             $this->load->view('authenticate/login');
@@ -832,5 +834,14 @@ class ControlUnit extends CI_Controller
             "tournament_id" => $this->input->post('tournament_id'),
             "team_id" => $this->input->post('team_id')
         );  
+        if($this->userDatabase->acceptRequestToTournament($data)){ echo true; }else{ echo false; }
+    }
+
+    public function rejectRequestToTournament() {
+        $data = array (
+            "tournament_id" => $this->input->post('tournament_id'),
+            "team_id" => $this->input->post('team_id')
+        );  
+        if($this->userDatabase->rejectRequestToTournament($data)){ echo true; }else{ echo false; }
     }
 }

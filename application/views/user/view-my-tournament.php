@@ -145,7 +145,7 @@
                                     </div>
                                 </div>
                                 <div class="small-text text-up text-dark fw-b">
-                                    <?php echo count($requested_teams); ?> Teams
+                                    <?php  echo empty($requested_teams) ? "0" : count($requested_teams); ?> Teams
                                 </div>
                             </div>
                         </div>
@@ -154,8 +154,8 @@
                 <div class="row">
                     <?php
                     if (!empty($requested_teams)) {
-                        foreach ($requested_teams as $teams) {
-                            $team = $this->userDatabase->fetchTeamDetail($teams['team_id']);
+                        foreach ($requested_teams as $requested_team) {
+                            $team = $this->userDatabase->fetchTeamDetail($requested_team['team_id']);
                     ?>
                             <div class="col-md-6">
                                 <div class="card" data-toggle="modal" data-target="#scrollmodal">
@@ -181,7 +181,7 @@
                                                     <button class="accept-team-request" data-team-id="<?php echo $team[0]['team_id']; ?>" data-tournament-id="<?php echo $tournament_id; ?>">ACCEPT</button>
                                                 </div>
                                                 <div class="reject-request d-block">
-                                                    <button class="reject-team-request" data-id="<?php echo $team[0]['team_id']; ?>">REJECT</button>
+                                                    <button class="reject-team-request" data-team-id="<?php echo $team[0]['team_id']; ?>" data-tournament-id="<?php echo $tournament_id; ?>">REJECT</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -208,11 +208,47 @@
                                     </div>
                                 </div>
                                 <div class="small-text text-up text-dark fw-b">
-                                    <?php echo count($requested_teams); ?> Teams
+                                    <?php echo empty($participated_teams) ? "0" : count($participated_teams); ?> Teams
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="row">
+                    <?php
+                    if (!empty($participated_teams)) {
+                        foreach ($participated_teams as $participated_team) {
+                            $team = $this->userDatabase->fetchTeamDetail($participated_team['team_id']);
+                    ?>
+                            <div class="col-md-6">
+                                <div class="card" data-toggle="modal" data-target="#scrollmodal">
+                                    <p class="card-title mb-0 d-block small-text text-dark total-player-pos"><?php echo empty($team[0]['total_players']) ? "0" : $team[0]['total_players']; ?> Players</p>
+                                    <div class="card-body p-2">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div class="w-25">
+                                                <img class="rounded-circle bg-light" src="<?php echo empty($team[0]['team_dp']) ? base_url() . 'images/team/avatar3.png' : base_url() . $team[0]['team_dp'] ?>" alt="team img" width="75">
+                                            </div>
+                                            <div class="w-75">
+                                                <strong class="card-title mb-0 d-block caps"><?php echo $team[0]['team_name']; ?></strong>
+                                                <img src="<?php echo base_url(); ?>images/icon/admin.png" alt="" width="12">&nbsp;<small><?php echo $team[0]['admin_name']; ?></small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer p-0 pt-2 pb-2">
+                                        <div class="d-flex justify-content-between pr-3 pl-3">
+                                            <div class="team-city">
+                                                <i class="fa fa-map-marker" style="font-size: 0.85rem"></i>&nbsp;<small class="caps"><?php echo $team[0]['team_city']; ?></small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                    <?php
+                        }
+                    }
+                    ?>
+
                 </div>
             </div>
             <!-- .animated -->

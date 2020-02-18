@@ -329,10 +329,20 @@ Class UserDatabase extends CI_Model {
 
     //ACCEPT TEAM REQUEST TO TOURNAMENT
     public function acceptRequestToTournament($where) {
-        $data = array('accepted'=>'1');
+        $data = array('accepted'=>'1','rejected' => '0');
         $this->db->trans_start();
         $this->db->where($where);
-        $this->db->update("team_relation_table",$data);
+        $this->db->update("tournaments_team_table",$data);
+        $this->db->trans_complete();
+        return $this->db->trans_status() ? TRUE : FALSE;
+    }
+
+     //REJECT TEAM REQUEST TO TOURNAMENT
+     public function rejectRequestToTournament($where) {
+        $data = array('rejected'=>'1','accepted'=>'0');
+        $this->db->trans_start();
+        $this->db->where($where);
+        $this->db->update("tournaments_team_table",$data);
         $this->db->trans_complete();
         return $this->db->trans_status() ? TRUE : FALSE;
     }
