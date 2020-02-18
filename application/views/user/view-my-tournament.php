@@ -155,6 +155,8 @@
                     <?php
                     if (!empty($requested_teams)) {
                         foreach ($requested_teams as $teams) {
+                            print_r($requested_teams);
+                            die;
                             $team = $this->userDatabase->fetchTeamDetail($teams['team_id']);
                     ?>
                             <div class="col-md-6">
