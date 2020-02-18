@@ -172,6 +172,25 @@ Class UserDatabase extends CI_Model {
         }
     }
 
+    //REQUEST TO TOURNAMENT 
+    public function requestToTournament($data){
+        $condition = "tournament_id =" . "'" . $data['tournament_id'] . "' AND " . "team_id =" . "'" . $data['team_id'] . "'";
+        $this->db->select('*');
+        $this->db->from('login_table');
+        $this->db->where($condition);
+        $this->db->limit(1);
+        $query = $this->db->get();
+
+        if ($query->num_rows() == 0) {
+            $this->db->trans_start();
+            $this->db->insert('tournaments_team_table',$data);
+            $this->db->trans_complete();
+		    return $this->db->trans_status() ? TRUE : FALSE;
+        } else {
+            return 'registered';
+        }
+    } 
+
     //Fetch My Teams
     public function fetchUserTeam($userId) {
         // $this->db->select('*');

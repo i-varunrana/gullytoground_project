@@ -809,13 +809,12 @@ class ControlUnit extends CI_Controller
         $totalPlayers = $this->userDatabase->getTotalTeamPlayers($teamId);
         if($totalPlayers >= 4){
             $tournamentId = $this->input->post('tournament_id');
-            $tableName = 'tournaments_team_table';
             $data = array (
                 "tournament_id" => $tournamentId,
                 "team_id" => $teamId
             );
-
-            if($this->userDatabase->saveIntoDatabase($tableName,$data)){ echo true; }else{ echo false; }
+            $result = $this->userDatabase->requestToTournament($data);
+            if($result){ echo $result; }else{ echo false; }
             
         }else {
             echo "add-players";
