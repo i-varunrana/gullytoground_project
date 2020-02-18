@@ -229,22 +229,22 @@
                 <div class="modal-body">
                     <div class="row mb-2">
                         <div class="col-md-12">
-                            <a class="btn btn-outline-primary btn-lg btn-block" href="tel:+91<?php echo $team[0]['team_id']; ?>">CALL</a>
+                            <a class="btn btn-outline-primary btn-lg btn-block" href="tel:+91<?php echo $team[0]['admin_id']; ?>">CALL</a>
                         </div>
                     </div>
                     <div class="row mb-2">
                         <div class="col-md-12">
-                            <a class="btn btn-outline-primary btn-lg btn-block" href="sms://+91<?php echo $team[0]['team_id']; ?>">MESSAGE</a>
+                            <a class="btn btn-outline-primary btn-lg btn-block" href="sms://+91<?php echo $team[0]['admin_id']; ?>">MESSAGE</a>
                         </div>
                     </div>
                     <div class="row mb-2">
                         <div class="col-md-12">
-                            <a class="btn btn-outline-success btn-lg btn-block" href="whatsapp://send?abid=+91<?php echo $team[0]['team_id']; ?>">WHATSAPP</a>
+                            <a class="btn btn-outline-success btn-lg btn-block" href="whatsapp://send?abid=+91<?php echo $team[0]['admin_id']; ?>">WHATSAPP</a>
                         </div>
                     </div>
                     <div class="row mb-2">
                         <div class="col-md-12">
-                            <button class="btn btn-outline-info btn-lg btn-block">VISIT TEAM</button>
+                            <a class="btn btn-outline-info btn-lg btn-block" href="<?echo base_url("team-players/".$team[0]['team_id']); ?>">VISIT TEAM</a>
                         </div>
                     </div>
                 </div>
