@@ -24,7 +24,6 @@
     <link rel="stylesheet" href="<?php echo base_url(); ?>css/cs-skin-elastic.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>css/style.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>css/userstyle.css?v=<?php echo $update_css_js[0]['datetime']; ?>">
-    <link rel="stylesheet" href="<?php echo base_url(); ?>css/croppie.css">
     <script>
         const BASE_URL = "<?php echo base_url(); ?>";
     </script>
@@ -36,18 +35,18 @@
         <nav class="navbar navbar-expand-sm navbar-default">
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active">
+                    <li>
                         <a href="<?php echo base_url('home'); ?>"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
                     </li>
                     <li>
                         <a href="<?php echo base_url('profile'); ?>"> <i class="menu-icon fa fa-user"></i>My Profile</a>
                     </li><!-- /.menu-title -->
-                    <li class="menu-item-has-children dropdown">
+                    <li class="menu-item-has-children dropdown active">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-soccer-ball-o"></i>Tournaments</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-soccer-ball-o"></i><a href="<?php echo base_url('tournaments'); ?>">Tournaments</a></li>
-                            <li><i class="fa fa-soccer-ball-o"></i><a href="<?php echo base_url('my-tournaments'); ?>">My Tournaments</a></li>
-                            <li><i class="fa fa-soccer-ball-o"></i><a id="add-tournament" data-name="<?php echo $user_info[0]->full_name; ?>">Add A Tournaments</a></li>
+                            <li class="active"><i class="fa fa-soccer-ball-o"></i><a href="<?php echo base_url('my-tournaments'); ?>">My Tournaments</a></li>
+                            <li><i class="fa fa-soccer-ball-o"></i><a id="add-tournament" data-name="<?php echo $user_info[0]['full_name']; ?>">Add A Tournaments</a></li>
                         </ul>
                     </li>
                     <li>
@@ -108,11 +107,9 @@
 
                     <div class="user-area dropdown float-right">
                         <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img class="user-avatar rounded-circle" src="<?php if ($user_info[0]->image_address == '') {
-                                                                                echo base_url() . "images/profile_pic/default.png";
-                                                                            } else {
-                                                                                echo base_url() . $user_info[0]->image_address;
-                                                                            } ?>" alt="User Avatar">
+                            <img class="user-avatar rounded-circle" src="<?php echo empty($user_info[0]['image_address']) ?
+                                                                                base_url() . "images/profile_pic/default.png" :
+                                                                                base_url() . $user_info[0]['image_address']; ?>" alt="User Avatar">
                         </a>
 
                         <div class="user-menu dropdown-menu">
@@ -134,108 +131,70 @@
         <div class="content">
             <!-- Animated -->
             <div class="animated fadeIn">
+                <!-- Widgets  -->
                 <div class="row">
-                    <div class="col-md-12 mb-3">
-                        <strong class="card-title">Team <?php echo $team_info[0]['team_name']; ?></strong>
-                        <strong class="card-title float-right"><?php echo $totalPlayers ?> Players</strong>
-                    </div>
-                </div>
-                <div class="row">
-                    <?php
-                        if (isset($team_players)) {
-                            foreach ($team_players as $players) {
-                    ?>
-                    <div class="col-md-6">
-                        <div class="card players" data-id="<?php echo $players->user_id; ?>">
-                            <i class="fa fa-trash delete-team-btn"></i>
-                            <div class="card-body p-2">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="w-25">
-                                        <img class="rounded-circle bg-light" src="<?php echo base_url() . $players->image_address; ?>" alt="team img" width="75">
+                    <div class="col-md-12">
+                        <div class="card p-2 br-green">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="d-flex justify-content-start align-items-center">
+                                    <div class="wh-35 rounded-circle d-flex justify-content-center align-items-center bg-flat-color-3">
+                                        <img src="<?php echo base_url(); ?>images/icon/trophy.png" alt="trophy icon">
                                     </div>
-                                    <div class="w-75">
-                                        <strong class="card-title mb-0 d-block"><?php echo $players->full_name; ?></strong>
-                                        <p class="card-title mb-0 d-block small-text text-dark"><?php echo $players->playing_role; ?>&nbsp;<?php echo $players->batting_style; ?></p>
+                                    <div class="ml-2">
+                                        Requested Teams
                                     </div>
                                 </div>
-                            </div>
-                            <div class="card-footer">
-                                <div class="col-md-12">
-                                    <div class="team-city">
-                                        <i class="fa fa-map-marker" style="font-size: 0.85rem"></i>&nbsp;<small><?php echo $players->city; ?></small>
-                                    </div>
+                                <div class="small-text text-up text-dark fw-b">
+                                    <?php echo count($requested_teams); ?> Teams
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <?php
-                    } }
-                    else {
-                    ?>
-                    <div class="col-md-12">
-                        <p style="text-align: center">0 Player Added</p>
-                    </div>
-                    <?php
-                        }
-                    ?>
                 </div>
                 <div class="row">
-                <div class="col-md-12">
-                    <div class="create-team-btn">
-                        <a href="<?php echo base_url('add-players' . '/' . $team_id); ?>">ADD PLAYERS</a>
-                    </div>
-                 </div>
-                </div>
-                <!-- Widgets  -->
-                <!-- <div class="row">
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="card-header bg-white br-0 d-flex justify-content-between">
-                                <strong class="card-title inline-block large-text">Team <?php echo $team_info[0]['team_name']; ?></strong>
-                                <div class="total-player" style="font-size: 1rem; color: #4e5665;"><?php echo $total_players ?> Players</div>
-                            </div>
-
-                            <div class="card-body card-block">
-                                <div class="row">
-                                    <?php
-                                    if (isset($team_players)) {
-                                        foreach ($team_players as $players) {
-                                    ?>
-                                            <div class="col-md-6">
-                                                <div class="team-player-card">
-                                                <div class="head">
-                                                    <div class="right-half">
-                                                        <img src="<?php echo base_url() . $players->image_address; ?>" alt="<?php echo is_null($players->image_address); ?>" width="95">
-                                                    </div>
-                                                    <div class="left-half">
-                                                        <div class="name"><?php echo $players->full_name; ?></div>
-                                                        <div class="playing-role"><?php echo $players->playing_role; ?>&nbsp;<?php echo $players->batting_style; ?></div>
-                                                    </div>
+                    <?php
+                    if (!empty($requested_teams)) {
+                        foreach ($requested_teams as $teams) {
+                            $team = $this->userDatabase->fetchTeamDetail($teams['team_id']);
+                    ?>
+                            <div class="col-md-6">
+                                <div class="card" data-id="<?php echo $team[0]['team_id']; ?>" data-toggle="modal" data-target="#scrollmodal">
+                                    <p class="card-title mb-0 d-block small-text text-dark total-player-pos"><?php echo empty($team[0]['total_players']) ? "0" : $team[0]['total_players']; ?> Players</p>
+                                    <div class="card-body p-2">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div class="w-25">
+                                                <img class="rounded-circle bg-light" src="<?php echo empty($team[0]['team_dp']) ? base_url() . 'images/team/avatar3.png' : base_url() . $team[0]['team_dp'] ?>" alt="team img" width="75">
+                                            </div>
+                                            <div class="w-75">
+                                                <strong class="card-title mb-0 d-block caps"><?php echo $team[0]['team_name']; ?></strong>
+                                                <img src="<?php echo base_url(); ?>images/icon/admin.png" alt="" width="12">&nbsp;<small><?php echo $team[0]['admin_name']; ?></small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer p-0 pt-2 pb-2">
+                                        <div class="d-flex justify-content-between pr-3 pl-3">
+                                            <div class="team-city">
+                                                <i class="fa fa-map-marker" style="font-size: 0.85rem"></i>&nbsp;<small class="caps"><?php echo $team[0]['team_city']; ?></small>
+                                            </div>
+                                            <div class="d-flex flex-columns">
+                                                <div class="accept-request mr-2 d-block">
+                                                    <button>ACCEPT</button>
                                                 </div>
-                                                <div class="body">
-                                                    <div class="city"><i class="fa fa-map-marker"></i>&nbsp;<?php echo $players->city; ?></div>
-                                                </div>
+                                                <div class="reject-request d-block">
+                                                    <button>REJECT</button>
                                                 </div>
                                             </div>
-                                        <?php
-                                        }
-                                    } else {
-                                        ?>
-                                        <div class="col-md-12">
-                                            <p style="text-align: center">0 Player Added</p>
                                         </div>
-                                    <?php
-                                    }
-                                    ?>
-                                <div class="col-md-12">
-                                    <div class="create-team-btn">
-                                        <a href="<?php echo base_url('add-players' . '/' . $team_id); ?>">ADD PLAYERS</a>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div> -->
+
+                    <?php
+                        }
+                    }
+                    ?>
+
+                </div>
             </div>
             <!-- .animated -->
         </div>
@@ -258,6 +217,44 @@
     </div>
     <!-- /#right-panel -->
 
+    <div class="modal fade" id="scrollmodal" tabindex="-1" role="dialog" aria-labelledby="scrollmodalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="scrollmodalLabel"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row mb-2">
+                        <div class="col-md-12">
+                            <a class="btn btn-outline-primary btn-lg btn-block" href="tel:+91<?php echo $team[0]['team_id']; ?>">CALL</a>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-md-12">
+                            <a class="btn btn-outline-primary btn-lg btn-block" href="sms://+91<?php echo $team[0]['team_id']; ?>">MESSAGE</a>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-md-12">
+                            <a class="btn btn-outline-success btn-lg btn-block" href="whatsapp://send?abid=+91<?php echo $team[0]['team_id']; ?>">WHATSAPP</a>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-md-12">
+                            <button class="btn btn-outline-info btn-lg btn-block">VISIT TEAM</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
@@ -266,6 +263,7 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="<?php echo base_url(); ?>js/main.js"></script>
     <script src="<?php echo base_url(); ?>js/userscript.js?v=<?php echo $update_css_js[0]['datetime']; ?>"></script>
+    <script src="<?php echo base_url(); ?>js/card-swipe.js"></script>
 </body>
 
 </html>

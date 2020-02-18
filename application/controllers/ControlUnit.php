@@ -111,9 +111,39 @@ class ControlUnit extends CI_Controller
             $result = $this->session->userdata('logged_in');
             $where = array('id'=>'1');
             $data['update_css_js'] = $this->userDatabase->selectAllFromTableWhere('update_app_table',$where,'datetime');
+            $data['where'] = array('user_id' => $result['user_id'],'');
+            $data['user_info'] = $this->userDatabase->selectAllFromTableWhere('user_account_table', $data['where'], 'user_id,full_name,image_address,city');
+            $data['where'] = array(
+                't_user_id' => $result['user_id'],
+                't_city' => $data['user_info'][0]['city'],
+                'upcoming' => '1'
+            );
+            $data['upcoming_my_tournaments'] = $this->userDatabase->selectAllFromTableWhere('tournament_table',$data['where'],'*');
+            $data['where'] = array(
+                't_user_id' => $result['user_id'],
+                't_city' => $data['user_info'][0]['city'],
+                'ongoing' => '0',
+                'upcoming' => '0'
+            );
+            $data['ongoing_my_tournaments'] = $this->userDatabase->selectAllFromTableWhere('tournament_table',$data['where'],'*');
+
+            $this->load->view('user/my-tournaments', $data);
+        } else {
+            $this->load->view('authenticate/login');
+        }
+    }
+
+    //View My Tournament Page
+    public function viewMyTournamentPage($tournamentId){
+        if ($this->session->has_userdata('logged_in')) {
+            $result = $this->session->userdata('logged_in');
+            $where = array('id'=>'1');
+            $data['update_css_js'] = $this->userDatabase->selectAllFromTableWhere('update_app_table',$where,'datetime');
             $data['where'] = array('user_id' => $result['user_id']);
             $data['user_info'] = $this->userDatabase->selectAllFromTableWhere('user_account_table', $data['where'], 'user_id,full_name,image_address');
-            $this->load->view('user/my-tournaments', $data);
+            $data['where'] = array('tournament_id' => $tournamentId);
+            $data['requested_teams'] = $this->userDatabase->selectAllFromTableWhere('tournaments_team_table',$data['where'],'team_id');
+            $this->load->view('user/view-my-tournament', $data);
         } else {
             $this->load->view('authenticate/login');
         }
@@ -196,7 +226,7 @@ class ControlUnit extends CI_Controller
             $data['team_player_ids'] = empty($this->userDatabase->selectAllFromTableWhere('team_relation_table', $data['where'], 'user_id')) ? 0 : $this->userDatabase->selectAllFromTableWhere('team_relation_table', $data['where'], 'user_id');
             //Fetch Team Payers
             if ($data['team_player_ids'] != 0) {
-                $data['team_players'] = $this->userDatabase->multipleDataFetch('user_account_table', array_column($data['team_player_ids'], 'user_id'), 'full_name,playing_role,batting_style,city,image_address');
+                $data['team_players'] = $this->userDatabase->multipleDataFetch('user_account_table', array_column($data['team_player_ids'], 'user_id'), 'user_id,full_name,playing_role,batting_style,city,image_address');
                 $data['total_players'] = count($data['team_players']);
             } else {
                 $data['total_players'] = 0;
@@ -208,6 +238,22 @@ class ControlUnit extends CI_Controller
             //Fetch total players
             $data['totalPlayers'] = $this->userDatabase->getTotalTeamPlayers($teamId);
             $this->load->view('user/team-players', $data);
+        } else {
+            $this->load->view('authenticate/login');
+        }
+    }
+
+    //Visit Team Player Profile Page
+    public function visitTeamPlayerPage($playerId){
+        if ($this->session->has_userdata('logged_in')) {
+            $result = $this->session->userdata('logged_in');
+            $data['user_id'] = $playerId;
+            $where = array('id'=>'1');
+            $data['update_css_js'] = $this->userDatabase->selectAllFromTableWhere('update_app_table',$where,'datetime');
+            $data['user_info'] = $this->userDatabase->fetchUserInfo($result['user_id']);
+            $data['player_info'] = $this->userDatabase->fetchUserInfo($playerId);
+            $data['player_stats'] = $this->userDatabase->fetchUserStats($playerId);
+            $this->load->view('user/visit-player-profile', $data);
         } else {
             $this->load->view('authenticate/login');
         }
@@ -774,5 +820,10 @@ class ControlUnit extends CI_Controller
         }else {
             echo "add-players";
         }
+    }
+
+    public function getTeamDetails($teamId){
+        $data['team_info'] = $this->userDatabase->fetchTeamDetail($teamId);
+        return $data['team_info'];
     }
 }

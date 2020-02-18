@@ -108,9 +108,8 @@
                     <div class="user-area dropdown float-right">
                         <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <img class="user-avatar rounded-circle" src="<?php echo empty($user_info[0]['image_address']) ?
-                                                                                 base_url() . "images/profile_pic/default.png" :
-                                                                                 base_url() . $user_info[0]['image_address']; ?>" 
-                                                                                 alt="User Avatar">
+                                                                                base_url() . "images/profile_pic/default.png" :
+                                                                                base_url() . $user_info[0]['image_address']; ?>" alt="User Avatar">
                         </a>
 
                         <div class="user-menu dropdown-menu">
@@ -134,65 +133,80 @@
             <div class="animated fadeIn">
                 <!-- Widgets  -->
                 <div class="row">
-                <div class="col-lg-12">
+                    <div class="col-lg-12">
                         <div class="card">
-                            <div class="card-header">
+                            <div class="card-header bg-white">
                                 <h4>My Tournaments</h4>
                             </div>
                             <div class="card-body">
-                                <div class="default-tab">
-                                    <nav>
-                                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                            <a class="nav-item nav-link active" id="custom-nav-ongoing-tab" data-toggle="tab" href="#custom-nav-ongoing" role="tab" aria-controls="custom-nav-ongoing" aria-selected="true">Ongoing</a>
-                                            <a class="nav-item nav-link" id="custom-nav-upcoming-tab" data-toggle="tab" href="#custom-nav-upcoming" role="tab" aria-controls="custom-nav-upcoming" aria-selected="false">Upcoming</a>
-                                        </div>
-                                    </nav>
-                                    <div class="tab-content pl-3 pt-2" id="nav-tabContent">
-                                        <div class="tab-pane fade show active" id="custom-nav-ongoing" role="tabpanel" aria-labelledby="custom-nav-ongoing-tab">
-                                            <div class="row">
 
-                                                <div class="col-md-6">
-                                                    <div class="card">
-                                                        <div class="card-body no-padding">
-                                                            <div class="tournament-bg">
-                                                            </div>
-                                                            <div class="card-text p-3">
-                                                                <h5 class="mt-2 mb-2 light-text bold">Knight 11</h5>
-                                                                <div class="mb-1 light-text small-text"><i class="fa fa-calendar blue"></i>&nbsp; 24-Aug-19 too 10-Nov-19</div>
-                                                                <div class="light-text small-text"><i class="fa fa-map-marker blue"></i>&nbsp;&nbsp; Bulandshahr</div>
-                                                                <hr>
-                                                                <div class="light-text wrap pl-1 small-text">XYZ stadium near Bus stand, Bulandshahr</div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Tournament</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">History</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content" id="pills-tabContent">
+                                    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                                        <div class="row mt-4">
 
-                                            </div>
-                                        </div>
-                                        <div class="tab-pane fade" id="custom-nav-upcoming" role="tabpanel" aria-labelledby="custom-nav-upcoming-tab">
-                                            <div class="row">
-
-                                                <div class="col-md-6">
-                                                    <div class="card">
-                                                        <div class="card-body no-padding">
-                                                            <div class="tournament-bg">
-                                                            </div>
-                                                            <div class="card-text p-3">
-                                                                <h5 class="mt-2 mb-2 light-text bold">Knight 11</h5>
-                                                                <div class="mb-1 light-text small-text"><i class="fa fa-calendar blue"></i>&nbsp; 24-Aug-19 too 10-Nov-19</div>
-                                                                <div class="light-text small-text"><i class="fa fa-map-marker blue"></i>&nbsp;&nbsp; Bulandshahr</div>
-                                                                <hr>
-                                                                <div class="light-text wrap pl-1 extra-small-text">XYZ stadium near Bus stand, Bulandshahr</div>
+                                            <?php
+                                            if (!empty($upcoming_my_tournaments)) {
+                                                foreach ($upcoming_my_tournaments as $upcomingTournament) {
+                                            ?>
+                                                    <div class="col-md-12">
+                                                        <div class="card my-tournament-card" data-id="<?php echo $upcomingTournament['t_id']; ?>">
+                                                            <div class="card-body no-padding">
+                                                                <img class="card-img-top" src="<?php echo base_url() . $upcomingTournament['t_banner_path']; ?>" alt="" style="max-height: 130px">
+                                                                <div class="card-text p-3">
+                                                                    <h5 class="mt-2 mb-2 light-text bold"><?php echo $upcomingTournament['t_name']; ?></h5>
+                                                                    <div class="mb-1 light-text small-text"><i class="fa fa-calendar blue"></i>&nbsp; <?php echo $upcomingTournament['t_start_date']; ?> to <?php echo $upcomingTournament['t_end_date']; ?></div>
+                                                                    <div class="light-text small-text"><i class="fa fa-map-marker blue"></i>&nbsp;&nbsp;<?php echo ucfirst($upcomingTournament['t_city']); ?></div>
+                                                                    <hr>
+                                                                    <div class="light-text wrap pl-1 small-text"><?php echo $upcomingTournament['t_ground']; ?> , <?php echo ucfirst($upcomingTournament['t_city']); ?></div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                            <?php
+                                                }
+                                            }
+                                            ?>
 
-                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                                        <div class="row mt-4">
+                                            <?php
+                                            if (!empty($ongoing_my_tournaments)) {
+                                                foreach ($ongoing_my_tournaments as $ongoingTournament) {
+                                            ?>
+                                                    <div class="col-md-6">
+                                                        <div class="card tournament-card">
+                                                            <div class="card-body no-padding">
+                                                                <img class="card-img-top" src="<?php echo base_url() . $ongoingTournament->t_banner_path; ?>" alt="" style="max-height: 130px">
+                                                                <div class="card-text p-3">
+                                                                    <h5 class="mt-2 mb-2 light-text bold"><?php echo $ongoingTournament['t_name']; ?></h5>
+                                                                    <div class="mb-1 light-text small-text"><i class="fa fa-calendar blue"></i>&nbsp; <?php echo $ongoingTournament['t_start_date']; ?> to <?php echo $ongoingTournament['t_end_date']; ?></div>
+                                                                    <div class="light-text small-text"><i class="fa fa-map-marker blue"></i>&nbsp;&nbsp;<?php echo ucfirst($ongoingTournament['t_city']); ?></div>
+                                                                    <hr>
+                                                                    <div class="light-text wrap pl-1 small-text"><?php echo $ongoingTournament['t_ground']; ?> , <?php echo ucfirst($ongoingTournament['t_city']); ?></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                            <?php
+                                                }
+                                            }
+                                            ?>
+
                                         </div>
                                     </div>
-
                                 </div>
+
                             </div>
                         </div>
                     </div>

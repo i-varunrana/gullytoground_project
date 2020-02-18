@@ -301,6 +301,14 @@ Class UserDatabase extends CI_Model {
         }
     }
 
+    //FETCH TEAM DETAILS
+    public function fetchTeamDetail($teamId){
+        $teamId = 'bce13b80a1bf';
+        $query = "SELECT team.team_id,admin_id,admin_name,team_name,team_city,team_dp,COUNT(relation.team_id) AS total_players FROM team_relation_table AS relation, team_table AS team WHERE team.team_id = relation.team_id AND team.team_id= '".$teamId."' GROUP BY relation.team_id";
+		$result = $this->db->query($query)->result_array();
+        return $this->db->affected_rows() ? $result : FALSE; 
+    }
+
 
 // ----------------------------------------------------------------------------------------  //
 

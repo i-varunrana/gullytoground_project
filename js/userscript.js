@@ -301,6 +301,19 @@ $(document).ready(function () {
 
 /*****  /CLICK ON TEAM CARDS   *****/
 
+/*****  CLICK ON TEAM PLAYERS CARDS   *****/
+
+$(document).ready(function () {
+    $('.players').click(function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var playerId = $(this).attr('data-id');
+        window.location = BASE_URL + "visit-player-profile/" + playerId;
+    })
+});
+
+/*****  /CLICK ON TEAM PLAYERS CARDS   *****/
+
 $(document).ready(function () {
     $('.delete-team-btn').click(function (e) {
         e.preventDefault();
@@ -501,7 +514,7 @@ $(document).ready(function () {
     })
 });
 
-/*****   OPEN VIEW TOURNAMENT  *****/
+/*****   /OPEN VIEW TOURNAMENT  *****/
 
 
 /*****  CLICK ON TEAM CARDS   *****/
@@ -576,5 +589,21 @@ $(document).ready(function() {
 
 /* -------    VIEW TOURNAMENT PAGE ---> UPDATE TEAM DP / REGITER TEAM FORM SCRIPT [END] -------- */
 
+
+/*****   OPEN VIEW MY TOURNAMENT  *****/
+
+$(document).ready(function () {
+    $('.my-tournament-card').click(function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        //Tournament ID
+        var tId = $(this).attr('data-id');
+        console.log("open tournament ",tId);
+        window.location = BASE_URL + "view-my-tournament/" + tId;
+
+    })
+});
+
+/*****   /OPEN VIEW MY TOURNAMENT  *****/
 
 

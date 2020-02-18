@@ -427,6 +427,10 @@
 
   /* MY TEAM CSS START*/
 
+  .teams, .players {
+    cursor: pointer;
+  }
+
   .h-min-6 {
     min-height: 600px;
   }
@@ -702,5 +706,48 @@
     transition: all 1000ms ease-in;
     background-color: lightseagreen;
     color: white;
+  }
+
+  .total-player-pos {
+    position: absolute;
+    font-size: 0.8rem;
+    color: #4e5665;
+    top: 12px;
+    right: 12px;
+  }
+
+  .card-footer .accept-request button {
+    font-size: 0.72rem;
+    padding: 0.35rem 1rem;
+    border: 1px solid #00c292;
+    color: #00c292;
+  }
+
+  .card-footer .accept-request button:hover {
+    transition: all ease-in 0.1s;
+    background-color: #00c292;
+    color: white;
+  }
+
+  .card-footer .reject-request button {
+    font-size: 0.72rem;
+    padding: 0.35rem 1rem;
+    border: 1px solid #ef5350;
+    color: #ef5350;
+  }
+
+  .card-footer .reject-request button:hover {
+    transition: all ease-in 0.1s;
+    background-color: #ef5350;
+    color: white;
+  }
+
+  /* VIEW MY TOURNAMENT CSS */
+  .action-btn {
+    width: 100%;
+    padding: 0.4rem 1.5rem;
+    border: 1px solid #4e5665;
+    font-size: 1.5rem;
+    color: #4e5665;
   }
   
