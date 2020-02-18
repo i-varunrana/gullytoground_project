@@ -158,7 +158,7 @@
                             $team = $this->userDatabase->fetchTeamDetail($teams['team_id']);
                     ?>
                             <div class="col-md-6">
-                                <div class="card" data-id="<?php echo $team[0]['team_id']; ?>" data-toggle="modal" data-target="#scrollmodal">
+                                <div class="card" data-toggle="modal" data-target="#scrollmodal">
                                     <p class="card-title mb-0 d-block small-text text-dark total-player-pos"><?php echo empty($team[0]['total_players']) ? "0" : $team[0]['total_players']; ?> Players</p>
                                     <div class="card-body p-2">
                                         <div class="d-flex justify-content-between align-items-center">
@@ -178,10 +178,10 @@
                                             </div>
                                             <div class="d-flex flex-columns">
                                                 <div class="accept-request mr-2 d-block">
-                                                    <button>ACCEPT</button>
+                                                    <button class="accept-team-request" data-team-id="<?php echo $team[0]['team_id']; ?>" data-tournament-id="<?php echo $tournament_id; ?>">ACCEPT</button>
                                                 </div>
                                                 <div class="reject-request d-block">
-                                                    <button>REJECT</button>
+                                                    <button class="reject-team-request" data-id="<?php echo $team[0]['team_id']; ?>">REJECT</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -194,6 +194,25 @@
                     }
                     ?>
 
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card p-2 br-green">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="d-flex justify-content-start align-items-center">
+                                    <div class="wh-35 rounded-circle d-flex justify-content-center align-items-center bg-flat-color-3">
+                                        <img src="<?php echo base_url(); ?>images/icon/trophy.png" alt="trophy icon">
+                                    </div>
+                                    <div class="ml-2">
+                                        Participated Teams
+                                    </div>
+                                </div>
+                                <div class="small-text text-up text-dark fw-b">
+                                    <?php echo count($requested_teams); ?> Teams
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- .animated -->

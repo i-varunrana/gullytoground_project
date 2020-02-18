@@ -606,4 +606,40 @@ $(document).ready(function () {
 
 /*****   /OPEN VIEW MY TOURNAMENT  *****/
 
+$(document).ready(function() {
+    $('.accept-team-request').click(function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var teamId = $(this).attr('data-team-id');
+        var tournamentId = $(this).attr('data-tournament-id');
+        $.ajax({
+            url: BASE_URL + "ControlUnit/acceptRequestToTournament",
+            type: "POST",
+            data: {"team_id":teamId, "tournament_id":tournamentId},
+            success: function (response) {
+                 if (response) {
+
+                    swal({
+                        title: "Request Accept Successfully",
+                        icon: "success",
+                        button: "ok",
+                    }).then(function () {
+                        window.location = BASE_URL + "home";
+                    });
+
+                }
+                else {
+
+                    swal({
+                        title: "Something Went Worng!",
+                        icon: "error",
+                        button: "ok",
+                    });
+
+                }
+            }
+        });
+    })
+});
+
 

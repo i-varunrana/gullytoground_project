@@ -327,6 +327,16 @@ Class UserDatabase extends CI_Model {
         return $this->db->affected_rows() ? $result : FALSE; 
     }
 
+    //ACCEPT TEAM REQUEST TO TOURNAMENT
+    public function acceptRequestToTournament($where) {
+        $data = array('accepted'=>'1');
+        $this->db->trans_start();
+        $this->db->where($where);
+        $this->db->update("team_relation_table",$data);
+        $this->db->trans_complete();
+        return $this->db->trans_status() ? TRUE : FALSE;
+    }
+
 
 // ----------------------------------------------------------------------------------------  //
 

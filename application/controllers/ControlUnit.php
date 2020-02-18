@@ -137,6 +137,7 @@ class ControlUnit extends CI_Controller
     public function viewMyTournamentPage($tournamentId){
         if ($this->session->has_userdata('logged_in')) {
             $result = $this->session->userdata('logged_in');
+            $data['tournament_id'] = $tournamentId;
             $where = array('id'=>'1');
             $data['update_css_js'] = $this->userDatabase->selectAllFromTableWhere('update_app_table',$where,'datetime');
             $data['where'] = array('user_id' => $result['user_id']);
@@ -824,5 +825,12 @@ class ControlUnit extends CI_Controller
     public function getTeamDetails($teamId){
         $data['team_info'] = $this->userDatabase->fetchTeamDetail($teamId);
         return $data['team_info'];
+    }
+
+    public function acceptRequestToTournament() {
+        $data = array (
+            "tournament_id" => $this->input->post('tournament_id'),
+            "team_id" => $this->input->post('team_id')
+        );  
     }
 }
