@@ -836,7 +836,32 @@ class ControlUnit extends CI_Controller
             "tournament_id" => $this->input->post('tournament_id'),
             "team_id" => $this->input->post('team_id')
         );  
-        if($this->userDatabase->acceptRequestToTournament($data)){ echo true; }else{ echo false; }
+        if($this->userDatabase->acceptRequestToTournament($data)){ 
+
+
+            $where = array('team_id'=>$this->input->post('team_id'));
+            $team = $this->userDatabase->selectAllFromTableWhere('team_table', $where, 'admin_id,team_name');
+            $where = array('t_id'=>$this->input->post('tournament_id'));
+            $tournament = $this->userDatabase->selectAllFromTableWhere('tournament_table', $where, 't_name');
+
+            $userId = $team[0]['admin_id'];
+            $notification = "Your team ".$team[0]['team_name']." has been successfully participated in ".$tournament[0]['t_name']." tournament.";
+            $icon = "success";
+            
+            $data = array(
+                'user_id'=>$userId,
+                'notification'=>$notification,
+                'icon'=>$icon
+            );
+
+            if($this->userDatabase->sendNotification('notification_table',$data))
+            echo true;
+            else
+            echo false;
+
+        }else{ 
+            echo false; 
+        }
     }
 
     public function rejectRequestToTournament() {
@@ -844,6 +869,42 @@ class ControlUnit extends CI_Controller
             "tournament_id" => $this->input->post('tournament_id'),
             "team_id" => $this->input->post('team_id')
         );  
-        if($this->userDatabase->rejectRequestToTournament($data)){ echo true; }else{ echo false; }
+       // if($this->userDatabase->rejectRequestToTournament($data)){ 
+
+            $where = array('team_id'=>$this->input->post('team_id'));
+            $team = $this->userDatabase->selectAllFromTableWhere('team_table', $where, 'admin_id,team_name');
+            $where = array('t_id'=>$this->input->post('tournament_id'));
+            $tournament = $this->userDatabase->selectAllFromTableWhere('tournament_table', $where, 't_name');
+
+            $userId = $team[0]['admin_id'];
+            $notification = "Your request to ".$tournament[0]['t_name']." tournament  by ".$team[0]['team_name']." team has been rejected.";
+            $icon = "failure";
+
+            $data = array(
+                'user_id'=>$userId,
+                'notification'=>$notification,
+                'icon'=>$icon
+            );
+
+            if($this->userDatabase->sendNotificaitonToPlayer('notification_table',$data))
+            echo true;
+            else
+            echo false;
+
+       // }else{ 
+       //     echo false; 
+       // }
+    }
+
+    public function isRequestRejected($userId)
+    {
+        $result = $this->session->userdata('logged_in');
+        $data['user_id'] = $result['user_id'];
+        $results = $this->userDatabase->isRequestRejected($userId);
+        if ($results) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

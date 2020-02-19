@@ -324,11 +324,16 @@
                                     </div>
                                 </div>
 
-                        <?php
+                            <?php
                             }
+                        } else {
+                            ?>
+                            <div class="col-md-12">
+                                <p class="text-center">0 rejected request</p>
+                            </div>
+                        <?php
                         }
                         ?>
-
                     </div>
                 </div>
                 <div class="modal-footer">

@@ -27,11 +27,6 @@
     <script>
         const BASE_URL = "<?php echo base_url(); ?>";
     </script>
-    <style>
-        .swiper-slide {
-            width: 400px; 
-        }
-    </style>
 </head>
 
 <body>

@@ -176,7 +176,7 @@ Class UserDatabase extends CI_Model {
     public function requestToTournament($data){
         $condition = "tournament_id =" . "'" . $data['tournament_id'] . "' AND " . "team_id =" . "'" . $data['team_id'] . "'";
         $this->db->select('*');
-        $this->db->from('login_table');
+        $this->db->from('tournaments_team_table');
         $this->db->where($condition);
         $this->db->limit(1);
         $query = $this->db->get();
@@ -345,6 +345,14 @@ Class UserDatabase extends CI_Model {
         $this->db->update("tournaments_team_table",$data);
         $this->db->trans_complete();
         return $this->db->trans_status() ? TRUE : FALSE;
+    }
+
+    //SEND NOTIFICATION TO PLAYER
+    public function sendNotificaitonToPlayer($tableName,$data){
+        $this->db->trans_start();
+        $this->db->insert($tableName,$data);
+        $this->db->trans_complete();
+		return $this->db->trans_status() ? TRUE : FALSE;
     }
 
 

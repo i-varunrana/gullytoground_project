@@ -611,12 +611,14 @@ $(document).ready(function() {
         e.preventDefault();
         e.stopPropagation();
         var teamId = $(this).attr('data-team-id');
+        var playerId = $(this).attr('data-admin-id');
         var tournamentId = $(this).attr('data-tournament-id');
         $.ajax({
             url: BASE_URL + "ControlUnit/acceptRequestToTournament",
             type: "POST",
-            data: {"team_id":teamId, "tournament_id":tournamentId},
+            data: {"team_id":teamId, "admin_id": playerId ,"tournament_id":tournamentId},
             success: function (response) {
+                console.log(response);
                  if (response) {
 
                     swal({
@@ -656,12 +658,14 @@ $(document).ready(function() {
         .then((willDelete) => {
             if (willDelete) {
                 var teamId = $(this).attr('data-team-id');
+                var playerId = $(this).attr('data-admin-id');
                 var tournamentId = $(this).attr('data-tournament-id');
                 $.ajax({
                     url: BASE_URL + "ControlUnit/rejectRequestToTournament",
                     type: "POST",
-                    data: {"team_id":teamId, "tournament_id":tournamentId},
+                    data: {"team_id":teamId, "admin_id": playerId ,"tournament_id":tournamentId},
                     success: function (response) {
+                        console.log(response);
                          if (response) {
         
                             swal({
