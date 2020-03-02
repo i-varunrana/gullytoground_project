@@ -133,6 +133,137 @@
             <div class="animated fadeIn">
                 <!-- Widgets  -->
                 <div class="row">
+                    <div class="col-md-12 d-flex justify-content-center">
+                        <a class="btn btn-outline-primary mt-2 mb-4 text-center" style="cursor:pointer; color:#007bff !important;" data-toggle="modal" data-target="#startmatchmodal">START A MATCH</a>
+                    </div>
+                </div>
+                <!-- Widgets  -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-header bg-white">
+                                <h4>My Tournaments</h4>
+                            </div>
+                            <div class="card-body">
+
+                                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Requests</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Participants</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content" id="pills-tabContent">
+                                    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                                        <div class="row mt-4">
+                                            <?php
+                                            if (!empty($requested_teams)) {
+                                                foreach ($requested_teams as $requested_team) {
+                                                    $team = $this->userDatabase->fetchTeamDetail($requested_team['team_id']);
+                                            ?>
+                                                    <div class="col-md-6">
+                                                        <div class="card" data-toggle="modal" data-target="#scrollmodal">
+                                                            <p class="card-title mb-0 d-block small-text text-dark total-player-pos"><?php echo empty($team[0]['total_players']) ? "0" : $team[0]['total_players']; ?> Players</p>
+                                                            <div class="card-body p-2">
+                                                                <div class="d-flex justify-content-between align-items-center">
+                                                                    <div class="w-25">
+                                                                        <img class="rounded-circle bg-light" src="<?php echo empty($team[0]['team_dp']) ? base_url() . 'images/team/avatar3.png' : base_url() . $team[0]['team_dp'] ?>" alt="team img" width="75">
+                                                                    </div>
+                                                                    <div class="w-75">
+                                                                        <strong class="card-title mb-0 d-block caps"><?php echo $team[0]['team_name']; ?></strong>
+                                                                        <img src="<?php echo base_url(); ?>images/icon/admin.png" alt="" width="12">&nbsp;<small><?php echo $team[0]['admin_name']; ?></small>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="card-footer p-0 pt-2 pb-2">
+                                                                <div class="d-flex justify-content-between pr-3 pl-3">
+                                                                    <div class="team-city">
+                                                                        <i class="fa fa-map-marker" style="font-size: 0.85rem"></i>&nbsp;<small class="caps"><?php echo $team[0]['team_city']; ?></small>
+                                                                    </div>
+                                                                    <div class="d-flex flex-columns">
+                                                                        <div class="accept-request mr-2 d-block">
+                                                                            <button class="accept-team-request" data-team-id="<?php echo $team[0]['team_id']; ?>" data-tournament-id="<?php echo $tournament_id; ?>">ACCEPT</button>
+                                                                        </div>
+                                                                        <div class="reject-request d-block">
+                                                                            <button class="reject-team-request" data-team-id="<?php echo $team[0]['team_id']; ?>" data-tournament-id="<?php echo $tournament_id; ?>">REJECT</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                <?php
+                                                }
+                                            } else {
+                                                ?>
+
+                                                <div class="col-md-12">
+                                                    <h5 class="text-center m-3">0 requests</h5>
+                                                </div>
+
+                                            <?php } ?>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                                        <div class="row mt-1">
+                                            <div class="col-md-12 mb-3 ">
+                                                <h5 class="text-right small-text text-dark"><?php echo empty($participated_teams) ? "0" : count($participated_teams); ?> Team Participated</h5>
+                                            </div>
+                                            <?php
+                                            if (!empty($participated_teams)) {
+                                                foreach ($participated_teams as $participated_team) {
+                                                    $team = $this->userDatabase->fetchTeamDetail($participated_team['team_id']);
+                                            ?>
+                                                    <div class="col-md-6">
+                                                        <div class="card" data-toggle="modal" data-target="#scrollmodal">
+                                                            <p class="card-title mb-0 d-block small-text text-dark total-player-pos"><?php echo empty($team[0]['total_players']) ? "0" : $team[0]['total_players']; ?> Players</p>
+                                                            <div class="card-body p-2">
+                                                                <div class="d-flex justify-content-between align-items-center">
+                                                                    <div class="w-25">
+                                                                        <img class="rounded-circle bg-light" src="<?php echo empty($team[0]['team_dp']) ? base_url() . 'images/team/avatar3.png' : base_url() . $team[0]['team_dp'] ?>" alt="team img" width="75">
+                                                                    </div>
+                                                                    <div class="w-75">
+                                                                        <strong class="card-title mb-0 d-block caps"><?php echo $team[0]['team_name']; ?></strong>
+                                                                        <img src="<?php echo base_url(); ?>images/icon/admin.png" alt="" width="12">&nbsp;<small><?php echo $team[0]['admin_name']; ?></small>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="card-footer p-0 pt-2 pb-2">
+                                                                <div class="d-flex justify-content-between pr-3 pl-3">
+                                                                    <div class="team-city">
+                                                                        <i class="fa fa-map-marker" style="font-size: 0.85rem"></i>&nbsp;<small class="caps"><?php echo $team[0]['team_city']; ?></small>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                <?php
+                                                }
+                                            } else {
+                                                ?>
+
+                                                <div class="col-md-12">
+                                                    <h5 class="text-center m-3">0 Participant</h5>
+                                                </div>
+
+                                            <?php } ?>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- <div class="row">
                     <div class="col-md-12">
                         <div class="card p-2 br-green">
                             <div class="d-flex justify-content-between align-items-center">
@@ -148,6 +279,13 @@
                                     <?php echo empty($requested_teams) ? "0" : count($requested_teams); ?> Teams
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="float-right rejected-requests mb-4">
+                            <a data-toggle="modal" data-target="#rejectedteammodal">REJECTED REQUESTS</a>
                         </div>
                     </div>
                 </div>
@@ -253,10 +391,10 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="create-team-btn">
-                            <a data-toggle="modal" data-target="#rejectedteammodal">REJECTED REQUEST</a>
+                            <a style="cursor:pointer" data-toggle="modal" data-target="#startmatchmodal">START A MATCH</a>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
             <!-- .animated -->
         </div>
@@ -279,6 +417,68 @@
     </div>
     <!-- /#right-panel -->
 
+    <div class="modal fade" id="startmatchmodal" tabindex="-1" role="dialog" aria-labelledby="scrollmodalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="scrollmodalLabel">Select Two Teams </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body p-0" style="padding:0.5rem !important">
+                    <div class="row">
+                        <?php
+                        $result = $this->userDatabase->isLiveMatchExist($tournament_id,$user_info[0]['user_id']);
+                        
+                        if($result){ redirect(base_url('start-match/'.$tournament_id)); }
+                        else{
+                            if (!empty($participated_teams)) {
+                                $count = 0;
+                                foreach ($participated_teams as $participated_team) {
+                                    $count++;
+                                    $team = $this->userDatabase->fetchTeamDetail($participated_team['team_id']);
+                        ?>
+                                <div class="col col-md-6">
+                                    <div class="card teams-for-match" data-id="<?php echo $participated_team['team_id'] ?>" data-tournament-id="<?php echo $tournament_id; ?>">
+                                        <div class="team-nums">
+                                            <b><?php echo $count; ?></b>
+                                        </div>
+                                        <div class="card-body p-1">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div class="w-25 mr-1">
+                                                    <img class="rounded-circle bg-light" src="<?php echo empty($team[0]['team_dp']) ? base_url() . 'images/team/avatar3.png' : base_url() . $team[0]['team_dp'] ?>" alt="team img" width="35">
+                                                </div>
+                                                <div class="w-75">
+                                                    <strong class="card-title mb-0 d-block caps small-text wrap"><?php echo $team[0]['team_name']; ?></strong>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer p-0">
+                                            <div class="d-flex justify-content-between pr-3 pl-3">
+                                                <div class="team-city">
+                                                    <i class="fa fa-map-marker" style="font-size: 0.85rem"></i>&nbsp;<small class="caps wrap"><?php echo $team[0]['team_city']; ?></small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                        <?php
+                                }
+                            }
+                        }
+                        ?>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary continue-with-teams" data-dismiss="modal">Continue</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="modal fade" id="rejectedteammodal" tabindex="-1" role="dialog" aria-labelledby="scrollmodalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -288,7 +488,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body p-0" style="padding:0.5rem !important">
                     <div class="row">
                         <?php
                         if (!empty($rejected_teams)) {
@@ -352,7 +552,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body p-0" style="padding:0.5rem !important">
                     <div class="row mb-2">
                         <div class="col-md-12">
                             <a class="btn btn-outline-primary btn-lg btn-block" href="tel:+91<?php echo $team[0]['admin_id']; ?>">CALL</a>

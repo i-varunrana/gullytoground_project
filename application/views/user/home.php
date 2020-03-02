@@ -134,109 +134,107 @@
             <!-- Animated -->
             <div class="animated fadeIn">
 
-                    <!-- Message for user -->
-                    <?php if (!$profile_complete) { ?>
-                        <div class="alert alert-warning" role="alert">
-                            Please complete your profile to get tournament updates and more features. Give it a click if you like <a href="<?php echo base_url('profile'); ?>" class="alert-link">Profile Page</a>
-                        </div>
-                    <?php } ?>
-                    <!-- /Message for user -->
+                <!-- Message for user -->
+                <?php if (!$profile_complete) { ?>
+                    <div class="alert alert-warning" role="alert">
+                        Please complete your profile to get tournament updates and more features. Give it a click if you like <a href="<?php echo base_url('profile'); ?>" class="alert-link">Profile Page</a>
+                    </div>
+                <?php } ?>
+                <!-- /Message for user -->
 
-                    <!-- Widgets  -->
-                    <div class="row">
-                        <!-- Porfile card -->
-                        <div class="col-md-12 col-lg-12">
-                            <section class="card">
-                                <div class="twt-feed blue-bg">
-                                    <div class="corner-ribon black-ribon">
-                                    </div>
-                                    <div class="wtt-mark"></div>
+                <!-- Widgets  -->
+                <div class="row">
+                    <!-- Porfile card -->
+                    <div class="col-md-12 col-lg-12">
+                        <section class="card">
+                            <div class="twt-feed blue-bg">
+                                <div class="corner-ribon black-ribon">
+                                </div>
+                                <div class="wtt-mark"></div>
 
-                                    <div class="media">
-                                        <a href="#">
-                                            <img class="align-self-center mr-3 bg-dark rounded-circle p-1" alt="profile pic" src="<?php if ($user_info[0]->image_address == '') {
-                                                                                                                                        echo base_url() . "images/profile_pic/default.png";
-                                                                                                                                    } else {
-                                                                                                                                        echo base_url() . $user_info[0]->image_address;
-                                                                                                                                    } ?>" style="width:110px; height:110px;">
-                                        </a>
-                                        <div class="media-body">
-                                            <h3 class="text-white display-6"><?php echo $user_info[0]->full_name; ?></h3>
-                                            <p class="text-light inline-block text-capitalize"><?php echo $user_info[0]->playing_role; ?></p>
-                                            <p class="text-light inline-block"><b><?php echo $user_info[0]->batting_style; ?></b></p>
-                                        </div>
+                                <div class="media">
+                                    <a href="#">
+                                        <img class="align-self-center mr-3 bg-dark rounded-circle p-1" alt="profile pic" src="<?php if ($user_info[0]->image_address == '') {
+                                                                                                                                    echo base_url() . "images/profile_pic/default.png";
+                                                                                                                                } else {
+                                                                                                                                    echo base_url() . $user_info[0]->image_address;
+                                                                                                                                } ?>" style="width:110px; height:110px;">
+                                    </a>
+                                    <div class="media-body">
+                                        <h3 class="text-white display-6"><?php echo $user_info[0]->full_name; ?></h3>
+                                        <p class="text-light inline-block text-capitalize"><?php echo $user_info[0]->playing_role; ?></p>
+                                        <p class="text-light inline-block"><b><?php echo $user_info[0]->batting_style; ?></b></p>
                                     </div>
                                 </div>
-                                <div class="weather-category twt-category">
-                                    <ul>
-                                        <li class="active">
-                                            <h4 class="text-dark"><?php echo $user_stats[0]->matches; ?></h4>
-                                            Total Matches
-                                        </li>
-                                        <li>
-                                            <h4 class="text-dark"><?php echo $user_stats[0]->runs; ?></h4>
-                                            Total Runs
-                                        </li>
-                                        <li>
-                                            <h4 class="text-dark"><?php echo $user_stats[0]->wickets; ?></h4>
-                                            Total Wickets
-                                        </li>
-                                    </ul>
-                                </div>
-                                <footer class="twt-footer">
-                                </footer>
-                            </section>
+                            </div>
+                            <div class="weather-category twt-category">
+                                <ul>
+                                    <li class="active">
+                                        <h4 class="text-dark"><?php echo $user_stats[0]->matches; ?></h4>
+                                        Total Matches
+                                    </li>
+                                    <li>
+                                        <h4 class="text-dark"><?php echo $user_stats[0]->runs; ?></h4>
+                                        Total Runs
+                                    </li>
+                                    <li>
+                                        <h4 class="text-dark"><?php echo $user_stats[0]->wickets; ?></h4>
+                                        Total Wickets
+                                    </li>
+                                </ul>
+                            </div>
+                            <footer class="twt-footer">
+                            </footer>
+                        </section>
+                    </div>
+                    <!-- Porfile card -->
+
+                </div>
+                <!-- /Widgets -->
+
+                <div class="mb-3 title bold">
+                    <strong class="card-title">UPCOMING TOURNAMENTS</strong>
+                </div>
+
+                <!-- Tournaments -->
+                <div class="row ov-h">
+
+                    <div class="col-md-12">
+                        <div class="left-arrow">
+                            <img src="<?php echo base_url(); ?>images/icon/left_arrow.png" alt="swipe left">
                         </div>
-                        <!-- Porfile card -->
 
-                    </div>
-                    <!-- /Widgets -->
+                        <!-- Tournament cards wrapper -->
+                        <div class="demo__card-cont">
 
-                    <div class="mb-3 title bold">
-                        <strong class="card-title">UPCOMING TOURNAMENTS</strong>
-                    </div>
+                            <?php
+                            foreach ($tournaments as $tournament) {
+                            ?>
 
-                    <!-- Tournaments -->
-                    <div class="row ov-h">
-
-                        <div class="col-md-12">
-                            <div class="left-arrow">
-                                <img src="<?php echo base_url(); ?>images/icon/left_arrow.png" alt="swipe left">
-                            </div>
-
-                            <!-- Tournament cards wrapper -->
-                            <div class="demo__card-cont">
-
-                                <?php
-                                foreach ($tournaments as $tournament) {
-                                ?>
-
-                                    <!-- tournament cards -->
-                                    <div class="demo__card border">
-                                        <img class="card-img-top" src="<?php echo base_url().$tournament->t_banner_path; ?>" alt="" style="max-height: 150px">
-                                        <div class="card-body no-padding">
-                                            <div class="card-text pl-3 pr-3 pb-1 pt-1">
-                                                <h5 class="mt-2 mb-2 light-text bold"><?php echo $tournament->t_name; ?></h5>
-                                                <div class="mb-1 light-text small-text"><i class="fa fa-calendar blue"></i>&nbsp; <?php echo $tournament->t_start_date; ?> to <?php echo $tournament->t_end_date; ?></div>
-                                                <div class="light-text small-text"><i class="fa fa-map-marker blue"></i>&nbsp;&nbsp;<?php echo $tournament->t_city; ?></div>
-                                                <hr>
-                                                <div class="light-text wrap pl-1 mb-4 small-text"><?php echo $tournament->t_ground; ?> , <?php echo $tournament->t_city; ?></div>
-                                            </div>
+                                <!-- tournament cards -->
+                                <div class="demo__card border">
+                                    <img class="card-img-top" src="<?php echo base_url() . $tournament->t_banner_path; ?>" alt="" style="max-height: 150px">
+                                    <div class="card-body no-padding">
+                                        <div class="card-text pl-3 pr-3 pb-1 pt-1">
+                                            <h5 class="mt-2 mb-2 light-text bold"><?php echo $tournament->t_name; ?></h5>
+                                            <div class="mb-1 light-text small-text"><i class="fa fa-calendar blue"></i>&nbsp; <?php echo $tournament->t_start_date; ?> to <?php echo $tournament->t_end_date; ?></div>
+                                            <div class="light-text small-text"><i class="fa fa-map-marker blue"></i>&nbsp;&nbsp;<?php echo $tournament->t_city; ?></div>
+                                            <hr>
+                                            <div class="light-text wrap pl-1 mb-4 small-text"><?php echo $tournament->t_ground; ?> , <?php echo $tournament->t_city; ?></div>
                                         </div>
-                                        <div class="demo__card__drag"></div>
                                     </div>
+                                    <div class="demo__card__drag"></div>
+                                </div>
 
-                                <?php
-                                }
-                                ?>
+                            <?php
+                            }
+                            ?>
 
-                            </div>
-                            <!-- tournament cards wrapper -->
+                        </div>
+                        <!-- tournament cards wrapper -->
 
-                            <div class="right-arrow">
-                                <img src="<?php echo base_url(); ?>images/icon/right_arrow.png" alt="swipe right">
-                            </div>
-
+                        <div class="right-arrow">
+                            <img src="<?php echo base_url(); ?>images/icon/right_arrow.png" alt="swipe right">
                         </div>
 
                     </div>
@@ -272,9 +270,11 @@
 
                                             <div class="media">
                                                 <a href="#">
-                                                    <img class="align-self-center mr-3 bg-dark rounded-circle p-1" alt="profile pic" 
-                                                    src="<?php if ($player['image_address'] == '') { echo base_url() . "images/profile_pic/default.png";
-                                                    } else { echo base_url() . $player['image_address']; } ?>" style="width:110px; height:110px;">
+                                                    <img class="align-self-center mr-3 bg-dark rounded-circle p-1" alt="profile pic" src="<?php if ($player['image_address'] == '') {
+                                                                                                                                                echo base_url() . "images/profile_pic/default.png";
+                                                                                                                                            } else {
+                                                                                                                                                echo base_url() . $player['image_address'];
+                                                                                                                                            } ?>" style="width:110px; height:110px;">
                                                 </a>
                                                 <div class="media-body">
                                                     <h3 class="text-white display-6"><?php echo $player['full_name']; ?></h3>

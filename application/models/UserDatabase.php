@@ -251,6 +251,12 @@ Class UserDatabase extends CI_Model {
         $result = $this->db->select($getColumn)->get_where($tableName,$condition)->result_array();
         return $this->db->affected_rows() ? $result : FALSE;
     }
+
+    public function isRowExist($tableName=null,$condition=null,$getColumn=null){
+        $result = $this->db->select($getColumn)->get_where($tableName,$condition)->result_array();
+        return ($this->db->affected_rows() >= 1) ? TRUE : FALSE;
+    }
+
     //------------------  /all fetch ----------------------//
 
     //------------------  insert all ----------------------//
@@ -266,8 +272,8 @@ Class UserDatabase extends CI_Model {
         $this->db->select($getColumn);
         $this->db->from($tableName);
         $this->db->where_in('user_id', $in);
-        $query = $this->db->get();
-        return $query->result();
+        $query = $this->db->get()->result_array();
+        return $this->db->affected_rows() ? $query : FALSE;
     }
 
     //FETCH CSS AND JS
@@ -354,6 +360,31 @@ Class UserDatabase extends CI_Model {
         $this->db->trans_complete();
 		return $this->db->trans_status() ? TRUE : FALSE;
     }
+
+    public function isLiveMatchExist($tournamentId,$userId){
+        $condition = "t_id =" . "'" . $tournamentId . "' AND " . "t_user_id =" . "'" . $userId . "'";
+        $this->db->select('*');
+        $this->db->from('tournament_table');
+        $this->db->where($condition);
+        $this->db->limit(1);
+        $query = $this->db->get();
+        if ($query->num_rows() == 1) {
+            $condition = "tournament_id =" . "'" . $tournamentId . "' AND " . "active = 1";
+            $this->db->select('*');
+            $this->db->from('match_table');
+            $this->db->where($condition);
+            $this->db->limit(1);
+            $query = $this->db->get();
+            if ($query->num_rows() == 1)
+                return true;
+            else
+                return false;
+        } else {
+            return false;
+        }
+    }
+
+    
 
 
 // ----------------------------------------------------------------------------------------  //

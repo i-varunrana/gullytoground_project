@@ -11,6 +11,7 @@ class ControlUnit extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->CI = & get_instance();
 
         // Load form helper library
         $this->load->helper('form', 'security');
@@ -315,6 +316,31 @@ class ControlUnit extends CI_Controller
             $this->load->view('authenticate/login');
         }
     }
+
+    //START A MATCH PAGE
+    public function startMatchPage($tournamentId)
+    {
+        if ($this->session->has_userdata('logged_in')) {
+            $result = $this->session->userdata('logged_in');
+
+            $data['update_css_js'] = $this->userDatabase->selectAllFromTableWhere('update_app_table',array('id'=>'1'),'datetime');
+
+            $data['user_info'] = $this->userDatabase->selectAllFromTableWhere('user_account_table', array('user_id' => $result['user_id']), 'user_id,full_name,image_address');
+
+            $data['match_info'] = $this->userDatabase->selectAllFromTableWhere('match_table', array('tournament_id' => $tournamentId), 'match_id,tournament_id,team_a,team_b,date');
+
+            $data['team_a'] = $this->userDatabase->selectAllFromTableWhere('team_table', array('team_id' => $data['match_info'][0]['team_a']), 'team_id,team_name');
+            $data['team_b'] = $this->userDatabase->selectAllFromTableWhere('team_table', array('team_id' => $data['match_info'][0]['team_b']), 'team_id,team_name');
+
+            $data['team_a_players'] = $this->fetchTeamPlayer($data['match_info'][0]['team_a']);
+            $data['team_b_players'] = $this->fetchTeamPlayer($data['match_info'][0]['team_b']);
+
+            $this->load->view('user/start-match', $data);
+        } else {
+            $this->load->view('authenticate/login');
+        } 
+    }
+
 
     /* pages calling functions  stop */
 
@@ -896,15 +922,74 @@ class ControlUnit extends CI_Controller
        // }
     }
 
+
+    public function isLiveMatchExist($tournamentId) {
+        $result = $this->session->userdata('logged_in');
+        $data['user_id'] = $result['user_id'];
+        $results = $this->userDatabase->isLiveMatchExist($tournamentId,$result['user_id']);
+        if ($results) {
+            echo true;
+        } else {
+            echo false;
+        }
+    }
+
     public function isRequestRejected($userId)
     {
         $result = $this->session->userdata('logged_in');
         $data['user_id'] = $result['user_id'];
         $results = $this->userDatabase->isRequestRejected($userId);
         if ($results) {
-            return true;
+            echo true;
         } else {
-            return false;
+            echo false;
         }
+    }
+
+    public function startAMatch()
+    {
+        $result = $this->session->userdata('logged_in');
+        $data['user_id'] = $result['user_id'];
+        $matchId = $this->random_strings(12);
+        $where = array(
+            "tournament_id" => $this->input->post('tournament_id'),
+            "team_a" => $this->input->post('team_a'),
+            "team_b" => $this->input->post('team_b'), 
+        );
+        $isRowExist = $this->userDatabase->isRowExist("match_table",$where,"match_id");
+
+        if(!$isRowExist){
+            $data = array(
+                "match_id" => $matchId,
+                "tournament_id" => $this->input->post('tournament_id'),
+                "team_a" => $this->input->post('team_a'),
+                "team_b" => $this->input->post('team_b'),
+                "date" => date("Y-m-d"),
+                "time" => date("h:i:s"),
+                "active" => '1'
+            );
+            $results = $this->userDatabase->saveIntoDatabase("match_table",$data);
+            if ($results) {
+                echo  true;
+            } else {
+                echo false;
+            } 
+        }else{
+            echo "exist";
+        }
+    }
+
+    public function fetchTeamPlayer($teamId){
+         //Fetch Team Player Ids
+         $data['team_id'] = $teamId;
+         $data['where'] = array('team_id' => $teamId);
+         $data['team_player_ids'] = empty($this->userDatabase->selectAllFromTableWhere('team_relation_table', $data['where'], 'user_id')) ? 0 : $this->userDatabase->selectAllFromTableWhere('team_relation_table', $data['where'], 'user_id');
+         //Fetch Team Payers
+         if ($data['team_player_ids'] != 0) {
+             $data['team_players'] = $this->userDatabase->multipleDataFetch('user_account_table', array_column($data['team_player_ids'], 'user_id'), 'user_id,full_name,playing_role,batting_style,city,image_address');
+             return $data['team_players'];
+         }
+         else return 0;
+             
     }
 }

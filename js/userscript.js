@@ -695,4 +695,67 @@ $(document).ready(function() {
     })
 });
 
+$(document).ready(function(){
+    $('.teams-for-match').click(function(){
+        var total = $('.teams-for-match.match-active-team').length;
+        if(total < 2){
+            if($(this).hasClass('match-active-team')){
+                $(this).removeClass('match-active-team');
+                $(this).attr('data-active','0');
+            }else{
+                $(this).addClass('match-active-team');
+                $(this).attr('data-active','1');
+            }
+        }else{
+            if($(this).hasClass('match-active-team')){
+                $(this).removeClass('match-active-team');
+                $(this).attr('data-active','0'); 
+            }
+        }
+    });
+});
+
+$(document).ready(function(){
+    $('.continue-with-teams').click(function(){
+        var total = $('.teams-for-match.match-active-team').length;
+        if(total == 2){
+            var tournamentId = $('.teams-for-match').attr('data-tournament-id');
+            var teams = jQuery.map(jQuery(".teams-for-match[data-active='1']"),function(n,i){
+                return jQuery(n).attr('data-id');
+            });
+            console.log(teams);
+            $.ajax({
+                url: BASE_URL + "ControlUnit/startAMatch",
+                type: "POST",
+                data: {"team_a":teams[0],"team_b":teams[1],"tournament_id":tournamentId},
+                success: function (response) {
+                    if(response == "exist"){
+                        swal({
+                            title: "Match is already exist!",
+                            icon: "warning",
+                            button: "ok",
+                        });
+                    }
+                    else if (response) {
+                           window.location = BASE_URL + "start-match/" + tournamentId;
+                    }
+                    else {
+    
+                        swal({
+                            title: "Something Went Worng!",
+                            icon: "error",
+                            button: "ok",
+                        });
+    
+                    }
+                }
+            });
+
+        }else{
+            swal('teams are not selected correctly');
+        }
+    });
+});
+
+// alert($('.teams-for-match').length); 
 
