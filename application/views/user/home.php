@@ -320,258 +320,334 @@
                 <!--  Stats  -->
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="card">
-                            <div class="card-header bg-white br-0">
-                                <strong class="card-title">My Stats</strong>
-                            </div>
-                            <div class="card-body">
-                                <div class="default-tab">
-                                    <nav>
-                                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                            <a class="nav-item nav-link active" id="nav-bating-tab" data-toggle="tab" href="#nav-bating" role="tab" aria-controls="nav-bating" aria-selected="true">Bating</a>
-                                            <a class="nav-item nav-link" id="nav-bowling-tab" data-toggle="tab" href="#nav-bowling" role="tab" aria-controls="nav-bowling" aria-selected="false">Bowling</a>
-                                        </div>
-                                    </nav>
-                                    <div class="tab-content pl-3 pt-2" id="nav-tabContent">
-                                        <div class="tab-pane fade show active" id="nav-bating" role="tabpanel" aria-labelledby="nav-bating-tab">
-                                            <div class="row">
-                                                <div class="w-30 mr-1">
-                                                    <div class="card">
-                                                        <div class="card-body">
-                                                            <div class="stat-widget-one">
-                                                                <div class="stat-content dib">
-                                                                    <div class="stat-text">Matches</div>
-                                                                    <div class="stat-digit">50</div>
-                                                                </div>
+                                <div class="card">
+                                    <div class="card-header bg-white br-0">
+                                            <strong class="card-title">My Stats</strong>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="default-tab">
+                                            <nav>
+                                                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                                    <a class="nav-item nav-link active" id="nav-bating-tab" data-toggle="tab" href="#nav-bating" role="tab" aria-controls="nav-bating" aria-selected="true">Bating</a>
+                                                    <a class="nav-item nav-link" id="nav-bowling-tab" data-toggle="tab" href="#nav-bowling" role="tab" aria-controls="nav-bowling" aria-selected="false">Bowling</a>
+                                                </div>
+                                            </nav>
+                                            <div class="tab-content pl-3 pt-2" id="nav-tabContent">
+                                                <div class="tab-pane fade show active" id="nav-bating" role="tabpanel" aria-labelledby="nav-bating-tab">
+                                                    <div class="row">
+                                                            <div class="w-30 mr-1">
+                                                                    <div class="card">
+                                                                        <div class="card-body">
+                                                                            <div class="stat-widget-one">
+                                                                                <div class="stat-content dib">
+                                                                                    <div class="stat-text">Matches</div>
+                                                                                    <div class="stat-digit"><?php echo $user_stats[0]->matches;?></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
                                                             </div>
-                                                        </div>
+                                                            <div class="w-30 mr-1">
+                                                                    <div class="card">
+                                                                        <div class="card-body">
+                                                                            <div class="stat-widget-one">
+                                                                                <div class="stat-content dib">
+                                                                                    <div class="stat-text">Innings</div>
+                                                                                    <div class="stat-digit"><?php echo $user_stats[0]->batting_innings;?></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                            </div>
+                                                            <div class="w-30 mr-1">
+                                                                    <div class="card">
+                                                                        <div class="card-body">
+                                                                            <div class="stat-widget-one">
+                                                                                <div class="stat-content dib">
+                                                                                    <div class="stat-text">Not out</div>
+                                                                                    <div class="stat-digit"><?php echo $user_stats[0]->not_out;?></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                            </div>
+                                                    </div>
+                                                    <div class="row">
+                                                            <div class="w-30 mr-1">
+                                                                    <div class="card">
+                                                                        <div class="card-body">
+                                                                            <div class="stat-widget-one">
+                                                                                <div class="stat-content dib">
+                                                                                    <div class="stat-text">Runs</div>
+                                                                                    <div class="stat-digit"><?php echo $user_stats[0]->runs;?></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                            </div>
+                                                            <div class="w-30 mr-1">
+                                                                    <div class="card">
+                                                                        <div class="card-body">
+                                                                            <div class="stat-widget-one">
+                                                                                <div class="stat-content dib">
+                                                                                    <div class="stat-text">Highest Runs</div>
+                                                                                    <div class="stat-digit"><?php echo $user_stats[0]->highest_runs;?></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                            </div>
+                                                            <div class="w-30 mr-1">
+                                                                    <div class="card">
+                                                                        <div class="card-body">
+                                                                            <div class="stat-widget-one">
+                                                                                <div class="stat-content dib">
+                                                                                    <div class="stat-text">Avg</div>
+                                                                                    <div class="stat-digit"><?php echo $user_stats[0]->batting_avg;?></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                            </div>
+                                                    </div>
+                                                    <div class="row">
+                                                            <div class="w-30 mr-1">
+                                                                    <div class="card">
+                                                                        <div class="card-body">
+                                                                            <div class="stat-widget-one">
+                                                                                <div class="stat-content dib">
+                                                                                    <div class="stat-text">SR</div>
+                                                                                    <div class="stat-digit"><?php echo $user_stats[0]->batting_sr;?></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                            </div>
+                                                            <div class="w-30 mr-1">
+                                                                    <div class="card">
+                                                                        <div class="card-body">
+                                                                            <div class="stat-widget-one">
+                                                                                <div class="stat-content dib">
+                                                                                    <div class="stat-text">50s</div>
+                                                                                    <div class="stat-digit"><?php echo $user_stats[0]->fifties;?></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                            </div>
+                                                            <div class="w-30 mr-1">
+                                                                    <div class="card">
+                                                                        <div class="card-body">
+                                                                            <div class="stat-widget-one">
+                                                                                <div class="stat-content dib">
+                                                                                    <div class="stat-text">100s</div>
+                                                                                    <div class="stat-digit"><?php echo $user_stats[0]->hundreds;?></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                            </div>
+                                                    </div>
+                                                    <div class="row">
+                                                            <div class="w-30 mr-1">
+                                                                    <div class="card">
+                                                                        <div class="card-body">
+                                                                            <div class="stat-widget-one">
+                                                                                <div class="stat-content dib">
+                                                                                    <div class="stat-text">Ducks</div>
+                                                                                    <div class="stat-digit"><?php echo $user_stats[0]->ducks;?></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                            </div>
+                                                            <div class="w-30 mr-1">
+                                                                    <div class="card">
+                                                                        <div class="card-body">
+                                                                            <div class="stat-widget-one">
+                                                                                <div class="stat-content dib">
+                                                                                    <div class="stat-text">Won</div>
+                                                                                    <div class="stat-digit"><?php echo $user_stats[0]->won;?></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                            </div>
+                                                            <div class="w-30 mr-1">
+                                                                    <div class="card">
+                                                                        <div class="card-body">
+                                                                            <div class="stat-widget-one">
+                                                                                <div class="stat-content dib">
+                                                                                    <div class="stat-text">loss</div>
+                                                                                    <div class="stat-digit"><?php echo $user_stats[0]->loss;?></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                            </div>
                                                     </div>
                                                 </div>
-                                                <div class="w-30 mr-1">
-                                                    <div class="card">
-                                                        <div class="card-body">
-                                                            <div class="stat-widget-one">
-                                                                <div class="stat-content dib">
-                                                                    <div class="stat-text">Innings</div>
-                                                                    <div class="stat-digit">30</div>
+                                                <div class="tab-pane fade" id="nav-bowling" role="tabpanel" aria-labelledby="nav-bowling-tab">
+                                                        <div class="row">
+                                                                <div class="w-30 mystat-card">
+                                                                        <div class="card">
+                                                                            <div class="card-body">
+                                                                                <div class="stat-widget-one">
+                                                                                    <div class="stat-content dib">
+                                                                                        <div class="stat-text">Matches</div>
+                                                                                        <div class="stat-digit"><?php echo $user_stats[0]->matches;?></div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
                                                                 </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="w-30 mr-1">
-                                                    <div class="card">
-                                                        <div class="card-body">
-                                                            <div class="stat-widget-one">
-                                                                <div class="stat-content dib">
-                                                                    <div class="stat-text">Not out</div>
-                                                                    <div class="stat-digit">10</div>
+                                                                <div class="w-30 mystat-card">
+                                                                        <div class="card">
+                                                                            <div class="card-body">
+                                                                                <div class="stat-widget-one">
+                                                                                    <div class="stat-content dib">
+                                                                                        <div class="stat-text">Innings</div>
+                                                                                        <div class="stat-digit"><?php echo $user_stats[0]->balling_innings;?></div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
                                                                 </div>
-                                                            </div>
+                                                                <div class="w-30 mystat-card">
+                                                                        <div class="card">
+                                                                            <div class="card-body">
+                                                                                <div class="stat-widget-one">
+                                                                                    <div class="stat-content dib">
+                                                                                        <div class="stat-text">Overs</div>
+                                                                                        <div class="stat-digit"><?php echo $user_stats[0]->overs;?></div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                </div>
                                                         </div>
-                                                    </div>
+                                                        <div class="row">
+                                                                <div class="w-30 mystat-card">
+                                                                        <div class="card">
+                                                                            <div class="card-body">
+                                                                                <div class="stat-widget-one">
+                                                                                    <div class="stat-content dib">
+                                                                                        <div class="stat-text">Maidens</div>
+                                                                                        <div class="stat-digit"><?php echo $user_stats[0]->maidens;?></div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                </div>
+                                                                <div class="w-30 mystat-card">
+                                                                        <div class="card">
+                                                                            <div class="card-body">
+                                                                                <div class="stat-widget-one">
+                                                                                    <div class="stat-content dib">
+                                                                                        <div class="stat-text">Wickets</div>
+                                                                                        <div class="stat-digit"><?php echo $user_stats[0]->wickets;?></div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                </div>
+                                                                <div class="w-30 mystat-card">
+                                                                        <div class="card">
+                                                                            <div class="card-body">
+                                                                                <div class="stat-widget-one">
+                                                                                    <div class="stat-content dib">
+                                                                                        <div class="stat-text">Avg</div>
+                                                                                        <div class="stat-digit"><?php echo $user_stats[0]->balling_avg;?></div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                </div>
+                                                        </div>
+                                                        <div class="row">
+                                                                <div class="w-30 mystat-card">
+                                                                        <div class="card">
+                                                                            <div class="card-body">
+                                                                                <div class="stat-widget-one">
+                                                                                    <div class="stat-content dib">
+                                                                                        <div class="stat-text">Runs</div>
+                                                                                        <div class="stat-digit"><?php echo $user_stats[0]->give_runs;?></div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                </div>
+                                                                <div class="w-30 mystat-card">
+                                                                        <div class="card">
+                                                                            <div class="card-body">
+                                                                                <div class="stat-widget-one">
+                                                                                    <div class="stat-content dib">
+                                                                                        <div class="stat-text">Best Balling</div>
+                                                                                        <div class="stat-digit"><?php echo $user_stats[0]->best_balling;?></div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                </div>
+                                                                <div class="w-30 mystat-card">
+                                                                        <div class="card">
+                                                                            <div class="card-body">
+                                                                                <div class="stat-widget-one">
+                                                                                    <div class="stat-content dib">
+                                                                                        <div class="stat-text">Five Wickets</div>
+                                                                                        <div class="stat-digit"><?php echo $user_stats[0]->five_wickets;?></div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                </div>
+                                                        </div>
+                                                        <div class="row">
+                                                                <div class="w-30 mystat-card">
+                                                                        <div class="card">
+                                                                            <div class="card-body">
+                                                                                <div class="stat-widget-one">
+                                                                                    <div class="stat-content dib">
+                                                                                        <div class="stat-text">Dot Balls</div>
+                                                                                        <div class="stat-digit"><?php echo $user_stats[0]->dot_balls;?></div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                </div>
+                                                                <div class="w-30 mystat-card">
+                                                                        <div class="card">
+                                                                            <div class="card-body">
+                                                                                <div class="stat-widget-one">
+                                                                                    <div class="stat-content dib">
+                                                                                        <div class="stat-text">4s</div>
+                                                                                        <div class="stat-digit"><?php echo $user_stats[0]->give_fours;?></div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                </div>
+                                                                <div class="w-30 mystat-card">
+                                                                        <div class="card">
+                                                                            <div class="card-body">
+                                                                                <div class="stat-widget-one">
+                                                                                    <div class="stat-content dib">
+                                                                                        <div class="stat-text">6s</div>
+                                                                                        <div class="stat-digit"><?php echo $user_stats[0]->give_sixes;?></div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                </div>
+                                                        </div>
                                                 </div>
                                             </div>
-                                            <div class="row">
-                                                <div class="w-30 mr-1">
-                                                    <div class="card">
-                                                        <div class="card-body">
-                                                            <div class="stat-widget-one">
-                                                                <div class="stat-content dib">
-                                                                    <div class="stat-text">Runs</div>
-                                                                    <div class="stat-digit">187</div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="w-30 mr-1">
-                                                    <div class="card">
-                                                        <div class="card-body">
-                                                            <div class="stat-widget-one">
-                                                                <div class="stat-content dib">
-                                                                    <div class="stat-text">Highest Runs</div>
-                                                                    <div class="stat-digit">58</div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="w-30 mr-1">
-                                                    <div class="card">
-                                                        <div class="card-body">
-                                                            <div class="stat-widget-one">
-                                                                <div class="stat-content dib">
-                                                                    <div class="stat-text">Avg</div>
-                                                                    <div class="stat-digit">62.33</div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="w-30 mr-1">
-                                                    <div class="card">
-                                                        <div class="card-body">
-                                                            <div class="stat-widget-one">
-                                                                <div class="stat-content dib">
-                                                                    <div class="stat-text">6s</div>
-                                                                    <div class="stat-digit">50</div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="w-30 mr-1">
-                                                    <div class="card">
-                                                        <div class="card-body">
-                                                            <div class="stat-widget-one">
-                                                                <div class="stat-content dib">
-                                                                    <div class="stat-text">Innings</div>
-                                                                    <div class="stat-digit">30</div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="w-30 mr-1">
-                                                    <div class="card">
-                                                        <div class="card-body">
-                                                            <div class="stat-widget-one">
-                                                                <div class="stat-content dib">
-                                                                    <div class="stat-text">Not out</div>
-                                                                    <div class="stat-digit">10</div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="tab-pane fade" id="nav-bowling" role="tabpanel" aria-labelledby="nav-bowling-tab">
-                                            <div class="row">
-                                                <div class="w-30 mystat-card">
-                                                    <div class="card">
-                                                        <div class="card-body">
-                                                            <div class="stat-widget-one">
-                                                                <div class="stat-content dib">
-                                                                    <div class="stat-text">Matches</div>
-                                                                    <div class="stat-digit">50</div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="w-30 mystat-card">
-                                                    <div class="card">
-                                                        <div class="card-body">
-                                                            <div class="stat-widget-one">
-                                                                <div class="stat-content dib">
-                                                                    <div class="stat-text">Innings</div>
-                                                                    <div class="stat-digit">30</div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="w-30 mystat-card">
-                                                    <div class="card">
-                                                        <div class="card-body">
-                                                            <div class="stat-widget-one">
-                                                                <div class="stat-content dib">
-                                                                    <div class="stat-text">Overs</div>
-                                                                    <div class="stat-digit">10</div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="w-30 mystat-card">
-                                                    <div class="card">
-                                                        <div class="card-body">
-                                                            <div class="stat-widget-one">
-                                                                <div class="stat-content dib">
-                                                                    <div class="stat-text">Maidens</div>
-                                                                    <div class="stat-digit">187</div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="w-30 mystat-card">
-                                                    <div class="card">
-                                                        <div class="card-body">
-                                                            <div class="stat-widget-one">
-                                                                <div class="stat-content dib">
-                                                                    <div class="stat-text">Wickets</div>
-                                                                    <div class="stat-digit">58</div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="w-30 mystat-card">
-                                                    <div class="card">
-                                                        <div class="card-body">
-                                                            <div class="stat-widget-one">
-                                                                <div class="stat-content dib">
-                                                                    <div class="stat-text">Avg</div>
-                                                                    <div class="stat-digit">62.33</div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="w-30 mystat-card">
-                                                    <div class="card">
-                                                        <div class="card-body">
-                                                            <div class="stat-widget-one">
-                                                                <div class="stat-content dib">
-                                                                    <div class="stat-text">Wides</div>
-                                                                    <div class="stat-digit">50</div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="w-30 mystat-card">
-                                                    <div class="card">
-                                                        <div class="card-body">
-                                                            <div class="stat-widget-one">
-                                                                <div class="stat-content dib">
-                                                                    <div class="stat-text">Noballs</div>
-                                                                    <div class="stat-digit">30</div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="w-30 mystat-card">
-                                                    <div class="card">
-                                                        <div class="card-body">
-                                                            <div class="stat-widget-one">
-                                                                <div class="stat-content dib">
-                                                                    <div class="stat-text">Runs</div>
-                                                                    <div class="stat-digit">100</div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+
                                         </div>
                                     </div>
-
                                 </div>
-                            </div>
-                        </div>
+                            </div>    
                     </div>
-                </div>
                 <!--  /# Stats -->
                 <!-- widgets -->
                 <div class="row">

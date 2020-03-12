@@ -151,6 +151,29 @@
                     </div>
                 </div>
 
+                <div class="row mb-4">
+                    <div class="col-md-12">
+                        <button class="btn btn-primary btn-sm inning-complete-btn float-right" data-id="<?php echo $match_info[0]['match_id']; ?>" >
+                            INNING COMPLETE
+                        </button>
+                    </div>
+                </div>
+
+                <div class="row mb-4">
+                    <div class="col-md-12">
+                        <p class="text-center text-dark bold">First Inning</p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col col-md-6">
+                        <p class="text-center small-text bold" style="color:#a8ffac">BATTING TEAM</p>
+                    </div>
+                    <div class="col col-md-6">
+                        <p class="text-center small-text bold" style="color:#94deff">BALLING TEAM</p>
+                    </div>
+                </div>
+
                 <div class="row">
                     <div class="col col-md-6">
                         <div class="row">
@@ -169,7 +192,7 @@
                                     $count++;
                             ?>
                                     <div class="col-md-12">
-                                        <div class="card team_a_players " data-id="<?php echo $team_a_player['user_id']; ?>" data-toggle="modal" data-target="#addScoreModal">
+                                        <div class="card team_a_players pointer" data-id="<?php echo $team_a_player['user_id']; ?>" data-name="<?php echo $team_a_player['full_name']; ?>" data-batting="1">
                                             <div class="team-nums">
                                                 <b><?php echo $count; ?></b>
                                             </div>
@@ -215,7 +238,7 @@
                                     $count++;
                             ?>
                                     <div class="col-md-12">
-                                        <div class="card team_b_players" data-id="<?php echo $team_b_player['user_id']; ?>" data-toggle="modal" data-target="#addScoreModal">
+                                        <div class="card team_b_players pointer" data-id="<?php echo $team_b_player['user_id']; ?>" data-name="<?php echo $team_b_player['full_name']; ?>" data-batting="0">
                                             <div class="team-nums">
                                                 <b><?php echo $count; ?></b>
                                             </div>
@@ -246,6 +269,15 @@
                     </div>
                 </div>
 
+
+                <div class="row m-4">
+                    <div class="col-md-12 d-flex justify-content-center">
+                        <button class="btn btn-primary btn-sm">
+                            MATCH COMPLETE
+                        </button>
+                    </div>
+                </div>
+
                 <!-- .animated -->
             </div>
             <!-- /.content -->
@@ -268,7 +300,7 @@
         <!-- /#right-panel -->
 
 
-        <div class="modal fade" id="addScoreModal" tabindex="-1" role="dialog" aria-labelledby="scrollmodalLabel" aria-hidden="true">
+        <div class="modal fade" id="addBattingScoreModal" tabindex="-1" role="dialog" aria-labelledby="scrollmodalLabel" aria-hidden="true">
             <div class="modal-dialog modal-sm" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -281,38 +313,104 @@
                         <div class="card p-2">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <p class="form-control-static">
-                                        Varun Rana
+                                    <p class="form-control-static caps" id="batting-player-name">
+
                                     </p>
                                 </div>
                             </div>
+                            <form class="batting-score-update-form" method="POST">
                             <div class="row mb-3">
                                 <div class="col-md-12">
-                                    <input type="text" class="input-sm form-control-sm form-control" placeholder="Total runs">
+                                    <input type="text" name="total-runs" class="input-sm form-control-sm form-control" placeholder="Total runs">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col col-md-6">
+                                    <input type="text" name="sixes" class="input-sm form-control-sm form-control" placeholder="No. of 6s">
+                                </div>
+                                <div class="col col-md-6">
+                                    <input type="text" name="fours" class="input-sm form-control-sm form-control" placeholder="No. of 4s">
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <div class="col-md-12">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <input type="text" class="input-sm form-control-sm form-control" placeholder="No. of 6s">
-                                        </div>
-                                        <div class="col-md-6">
-                                            <input type="text" class="input-sm form-control-sm form-control" placeholder="No. of 4s">
-                                        </div>
-                                    </div>
+                                    <input type="text" name="ball-played" class="input-sm form-control-sm form-control" placeholder="Total Ball Played">
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <div class="col-md-12">
-                                <input type="checkbox" class="d-inline">&nbsp;&nbsp;<span class="d-inline text-dark small-text">Not Out</span>
+                                    <input type="checkbox" name="not-out" class="d-inline">&nbsp;&nbsp;<span class="d-inline text-dark small-text">Not Out</span>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                <button class="btn btn-primary btn-sm btn-block">Update</button>
+                                    <button type="submit" class="btn btn-primary btn-sm btn-block batting-score-update-btn">Update</button>
                                 </div>
                             </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="addBallingScoreModal" tabindex="-1" role="dialog" aria-labelledby="scrollmodalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="scrollmodalLabel"></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="col-md-12 mt-2">
+                        <div class="card p-2">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p class="form-control-static caps" id="balling-player-name">
+
+                                    </p>
+                                </div>
+                            </div>
+                            <form class="balling-score-update-form" method="POST">
+                            <div class="row mb-3">
+                                <div class="col-md-12">
+                                    <input type="text" name="total-overs" class="input-sm form-control-sm form-control" placeholder="Total Overs">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col col-md-6">
+                                    <input type="text" name="maidens" class="input-sm form-control-sm form-control" placeholder="No. of Maidens">
+                                </div>
+                                <div class="col col-md-6">
+                                    <input type="text" name="wickets" class="input-sm form-control-sm form-control" placeholder="No. of Wickets">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col col-md-6">
+                                    <input type="text" name="total-runs" class="input-sm form-control-sm form-control" placeholder="Total Runs">
+                                </div>
+                                <div class="col col-md-6">
+                                    <input type="text" name="total-dot-balls" class="input-sm form-control-sm form-control" placeholder="Total Dot Balls">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col col-md-6">
+                                    <input type="text" name="fours" class="input-sm form-control-sm form-control" placeholder="No. of 4s">
+                                </div>
+                                <div class="col col-md-6">
+                                    <input type="text" name="sixes" class="input-sm form-control-sm form-control" placeholder="No. of 6s">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <button type="submit" class="btn btn-primary btn-sm btn-block balling-score-update-btn">Update</button>
+                                </div>
+                            </div>
+                        </form>
                         </div>
                     </div>
                     <div class="modal-footer">

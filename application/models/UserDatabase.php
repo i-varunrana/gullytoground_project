@@ -384,6 +384,49 @@ Class UserDatabase extends CI_Model {
         }
     }
 
+    public function saveData($tableName,$data,$where){
+        $this->db->trans_start();
+        $this->db->where($where);
+        $this->db->update($tableName,$data);
+        $this->db->trans_complete();
+        return $this->db->trans_status() ? TRUE : FALSE;
+    }
+
+    public function updateBattingScores($data){
+        $this->db->trans_start();
+        $SQL = "UPDATE user_stats_table SET matches = (matches+1), batting_innings = (batting_innings+1), 
+        not_out = " . $data['not_out'] . ", runs = runs + ".$data['total_runs'].", highest_runs = IF(highest_runs < ".$data['total_runs']." , ".$data['total_runs'].", highest_runs), 
+        batting_avg = ((".$data['total_runs']." + runs) / ((batting_innings+1) - (not_out + ".$data['not_out']."))) , 
+        batting_sr = ((".$data['total_runs']." + runs) / (".$data['ball_played']." + ball_played) * 100), 
+        ball_played = (ball_played + ".$data['ball_played']."), 
+        fifties = IF(".$data['total_runs']." >= 50 && ".$data['total_runs']." < 100, fifties+1, fifties), hundreds = IF(".$data['total_runs']." >= 100, hundreds+1, hundreds), 
+        sixes = sixes + ".$data['sixes'].", ducks = IF(".$data['total_runs']." <= 0, ducks+1, ducks), fours = fours + ".$data['fours']."  WHERE user_id = ". $data['user_id'];
+
+        $this->db->query($SQL);
+        $this->db->trans_complete();
+        return $this->db->trans_status() ? TRUE : FALSE;
+    }
+
+    public function updateBallingScores($data){
+        $this->db->trans_start();
+        $SQL = "UPDATE user_stats_table SET balling_innings = (balling_innings+1), overs = overs + " . $data['overs'] . ", 
+        maidens = maidens + ".$data['maidens'].", wickets = wickets + ".$data['wickets'].", balling_avg = ((".$data['runs']." + give_runs) / (".$data['wickets']." + wickets)), 
+        give_runs = give_runs + ".$data['runs'].", five_wickets = IF(".$data['wickets']." >=5, (five_wickets+1), five_wickets), 
+        dot_balls = dot_balls + ".$data['total_dot_balls'].", give_sixes = give_sixes + ".$data['sixes'].", balling_sr = (((".$data['runs']." + give_runs) * 6) / ((".$data['overs']." + overs) * 6)), 
+        give_fours = give_fours + ".$data['fours']."  WHERE user_id = ". $data['user_id'];
+        $this->db->query($SQL);
+        $this->db->trans_complete();
+        return $this->db->trans_status() ? TRUE : FALSE;
+    }
+
+    public function frstInningComplete($matchId){
+        $this->db->trans_start();
+        $this->db->where('match_id',$matchId);
+        $this->db->update("match_table",array('is_first_inning_complete' => 1));
+        $this->db->trans_complete();
+        return $this->db->trans_status() ? TRUE : FALSE;
+    }
+
     
 
 
@@ -462,4 +505,3 @@ public function deleteUserAddress($addressId) {
 
 
 }
-?>

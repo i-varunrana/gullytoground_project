@@ -757,5 +757,134 @@ $(document).ready(function(){
     });
 });
 
+$(document).ready(function(){
+    $('.team_a_players').click(function(){
+        let playerName = $(this).attr('data-name');
+        let playerId = $(this).attr('data-id');
+        $("#addBattingScoreModal").modal();
+        $("#batting-player-name").text(playerName);
+        $('.batting-score-update-btn').attr('data-id',playerId);
+    });
+
+    $('.team_b_players').click(function(){
+        let playerName = $(this).attr('data-name');
+        let playerId = $(this).attr('data-id');
+        $("#addBallingScoreModal").modal();
+        $("#balling-player-name").text(playerName);
+        $('.balling-score-update-btn').attr('data-id',playerId);
+    });
+
+    $(".batting-score-update-form").submit(function (e) {
+        e.preventDefault();
+        var form_data = $(this).serialize();
+        var button_content = $(this).find('button[type=submit]');
+        var data = {
+            playerId : button_content.attr('data-id')
+        };
+        button_content.html('please wait..');
+        $.ajax({
+            url: BASE_URL + "ControlUnit/updateBattingScores",
+            type: "POST",
+            data: form_data + '&' + $.param(data),
+            success: function (response) {
+                if(response){
+                    swal({
+                        title: "Scores Updated Successfully",
+                        icon: "success",
+                        button: "ok",
+                    });
+                }
+                else {
+                    swal({
+                        title: "Something went wrong!",
+                        icon: "error",
+                        button: "ok",
+                    });
+                    button_content.html('Update');
+                }
+            }
+        });
+    });
+
+    $(".balling-score-update-form").submit(function (e) {
+        e.preventDefault();
+        var form_data = $(this).serialize();
+        var button_content = $(this).find('button[type=submit]');
+        var data = {
+            playerId : button_content.attr('data-id')
+        };
+        button_content.html('please wait..');
+        $.ajax({
+            url: BASE_URL + "ControlUnit/updateBallingScores",
+            type: "POST",
+            data: form_data + '&' + $.param(data),
+            success: function (response) {
+                if(response == "empty-fields"){
+                    swal({
+                        title: "Scores Updated Successfully",
+                        icon: "success",
+                        button: "ok",
+                    });
+                }
+                else if(response){
+                    swal({
+                        title: "Scores Updated Successfully",
+                        icon: "success",
+                        button: "ok",
+                    });
+                }
+                else {
+                    swal({
+                        title: "Something went wrong!",
+                        icon: "error",
+                        button: "ok",
+                    });
+                }
+                button_content.html('Update');
+            }
+        });
+    });
+})
+
+$(document).ready(function(){
+    $('.inning-complete-btn').click(function(){
+
+        var matchId = $(this).attr('data-id');
+
+        swal({
+            title: "Are you sure ??",
+            icon: "warning",
+            buttons: ["NO", "YES"],
+        })
+        .then((value) => {
+            if (value) {
+
+                $.ajax({
+                    url: BASE_URL + "ControlUnit/firstInningComplete",
+                    type: "POST",
+                    data: { match_id : matchId },
+                    success: function (response) {
+
+                        if(response){
+                            window.location.reload();
+                        }
+                        else {
+                            swal({
+                                title: "Something went wrong!",
+                                icon: "error",
+                                button: "ok",
+                            });
+                        }
+                        button_content.html('Update');
+                    }
+                });
+                
+            } else {
+                //else code
+            }
+        });
+    })
+})
+
 // alert($('.teams-for-match').length); 
 

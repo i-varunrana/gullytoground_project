@@ -86,6 +86,10 @@
     font-size: 0.65rem;;
   }
 
+  .pointer {
+    cursor: pointer;
+  }
+
 /* image carousel css */
   .mySlides {
     display: none;
