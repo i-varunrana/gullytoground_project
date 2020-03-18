@@ -797,6 +797,30 @@
 
   }
 
+  .updated-tag {
+    padding: 0.18rem 0.3rem;
+    position: absolute;
+    border-radius: 25px;
+    top: -5px;
+    right: 20px;
+    background-color: #ef5350;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+  }
+  
+  .updated-tag {
+    font-size: 8px;
+    color: white;
+
+  }
+
+  .show-tag {
+    display: block;
+  }
+
+  .hide-tag {
+    display: none;
+  }
+
   .match-active-team {
     border: 2px solid #007bff;
   }

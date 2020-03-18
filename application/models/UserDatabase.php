@@ -392,9 +392,38 @@ Class UserDatabase extends CI_Model {
         return $this->db->trans_status() ? TRUE : FALSE;
     }
 
+    public function updateMatchBattingScores($data){
+        $this->db->trans_start();
+        $SQL = "UPDATE user_match_stats SET matches = 1, batting_innings = 1, 
+        not_out = " . $data['not_out'] . ", runs = ".$data['total_runs'].", highest_runs = IF(highest_runs < ".$data['total_runs']." , ".$data['total_runs'].", highest_runs), 
+        batting_avg = IF(".$data['not_out']." = 1, 'N.A.', ROUND((".$data['total_runs']." / (1 - ".$data['not_out'].")),2)),
+        batting_sr = ROUND((".$data['total_runs']." / (".$data['ball_played']." * 100)),2), 
+        ball_played = ".$data['ball_played'].", 
+        fifties = IF(".$data['total_runs']." >= 50 && ".$data['total_runs']." < 100, 1, fifties), hundreds = IF(".$data['total_runs']." >= 100, 1, hundreds), 
+        sixes = ".$data['sixes'].", ducks = IF(".$data['total_runs']." <= 0, 1, ducks), fours = ".$data['fours'].", is_batting_score_updated = true  WHERE user_id = ". $data['user_id'];
+
+        $this->db->query($SQL);
+        $this->db->trans_complete();
+        return $this->db->trans_status() ? TRUE : FALSE;
+    }
+    public function updateMatchBallingScores($data){
+        $this->db->trans_start();
+        $SQL = "UPDATE user_match_stats SET balling_innings = 1, overs = " . $data['overs'] . ", 
+        maidens = ".$data['maidens'].", wickets = ".$data['wickets'].", 
+        balling_avg = ROUND((".$data['runs']." / ".$data['wickets']."),2), 
+        balling_sr = ROUND(((".$data['runs']." * 6) / (".$data['overs']." * 6)),2), 
+        give_runs = ".$data['runs'].", five_wickets = IF(".$data['wickets']." >=5, 1, five_wickets), 
+        dot_balls = ".$data['total_dot_balls'].", give_sixes = ".$data['sixes'].", 
+        give_fours = ".$data['fours']." is_balling_score_updated = true  WHERE user_id = ". $data['user_id'];
+
+        $this->db->query($SQL);
+        $this->db->trans_complete();
+        return $this->db->trans_status() ? TRUE : FALSE;
+    }
+
     public function updateBattingScores($data){
         $this->db->trans_start();
-        $SQL = "UPDATE user_stats_table SET matches = (matches+1), batting_innings = (batting_innings+1), 
+        $SQL = "UPDATE user_match_stats SET matches = (matches+1), batting_innings = (batting_innings+1), 
         not_out = " . $data['not_out'] . ", runs = runs + ".$data['total_runs'].", highest_runs = IF(highest_runs < ".$data['total_runs']." , ".$data['total_runs'].", highest_runs), 
         batting_avg = ((".$data['total_runs']." + runs) / ((batting_innings+1) - (not_out + ".$data['not_out']."))) , 
         batting_sr = ((".$data['total_runs']." + runs) / (".$data['ball_played']." + ball_played) * 100), 
@@ -409,7 +438,7 @@ Class UserDatabase extends CI_Model {
 
     public function updateBallingScores($data){
         $this->db->trans_start();
-        $SQL = "UPDATE user_stats_table SET balling_innings = (balling_innings+1), overs = overs + " . $data['overs'] . ", 
+        $SQL = "UPDATE user_match_stats SET balling_innings = (balling_innings+1), overs = overs + " . $data['overs'] . ", 
         maidens = maidens + ".$data['maidens'].", wickets = wickets + ".$data['wickets'].", balling_avg = ((".$data['runs']." + give_runs) / (".$data['wickets']." + wickets)), 
         give_runs = give_runs + ".$data['runs'].", five_wickets = IF(".$data['wickets']." >=5, (five_wickets+1), five_wickets), 
         dot_balls = dot_balls + ".$data['total_dot_balls'].", give_sixes = give_sixes + ".$data['sixes'].", balling_sr = (((".$data['runs']." + give_runs) * 6) / ((".$data['overs']." + overs) * 6)), 
@@ -426,6 +455,28 @@ Class UserDatabase extends CI_Model {
         $this->db->trans_complete();
         return $this->db->trans_status() ? TRUE : FALSE;
     }
+
+
+    public function fetchPlayesIds($tableName=null,$condition=null,$getColumn=null){
+        $this->db->select($getColumn);
+        $this->db->from($tableName);
+        $this->db->where_in("team_id",$condition);
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function SaveMultipleData($table,$data){
+         $query = $this->db->insert($table, $data);
+         return $this->db->insert_id();
+    }
+
+    public function insertMultipleData($table,$data){
+        $this->db->trans_start();
+        $this->db->insert_batch($table, $data);
+        $this->db->trans_complete();
+        return $this->db->trans_status() ? TRUE : FALSE;
+    }
+
 
     
 

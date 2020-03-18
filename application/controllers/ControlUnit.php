@@ -11,7 +11,7 @@ class ControlUnit extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->CI = & get_instance();
+        $this->CI = &get_instance();
 
         // Load form helper library
         $this->load->helper('form', 'security');
@@ -31,11 +31,9 @@ class ControlUnit extends CI_Controller
         if ($this->session->has_userdata('logged_in')) {
 
             $this->homePage();
-
-        }else {
+        } else {
 
             $this->load->view('authenticate/login');
-
         }
     }
 
@@ -59,7 +57,7 @@ class ControlUnit extends CI_Controller
         if ($this->session->has_userdata('logged_in')) {
             $result = $this->session->userdata('logged_in');
             $data['user_id'] = $result['user_id'];
-            $data['update_css_js'] = $this->userDatabase->selectAllFromTableWhere('update_app_table',array('id'=>'1'),'datetime');
+            $data['update_css_js'] = $this->userDatabase->selectAllFromTableWhere('update_app_table', array('id' => '1'), 'datetime');
             $data['profile_complete'] = $this->isProfileCompleted($result['user_id']);
             $data['user_info'] = $this->userDatabase->fetchUserInfo($result['user_id']);
             $data['tournaments'] = $this->userDatabase->fetchTournamentInMyCity($data['user_info'][0]->city);
@@ -77,7 +75,7 @@ class ControlUnit extends CI_Controller
         if ($this->session->has_userdata('logged_in')) {
             $result = $this->session->userdata('logged_in');
             $data['user_id'] = $result['user_id'];
-            $data['update_css_js'] = $this->userDatabase->selectAllFromTableWhere('update_app_table',array('id'=>'1'),'datetime');
+            $data['update_css_js'] = $this->userDatabase->selectAllFromTableWhere('update_app_table', array('id' => '1'), 'datetime');
             $data['user_info'] = $this->userDatabase->fetchUserInfo($result['user_id']);
             $data['user_stats'] = $this->userDatabase->getImpStats($result['user_id']);
             $this->load->view('user/profile', $data);
@@ -91,10 +89,10 @@ class ControlUnit extends CI_Controller
     {
         if ($this->session->has_userdata('logged_in')) {
             $result = $this->session->userdata('logged_in');
-            $data['update_css_js'] = $this->userDatabase->selectAllFromTableWhere('update_app_table',array('id'=>'1'),'datetime');
+            $data['update_css_js'] = $this->userDatabase->selectAllFromTableWhere('update_app_table', array('id' => '1'), 'datetime');
             $data['user_info'] = $this->userDatabase->selectAllFromTableWhere('user_account_table', array('user_id' => $result['user_id']), 'user_id,full_name,city,image_address');
-            $data['upcoming_tournaments'] = $this->userDatabase->selectAllFromTableWhere('tournament_table',array( 't_city' => $data['user_info'][0]['city'], 'upcoming' => '1' ),'*');
-            $data['ongoing_tournaments'] = $this->userDatabase->selectAllFromTableWhere('tournament_table',array( 't_city' => $data['user_info'][0]['city'], 'ongoing' => '1'),'*');
+            $data['upcoming_tournaments'] = $this->userDatabase->selectAllFromTableWhere('tournament_table', array('t_city' => $data['user_info'][0]['city'], 'upcoming' => '1'), '*');
+            $data['ongoing_tournaments'] = $this->userDatabase->selectAllFromTableWhere('tournament_table', array('t_city' => $data['user_info'][0]['city'], 'ongoing' => '1'), '*');
             $this->load->view('user/tournaments', $data);
         } else {
             $this->load->view('authenticate/login');
@@ -106,10 +104,10 @@ class ControlUnit extends CI_Controller
     {
         if ($this->session->has_userdata('logged_in')) {
             $result = $this->session->userdata('logged_in');
-            $data['update_css_js'] = $this->userDatabase->selectAllFromTableWhere('update_app_table',array('id'=>'1'),'datetime');
+            $data['update_css_js'] = $this->userDatabase->selectAllFromTableWhere('update_app_table', array('id' => '1'), 'datetime');
             $data['user_info'] = $this->userDatabase->selectAllFromTableWhere('user_account_table', array('user_id' => $result['user_id']), 'user_id,full_name,image_address,city');
-            $data['upcoming_my_tournaments'] = $this->userDatabase->selectAllFromTableWhere('tournament_table',array( 't_user_id' => $result['user_id'], 't_city' => $data['user_info'][0]['city'], 'upcoming' => '1'),'*');
-            $data['ongoing_my_tournaments'] = $this->userDatabase->selectAllFromTableWhere('tournament_table',array('t_user_id' => $result['user_id'],'t_city' => $data['user_info'][0]['city'],'ongoing' => '0','upcoming' => '0'),'*');
+            $data['upcoming_my_tournaments'] = $this->userDatabase->selectAllFromTableWhere('tournament_table', array('t_user_id' => $result['user_id'], 't_city' => $data['user_info'][0]['city'], 'upcoming' => '1'), '*');
+            $data['ongoing_my_tournaments'] = $this->userDatabase->selectAllFromTableWhere('tournament_table', array('t_user_id' => $result['user_id'], 't_city' => $data['user_info'][0]['city'], 'ongoing' => '0', 'upcoming' => '0'), '*');
 
             $this->load->view('user/my-tournaments', $data);
         } else {
@@ -118,15 +116,16 @@ class ControlUnit extends CI_Controller
     }
 
     //View My Tournament Page
-    public function viewMyTournamentPage($tournamentId){
+    public function viewMyTournamentPage($tournamentId)
+    {
         if ($this->session->has_userdata('logged_in')) {
             $result = $this->session->userdata('logged_in');
             $data['tournament_id'] = $tournamentId;
-            $data['update_css_js'] = $this->userDatabase->selectAllFromTableWhere('update_app_table',array('id'=>'1'),'datetime');
+            $data['update_css_js'] = $this->userDatabase->selectAllFromTableWhere('update_app_table', array('id' => '1'), 'datetime');
             $data['user_info'] = $this->userDatabase->selectAllFromTableWhere('user_account_table', array('user_id' => $result['user_id']), 'user_id,full_name,image_address');
-            $data['requested_teams'] = $this->userDatabase->selectAllFromTableWhere('tournaments_team_table',array('tournament_id' => $tournamentId, 'accepted' => '0', 'rejected' => '0'),'team_id');
-            $data['participated_teams'] = $this->userDatabase->selectAllFromTableWhere('tournaments_team_table',array('tournament_id' => $tournamentId, 'accepted' => '1', 'rejected' => '0'),'team_id');
-            $data['rejected_teams'] = $this->userDatabase->selectAllFromTableWhere('tournaments_team_table',array('tournament_id' => $tournamentId, 'accepted' => '0', 'rejected' => '1'),'team_id');
+            $data['requested_teams'] = $this->userDatabase->selectAllFromTableWhere('tournaments_team_table', array('tournament_id' => $tournamentId, 'accepted' => '0', 'rejected' => '0'), 'team_id');
+            $data['participated_teams'] = $this->userDatabase->selectAllFromTableWhere('tournaments_team_table', array('tournament_id' => $tournamentId, 'accepted' => '1', 'rejected' => '0'), 'team_id');
+            $data['rejected_teams'] = $this->userDatabase->selectAllFromTableWhere('tournaments_team_table', array('tournament_id' => $tournamentId, 'accepted' => '0', 'rejected' => '1'), 'team_id');
             $this->load->view('user/view-my-tournament', $data);
         } else {
             $this->load->view('authenticate/login');
@@ -138,8 +137,8 @@ class ControlUnit extends CI_Controller
     {
         if ($this->session->has_userdata('logged_in')) {
             $result = $this->session->userdata('logged_in');
-            $data['update_css_js'] = $this->userDatabase->selectAllFromTableWhere('update_app_table',array('id'=>'1'),'datetime');
-            $data['user_info'] = $this->userDatabase->selectAllFromTableWhere('user_account_table',array('user_id' => $result['user_id']), 'user_id,full_name,image_address');
+            $data['update_css_js'] = $this->userDatabase->selectAllFromTableWhere('update_app_table', array('id' => '1'), 'datetime');
+            $data['user_info'] = $this->userDatabase->selectAllFromTableWhere('user_account_table', array('user_id' => $result['user_id']), 'user_id,full_name,image_address');
             $this->load->view('user/add-tournament', $data);
         } else {
             $this->load->view('authenticate/login');
@@ -147,13 +146,14 @@ class ControlUnit extends CI_Controller
     }
 
     //View Tournament
-    public function viewTournamentPage($tournamentId){
+    public function viewTournamentPage($tournamentId)
+    {
         if ($this->session->has_userdata('logged_in')) {
             $result = $this->session->userdata('logged_in');
-            $data['update_css_js'] = $this->userDatabase->selectAllFromTableWhere('update_app_table',array('id'=>'1'),'datetime');
+            $data['update_css_js'] = $this->userDatabase->selectAllFromTableWhere('update_app_table', array('id' => '1'), 'datetime');
             //$join = array('user_stats_table', 'user_stats_table.user_id = user_account_table.user_id');
-            $data['tournament'] = $this->userDatabase->selectAllFromTableWhere('tournament_table',array('t_id'=>$tournamentId),'*');
-            $data['user_info'] = $this->userDatabase->selectAllFromTableWhere('user_account_table',array('user_id' => $result['user_id']), 'user_id,full_name,image_address');
+            $data['tournament'] = $this->userDatabase->selectAllFromTableWhere('tournament_table', array('t_id' => $tournamentId), '*');
+            $data['user_info'] = $this->userDatabase->selectAllFromTableWhere('user_account_table', array('user_id' => $result['user_id']), 'user_id,full_name,image_address');
             $data['user_teams'] = $this->userDatabase->fetchUserTeam($result['user_id']);
             $this->load->view('user/view-tournament', $data);
         } else {
@@ -166,7 +166,7 @@ class ControlUnit extends CI_Controller
     {
         if ($this->session->has_userdata('logged_in')) {
             $result = $this->session->userdata('logged_in');
-            $data['update_css_js'] = $this->userDatabase->selectAllFromTableWhere('update_app_table',array('id'=>'1'),'datetime');
+            $data['update_css_js'] = $this->userDatabase->selectAllFromTableWhere('update_app_table', array('id' => '1'), 'datetime');
             $data['user_info'] = $this->userDatabase->fetchUserInfo($result['user_id']);
             $data['user_dp'] = $this->userDatabase->getUserDp($result['user_id']);
             $data['user_teams'] = $this->userDatabase->fetchUserTeam($result['user_id']);
@@ -181,7 +181,7 @@ class ControlUnit extends CI_Controller
     {
         if ($this->session->has_userdata('logged_in')) {
             $result = $this->session->userdata('logged_in');
-            $data['update_css_js'] = $this->userDatabase->selectAllFromTableWhere('update_app_table',array('id'=>'1'),'datetime');
+            $data['update_css_js'] = $this->userDatabase->selectAllFromTableWhere('update_app_table', array('id' => '1'), 'datetime');
             $data['user_info'] = $this->userDatabase->fetchUserInfo($result['user_id']);
             $data['user_dp'] = $this->userDatabase->getUserDp($result['user_id']);
             $this->load->view('user/create-team', $data);
@@ -195,10 +195,10 @@ class ControlUnit extends CI_Controller
     {
         if ($this->session->has_userdata('logged_in')) {
             $result = $this->session->userdata('logged_in');
-            $data['update_css_js'] = $this->userDatabase->selectAllFromTableWhere('update_app_table',array('id'=>'1'),'datetime');
+            $data['update_css_js'] = $this->userDatabase->selectAllFromTableWhere('update_app_table', array('id' => '1'), 'datetime');
             //Fetch Team Player Ids
             $data['team_id'] = $teamId;
-            $data['team_player_ids'] = empty($this->userDatabase->selectAllFromTableWhere('team_relation_table',array('team_id' => $teamId), 'user_id')) ? 0 : $this->userDatabase->selectAllFromTableWhere('team_relation_table', $data['where'], 'user_id');
+            $data['team_player_ids'] = empty($this->userDatabase->selectAllFromTableWhere('team_relation_table', array('team_id' => $teamId), 'user_id')) ? 0 : $this->userDatabase->selectAllFromTableWhere('team_relation_table', $data['where'], 'user_id');
             //Fetch Team Payers
             if ($data['team_player_ids'] != 0) {
                 $data['team_players'] = $this->userDatabase->multipleDataFetch('user_account_table', array_column($data['team_player_ids'], 'user_id'), 'user_id,full_name,playing_role,batting_style,city,image_address');
@@ -218,11 +218,12 @@ class ControlUnit extends CI_Controller
     }
 
     //Visit Team Player Profile Page
-    public function visitTeamPlayerPage($playerId){
+    public function visitTeamPlayerPage($playerId)
+    {
         if ($this->session->has_userdata('logged_in')) {
             $result = $this->session->userdata('logged_in');
             $data['user_id'] = $playerId;
-            $data['update_css_js'] = $this->userDatabase->selectAllFromTableWhere('update_app_table',array('id'=>'1'),'datetime');
+            $data['update_css_js'] = $this->userDatabase->selectAllFromTableWhere('update_app_table', array('id' => '1'), 'datetime');
             $data['user_info'] = $this->userDatabase->fetchUserInfo($result['user_id']);
             $data['player_info'] = $this->userDatabase->fetchUserInfo($playerId);
             $data['player_stats'] = $this->userDatabase->fetchUserStats($playerId);
@@ -239,10 +240,10 @@ class ControlUnit extends CI_Controller
         if ($this->session->has_userdata('logged_in')) {
             $data['team_id'] = $teamId;
             $result = $this->session->userdata('logged_in');
-            $data['update_css_js'] = $this->userDatabase->selectAllFromTableWhere('update_app_table',array('id'=>'1'),'datetime');
+            $data['update_css_js'] = $this->userDatabase->selectAllFromTableWhere('update_app_table', array('id' => '1'), 'datetime');
             $data['user_info'] = $this->userDatabase->fetchUserInfo($result['user_id']);
             $data['user_dp'] = $this->userDatabase->getUserDp($result['user_id']);
-            $data['team'] = $this->userDatabase->selectAllFromTableWhere('team_table',array('team_id'=>$teamId),'team_name');
+            $data['team'] = $this->userDatabase->selectAllFromTableWhere('team_table', array('team_id' => $teamId), 'team_name');
             $data['totalPlayers'] = $this->userDatabase->getTotalTeamPlayers($teamId);
             $this->load->view('user/add-players', $data);
         } else {
@@ -257,7 +258,7 @@ class ControlUnit extends CI_Controller
         if ($this->session->has_userdata('logged_in')) {
             $result = $this->session->userdata('logged_in');
             $data['user_id'] = $result['user_id'];
-            $data['update_css_js'] = $this->userDatabase->selectAllFromTableWhere('update_app_table',array('id'=>'1'),'datetime');
+            $data['update_css_js'] = $this->userDatabase->selectAllFromTableWhere('update_app_table', array('id' => '1'), 'datetime');
             $data['user_info'] = $this->userDatabase->fetchUserInfo($result['user_id']);
             $this->load->view('user/settings', $data);
         } else {
@@ -270,7 +271,7 @@ class ControlUnit extends CI_Controller
     {
         if ($this->session->has_userdata('logged_in')) {
             $result = $this->session->userdata('logged_in');
-            $data['update_css_js'] = $this->userDatabase->selectAllFromTableWhere('update_app_table',array('id'=>'1'),'datetime');
+            $data['update_css_js'] = $this->userDatabase->selectAllFromTableWhere('update_app_table', array('id' => '1'), 'datetime');
             $data['user_info'] = $this->userDatabase->selectAllFromTableWhere('user_account_table', array('user_id' => $result['user_id']), 'user_id,full_name,image_address');
             $data['user_stats'] = $this->userDatabase->fetchUserStats($result['user_id']);
             $this->load->view('user/stats', $data);
@@ -287,53 +288,97 @@ class ControlUnit extends CI_Controller
 
             $data['tournamentId'] = $tournamentId;
 
-            $data['update_css_js'] = $this->userDatabase->selectAllFromTableWhere('update_app_table',array('id'=>'1'),'datetime');
+            $data['update_css_js'] = $this->userDatabase->selectAllFromTableWhere('update_app_table', array('id' => '1'), 'datetime');
 
             $data['user_info'] = $this->userDatabase->selectAllFromTableWhere('user_account_table', array('user_id' => $result['user_id']), 'user_id,full_name,image_address');
 
-            $data['match_info'] = $this->userDatabase->selectAllFromTableWhere('match_table', array('tournament_id' => $tournamentId), 'match_id,tournament_id,team_a,team_b,batting_first,is_first_inning_complete,date');
-            
-            if($data['match_info']){
+            $data['match_info'] = $this->userDatabase->selectAllFromTableWhere('match_table', array('tournament_id' => $tournamentId), 'match_id,tournament_id,team_a,team_b,batting_first,batting_second,is_first_inning_complete,date');
 
-                if($data['match_info'][0]['is_first_inning_complete']){
+            $team_player_ids = empty($this->userDatabase->fetchPlayesIds('team_relation_table', array($data['match_info'][0]['team_a'], $data['match_info'][0]['team_b']), 'user_id')) ?
+                0 : $this->userDatabase->fetchPlayesIds('team_relation_table', array($data['match_info'][0]['team_a'], $data['match_info'][0]['team_b']), 'user_id');
 
-                    $data['team_a'] = $this->userDatabase->selectAllFromTableWhere('team_table', array('team_id' => $data['match_info'][0]['team_b']), 'team_id,team_name');
-                    $data['team_b'] = $this->userDatabase->selectAllFromTableWhere('team_table', array('team_id' => $data['match_info'][0]['team_a']), 'team_id,team_name');
 
-                    if(!empty($data['match_info'][0]['batting_first'])){
-                        $this->load->view('user/start-match',$data);
-                    } else {
-                        $this->load->view('user/initialize-start-match', $data);
-                        $this->load->view('user/pages_js/start-match',$data); 
-                    }
+            if (empty($this->userDatabase->selectAllFromTableWhere('user_match_stats', array('match_id' => $data['match_info'][0]['match_id']), "user_id")) && !empty($data['match_info'])) {
 
-                } else {
-                    $data['team_a'] = $this->userDatabase->selectAllFromTableWhere('team_table', array('team_id' => $data['match_info'][0]['team_a']), 'team_id,team_name');
-                    $data['team_b'] = $this->userDatabase->selectAllFromTableWhere('team_table', array('team_id' => $data['match_info'][0]['team_b']), 'team_id,team_name');
-
-                    if(!empty($data['match_info'][0]['batting_first'])){
-                        $this->load->view('user/start-match',$data);
-                    } else {
-                        $this->load->view('user/initialize-start-match', $data);
-                        $this->load->view('user/pages_js/start-match',$data); 
-                    } 
+                $dataToBeInsert = array();
+                foreach ($team_player_ids as $id) {
+                    array_push( $dataToBeInsert,array("user_id" => $id->user_id, "match_id" => $data['match_info'][0]['match_id']));
                 }
-                
-            }else {
-                redirect(__CLASS__ . '/index');
+
+                if ($this->userDatabase->insertMultipleData("user_match_stats", $dataToBeInsert)) {
+
+                    if ($data['match_info']) {
+
+                        if (!empty($data['match_info'][0]['batting_first']) && !empty($data['match_info'][0]['batting_first'])) {
+
+                            if (!empty($data['match_info'][0]['is_first_inning_complete'])) {
+
+                                $data['team_a'] = $this->userDatabase->selectAllFromTableWhere('team_table', array('team_id' => $data['match_info'][0]['batting_second']), 'team_id,team_name');
+                                $data['team_b'] = $this->userDatabase->selectAllFromTableWhere('team_table', array('team_id' => $data['match_info'][0]['batting_first']), 'team_id,team_name');
+
+                                $this->load->view('user/start-match', $data);
+                            } else {
+                                $data['team_a'] = $this->userDatabase->selectAllFromTableWhere('team_table', array('team_id' => $data['match_info'][0]['batting_first']), 'team_id,team_name');
+                                $data['team_b'] = $this->userDatabase->selectAllFromTableWhere('team_table', array('team_id' => $data['match_info'][0]['batting_second']), 'team_id,team_name');
+
+                                $this->load->view('user/start-match', $data);
+                            }
+                        } else {
+                            $data['team_a'] = $this->userDatabase->selectAllFromTableWhere('team_table', array('team_id' => $data['match_info'][0]['team_a']), 'team_id,team_name');
+                            $data['team_b'] = $this->userDatabase->selectAllFromTableWhere('team_table', array('team_id' => $data['match_info'][0]['team_b']), 'team_id,team_name');
+                            $this->load->view('user/initialize-start-match', $data);
+                            $this->load->view('user/pages_js/start-match', $data);
+                        }
+                    } else {
+                        redirect(__CLASS__ . '/index');
+                    }
+                } else {
+                    redirect(__CLASS__ . '/index');
+                }
+
+            } else {
+
+                if ($data['match_info']) {
+
+                    if (!empty($data['match_info'][0]['batting_first']) && !empty($data['match_info'][0]['batting_first'])) {
+
+                        if (!empty($data['match_info'][0]['is_first_inning_complete'])) {
+
+                            $data['team_a'] = $this->userDatabase->selectAllFromTableWhere('team_table', array('team_id' => $data['match_info'][0]['batting_second']), 'team_id,team_name');
+                            $data['team_b'] = $this->userDatabase->selectAllFromTableWhere('team_table', array('team_id' => $data['match_info'][0]['batting_first']), 'team_id,team_name');
+
+                            $this->load->view('user/start-match', $data);
+                        } else {
+                            $data['team_a'] = $this->userDatabase->selectAllFromTableWhere('team_table', array('team_id' => $data['match_info'][0]['batting_first']), 'team_id,team_name');
+                            $data['team_b'] = $this->userDatabase->selectAllFromTableWhere('team_table', array('team_id' => $data['match_info'][0]['batting_second']), 'team_id,team_name');
+
+                            $this->load->view('user/start-match', $data);
+                        }
+                    } else {
+                        $data['team_a'] = $this->userDatabase->selectAllFromTableWhere('team_table', array('team_id' => $data['match_info'][0]['team_a']), 'team_id,team_name');
+                        $data['team_b'] = $this->userDatabase->selectAllFromTableWhere('team_table', array('team_id' => $data['match_info'][0]['team_b']), 'team_id,team_name');
+                        $this->load->view('user/initialize-start-match', $data);
+                        $this->load->view('user/pages_js/start-match', $data);
+                    }
+                } else {
+                    redirect(__CLASS__ . '/index');
+                }
+
             }
+
         } else {
             $this->load->view('authenticate/login');
-        } 
+        }
     }
 
-    public function initializeStartMatchPage($tournamentId){
+    public function initializeStartMatchPage($tournamentId)
+    {
         if ($this->session->has_userdata('logged_in')) {
             $result = $this->session->userdata('logged_in');
 
             $data['tournamentId'] = $tournamentId;
 
-            $data['update_css_js'] = $this->userDatabase->selectAllFromTableWhere('update_app_table',array('id'=>'1'),'datetime');
+            $data['update_css_js'] = $this->userDatabase->selectAllFromTableWhere('update_app_table', array('id' => '1'), 'datetime');
 
             $data['user_info'] = $this->userDatabase->selectAllFromTableWhere('user_account_table', array('user_id' => $result['user_id']), 'user_id,full_name,image_address');
 
@@ -345,16 +390,15 @@ class ControlUnit extends CI_Controller
             echo $data['match_info'][0]['batting_first'];
             die;
 
-            if($data['match_info'][0]['batting_first'] == null || $data['match_info']['batting_first'] == ""){
+            if ($data['match_info'][0]['batting_first'] == null || $data['match_info']['batting_first'] == "") {
                 $this->load->view('user/initialize-start-match', $data);
-                $this->load->view('user/pages_js/start-match',$data); 
-
+                $this->load->view('user/pages_js/start-match', $data);
             } else {
-                $this->startMatchPage($data['match_info'],$data['team_a'],$data['team_b']);
+                $this->startMatchPage($data['match_info'], $data['team_a'], $data['team_b']);
             }
         } else {
             $this->load->view('authenticate/login');
-        } 
+        }
     }
 
 
@@ -733,7 +777,7 @@ class ControlUnit extends CI_Controller
 
     public function search_player_card($result, $teamId)
     {
-        $imageAddress = empty($result[0]['image_address']) ? base_url()."images/profile_pic/default.png" : base_url().$result[0]['image_address'];
+        $imageAddress = empty($result[0]['image_address']) ? base_url() . "images/profile_pic/default.png" : base_url() . $result[0]['image_address'];
 
         return '<div class="players-card col-md-6 bg-white">
             <div class="head">
@@ -777,8 +821,6 @@ class ControlUnit extends CI_Controller
         } else {
             $this->load->view('authenticate/login');
         }
-
-
     }
 
     public function isProfileCompleted($userId)
@@ -822,25 +864,25 @@ class ControlUnit extends CI_Controller
         } else {
             $this->load->view('authenticate/login');
         }
-
     }
 
-    public function updateCssAndJs(){
+    public function updateCssAndJs()
+    {
         $dateTime = date("Y-m-d,h:i:s");
         $tableName = "update_app_table";
-        $data = array('datetime'=>$dateTime);
-        $result = $this->userDatabase->updateCssandJs($tableName,$data);
-        if($result){
+        $data = array('datetime' => $dateTime);
+        $result = $this->userDatabase->updateCssandJs($tableName, $data);
+        if ($result) {
             echo $result;
-        }
-        else{
+        } else {
             echo "failed";
         }
     }
 
     /* ------ CUSTOM MODAL FUNCITONS STARTS -------- */
 
-    public function getFeaturedPlayers(){
+    public function getFeaturedPlayers()
+    {
         $tableName = 'user_account_table';
         $where = null;
         $columns = array('user_account_table.user_id', 'full_name', 'playing_role', 'batting_style', 'city', 'image_address', 'matches', 'runs', 'wickets');
@@ -850,99 +892,106 @@ class ControlUnit extends CI_Controller
 
     /* ------ CUSTOM MODAL FUNCITONS END -------- */
 
-    public function requestToTournament(){
+    public function requestToTournament()
+    {
         //$teamId = 'ba34504f2e33';
         $teamId = $this->input->post('team_id');
         $totalPlayers = $this->userDatabase->getTotalTeamPlayers($teamId);
-        if($totalPlayers >= 4){
+        if ($totalPlayers >= 4) {
             $tournamentId = $this->input->post('tournament_id');
-            $data = array (
+            $data = array(
                 "tournament_id" => $tournamentId,
                 "team_id" => $teamId
             );
             $result = $this->userDatabase->requestToTournament($data);
-            if($result){ echo $result; }else{ echo false; }
-            
-        }else {
+            if ($result) {
+                echo $result;
+            } else {
+                echo false;
+            }
+        } else {
             echo "add-players";
         }
     }
 
-    public function getTeamDetails($teamId){
+    public function getTeamDetails($teamId)
+    {
         $data['team_info'] = $this->userDatabase->fetchTeamDetail($teamId);
         return $data['team_info'];
     }
 
-    public function acceptRequestToTournament() {
-        $data = array (
+    public function acceptRequestToTournament()
+    {
+        $data = array(
             "tournament_id" => $this->input->post('tournament_id'),
             "team_id" => $this->input->post('team_id')
-        );  
-        if($this->userDatabase->acceptRequestToTournament($data)){ 
+        );
+        if ($this->userDatabase->acceptRequestToTournament($data)) {
 
 
-            $where = array('team_id'=>$this->input->post('team_id'));
+            $where = array('team_id' => $this->input->post('team_id'));
             $team = $this->userDatabase->selectAllFromTableWhere('team_table', $where, 'admin_id,team_name');
-            $where = array('t_id'=>$this->input->post('tournament_id'));
+            $where = array('t_id' => $this->input->post('tournament_id'));
             $tournament = $this->userDatabase->selectAllFromTableWhere('tournament_table', $where, 't_name');
 
             $userId = $team[0]['admin_id'];
-            $notification = "Your team ".$team[0]['team_name']." has been successfully participated in ".$tournament[0]['t_name']." tournament.";
+            $notification = "Your team " . $team[0]['team_name'] . " has been successfully participated in " . $tournament[0]['t_name'] . " tournament.";
             $icon = "success";
-            
+
             $data = array(
-                'user_id'=>$userId,
-                'notification'=>$notification,
-                'icon'=>$icon
+                'user_id' => $userId,
+                'notification' => $notification,
+                'icon' => $icon
             );
 
-            if($this->userDatabase->sendNotification('notification_table',$data))
-            echo true;
+            if ($this->userDatabase->sendNotification('notification_table', $data))
+                echo true;
             else
+                echo false;
+        } else {
             echo false;
-
-        }else{ 
-            echo false; 
         }
     }
 
-    public function rejectRequestToTournament() {
-        $data = array (
+    public function rejectRequestToTournament()
+    {
+        $data = array(
             "tournament_id" => $this->input->post('tournament_id'),
             "team_id" => $this->input->post('team_id')
-        );  
-       // if($this->userDatabase->rejectRequestToTournament($data)){ 
+        );
+        // if($this->userDatabase->rejectRequestToTournament($data)){ 
 
-            $where = array('team_id'=>$this->input->post('team_id'));
-            $team = $this->userDatabase->selectAllFromTableWhere('team_table', $where, 'admin_id,team_name');
-            $where = array('t_id'=>$this->input->post('tournament_id'));
-            $tournament = $this->userDatabase->selectAllFromTableWhere('tournament_table', $where, 't_name');
+        $where = array('team_id' => $this->input->post('team_id'));
+        $team = $this->userDatabase->selectAllFromTableWhere('team_table', $where, 'admin_id,team_name');
+        $where = array('t_id' => $this->input->post('tournament_id'));
+        $tournament = $this->userDatabase->selectAllFromTableWhere('tournament_table', $where, 't_name');
 
-            $userId = $team[0]['admin_id'];
-            $notification = "Your request to ".$tournament[0]['t_name']." tournament  by ".$team[0]['team_name']." team has been rejected.";
-            $icon = "failure";
+        $userId = $team[0]['admin_id'];
+        $notification = "Your request to " . $tournament[0]['t_name'] . " tournament  by " . $team[0]['team_name'] . " team has been rejected.";
+        $icon = "failure";
 
-            $data = array(
-                'user_id'=>$userId,
-                'notification'=>$notification,
-                'icon'=>$icon
-            );
+        $data = array(
+            'user_id' => $userId,
+            'notification' => $notification,
+            'icon' => $icon
+        );
 
-            if($this->userDatabase->sendNotificaitonToPlayer('notification_table',$data))
+        if ($this->userDatabase->sendNotificaitonToPlayer('notification_table', $data))
             echo true;
-            else
+        else
             echo false;
 
-       // }else{ 
-       //     echo false; 
-       // }
+        // }else{ 
+        //     echo false; 
+        // }
     }
 
 
-    public function isLiveMatchExist($tournamentId) {
+    public function isLiveMatchExist($tournamentId)
+    {
         $result = $this->session->userdata('logged_in');
         $data['user_id'] = $result['user_id'];
-        $results = $this->userDatabase->isLiveMatchExist($tournamentId,$result['user_id']);
+        $results = $this->userDatabase->isLiveMatchExist($tournamentId, $result['user_id']);
         if ($results) {
             echo true;
         } else {
@@ -970,11 +1019,11 @@ class ControlUnit extends CI_Controller
         $where = array(
             "tournament_id" => $this->input->post('tournament_id'),
             "team_a" => $this->input->post('team_a'),
-            "team_b" => $this->input->post('team_b'), 
+            "team_b" => $this->input->post('team_b'),
         );
-        $isRowExist = $this->userDatabase->isRowExist("match_table",$where,"match_id");
+        $isRowExist = $this->userDatabase->isRowExist("match_table", $where, "match_id");
 
-        if(!$isRowExist){
+        if (!$isRowExist) {
             $data = array(
                 "match_id" => $matchId,
                 "tournament_id" => $this->input->post('tournament_id'),
@@ -984,92 +1033,105 @@ class ControlUnit extends CI_Controller
                 "time" => date("h:i:s"),
                 "active" => '1'
             );
-            $results = $this->userDatabase->saveIntoDatabase("match_table",$data);
+            $results = $this->userDatabase->saveIntoDatabase("match_table", $data);
             if ($results) {
                 echo  true;
             } else {
                 echo false;
-            } 
-        }else{
+            }
+        } else {
             echo "exist";
         }
     }
 
-    public function fetchTeamPlayer($teamId){
-         //Fetch Team Player Ids
-         $data['team_id'] = $teamId;
-         $data['where'] = array('team_id' => $teamId);
-         $data['team_player_ids'] = empty($this->userDatabase->selectAllFromTableWhere('team_relation_table', $data['where'], 'user_id')) ? 0 : $this->userDatabase->selectAllFromTableWhere('team_relation_table', $data['where'], 'user_id');
-         //Fetch Team Payers
-         if ($data['team_player_ids'] != 0) {
-             $data['team_players'] = $this->userDatabase->multipleDataFetch('user_account_table', array_column($data['team_player_ids'], 'user_id'), 'user_id,full_name,playing_role,batting_style,city,image_address');
-             return $data['team_players'];
-         }
-         else return 0;
-             
+    public function fetchTeamPlayer($teamId)
+    {
+        //Fetch Team Player Ids
+        $data['team_id'] = $teamId;
+        $data['where'] = array('team_id' => $teamId);
+        $data['team_player_ids'] = empty($this->userDatabase->selectAllFromTableWhere('team_relation_table', $data['where'], 'user_id')) ? 0 : $this->userDatabase->selectAllFromTableWhere('team_relation_table', $data['where'], 'user_id');
+        //Fetch Team Payers
+        if ($data['team_player_ids'] != 0) {
+            $data['team_players'] = $this->userDatabase->multipleDataFetch('user_account_table', array_column($data['team_player_ids'], 'user_id'), 'user_id,full_name,playing_role,batting_style,city,image_address');
+            return $data['team_players'];
+        } else return 0;
     }
 
-    public function saveFirstBattingTeam(){
+    public function saveFirstBattingTeam()
+    {
         $matchId = $this->input->post('match_id');
         $teamId = $this->input->post('team_id');
-        if($this->userDatabase->saveData('match_table',array('batting_first' => $teamId),array('match_id' => $matchId))){
+        $opponentId = $this->input->post('opponent_id');
+        if ($this->userDatabase->saveData('match_table', array('batting_first' => $teamId, 'batting_second' => $opponentId), array('match_id' => $matchId))) {
             echo true;
-        }else {
+        } else {
             echo false;
         }
     }
 
-    public function updateBattingScores() {
-        if(!empty($this->input->post('total-runs')) && !empty($this->input->post('sixes')) && !empty($this->input->post('fours')) && !empty($this->input->post('ball-played'))){
-            $data = array(    
-            'not_out' => empty($this->input->post('not-out')) ? 1 : 0,
-            'total_runs' =>  $this->input->post('total-runs'),
-            'sixes' => $this->input->post('sixes'),
-            'fours' => $this->input->post('fours'),
-            'ball_played' => $this->input->post('ball-played'),
-            'user_id' => $this->input->post('playerId')
+    public function updateBattingScores()
+    {
+
+        $totalRuns = $this->input->post('total-runs');
+        $sixes = $this->input->post('sixes');
+        $fours = $this->input->post('fours');
+        $ballPlayed = $this->input->post('ball-played');
+        if (isset($totalRuns) && isset($sixes) && isset($fours)  && isset($ballPlayed)) {
+             $notOut = $this->input->post('not-out');
+             if(isset($notOut)){ echo $notOut = 1; }else{ echo $notOut = 0; }
+            $data = array(
+                'not_out' => $notOut,
+                'total_runs' =>  $this->input->post('total-runs'),
+                'sixes' => $this->input->post('sixes'),
+                'fours' => $this->input->post('fours'),
+                'ball_played' => $this->input->post('ball-played'),
+                'user_id' => $this->input->post('playerId'),
+                'is_batting_score_updated' => 1,
             );
-            if($this->userDatabase->updateBattingScores($data)){
+            if ($this->userDatabase->updateMatchBattingScores($data)) {
                 echo true;
-            }else {
+            } else {
                 echo false;
             }
-        }
-        else{
+        } else {
             echo 'empty-fields';
         }
     }
 
-    public function updateBallingScores() {
-        if(!empty($this->input->post('total-overs')) && !empty($this->input->post('maidens')) 
-        && !empty($this->input->post('wickets')) && !empty($this->input->post('total-runs'))
-        && !empty($this->input->post('total-dot-balls')) && !empty($this->input->post('sixes')) 
-        && !empty($this->input->post('fours'))) {
-            $data = array(    
-            'overs' => $this->input->post('total-overs'),
-            'maidens' =>  $this->input->post('maidens'),
-            'wickets' =>  $this->input->post('wickets'),
-            'runs' =>  $this->input->post('total-runs'),
-            'total_dot_balls' =>  $this->input->post('total-dot-balls'),
-            'best-balling' =>  $this->input->post('best-balling'),
-            'sixes' => $this->input->post('sixes'),
-            'fours' => $this->input->post('fours'),
-            'user_id' => $this->input->post('playerId')
+    public function updateBallingScores()
+    {
+        if (
+            !empty($this->input->post('total-overs')) && !empty($this->input->post('maidens'))
+            && !empty($this->input->post('wickets')) && !empty($this->input->post('total-runs'))
+            && !empty($this->input->post('total-dot-balls')) && !empty($this->input->post('sixes'))
+            && !empty($this->input->post('fours'))
+        ) {
+            $data = array(
+                'overs' => $this->input->post('total-overs'),
+                'maidens' =>  $this->input->post('maidens'),
+                'wickets' =>  $this->input->post('wickets'),
+                'runs' =>  $this->input->post('total-runs'),
+                'total_dot_balls' =>  $this->input->post('total-dot-balls'),
+                'best-balling' =>  $this->input->post('best-balling'),
+                'sixes' => $this->input->post('sixes'),
+                'fours' => $this->input->post('fours'),
+                'user_id' => $this->input->post('playerId'),
+                'is_balling_score_updated' => 1,
             );
-            if($this->userDatabase->updateBallingScores($data)){
+            if ($this->userDatabase->updateMatchBallingScores($data)) {
                 echo true;
-            }else {
+            } else {
                 echo false;
             }
-        }
-        else{
+        } else {
             echo 'empty-fields';
         }
     }
 
-    public function firstInningComplete(){
+    public function firstInningComplete()
+    {
         $matchId = $this->input->post('match_id');
-        if($this->userDatabase->frstInningComplete($matchId)){
+        if ($this->userDatabase->frstInningComplete($matchId)) {
             echo true;
         } else {
             echo false;

@@ -168,8 +168,8 @@
                         </div>
                         <div class="row mb-3">
                             <div class="col-md-12 d-flex justify-content-center">
-                                <a class="btn btn-outline-primary mr-4 wrap save-frst-batting-team" data-tournament-id="<?php echo $tournamentId; ?>" data-match-id="<?php echo $match_info[0]['match_id'] ?>" data-team-id="<?php echo $team_a[0]['team_id']; ?>"><?php echo $team_a[0]['team_name']; ?></a>
-                                <a class="btn btn-outline-primary text-center wrap save-frst-batting-team" data-tournament-id="<?php echo $tournamentId; ?>" data-match-id="<?php echo $match_info[0]['match_id'] ?>" data-team-id="<?php echo $team_b[0]['team_id']; ?>"><?php echo $team_b[0]['team_name']; ?></a>
+                                <a class="btn btn-outline-primary mr-4 wrap save-frst-batting-team" data-tournament-id="<?php echo $tournamentId; ?>" data-match-id="<?php echo $match_info[0]['match_id'] ?>" data-team-id="<?php echo $team_a[0]['team_id']; ?>" data-opponent-id="<?php echo $team_b[0]['team_id']; ?>"><?php echo $team_a[0]['team_name']; ?></a>
+                                <a class="btn btn-outline-primary text-center wrap save-frst-batting-team" data-tournament-id="<?php echo $tournamentId; ?>" data-match-id="<?php echo $match_info[0]['match_id'] ?>" data-team-id="<?php echo $team_b[0]['team_id']; ?>" data-opponent-id="<?php echo $team_a[0]['team_id']; ?>"><?php echo $team_b[0]['team_name']; ?></a>
                             </div>
                         </div>
                     </div>

@@ -10,11 +10,13 @@ $(document).ready(function(){
         var tournamentId = $(this).attr('data-tournament-id');
         var matchId = $(this).attr('data-match-id');
         var teamId = $(this).attr('data-team-id');
+        var opponentId = $(this).attr('data-opponent-id');
         var teamName = $(this).text();
 
         var data = {
         'match_id': matchId,
-        'team_id': teamId
+        'team_id': teamId,
+        'opponent_id': opponentId
         };
         swal({
             title: 'Reconfirmation',

@@ -778,6 +778,7 @@ $(document).ready(function(){
         e.preventDefault();
         var form_data = $(this).serialize();
         var button_content = $(this).find('button[type=submit]');
+        var playerId = button_content.attr('data-id');
         var data = {
             playerId : button_content.attr('data-id')
         };
@@ -787,42 +788,13 @@ $(document).ready(function(){
             type: "POST",
             data: form_data + '&' + $.param(data),
             success: function (response) {
-                if(response){
-                    swal({
-                        title: "Scores Updated Successfully",
-                        icon: "success",
-                        button: "ok",
-                    });
-                }
-                else {
-                    swal({
-                        title: "Something went wrong!",
-                        icon: "error",
-                        button: "ok",
-                    });
-                    button_content.html('Update');
-                }
-            }
-        });
-    });
 
-    $(".balling-score-update-form").submit(function (e) {
-        e.preventDefault();
-        var form_data = $(this).serialize();
-        var button_content = $(this).find('button[type=submit]');
-        var data = {
-            playerId : button_content.attr('data-id')
-        };
-        button_content.html('please wait..');
-        $.ajax({
-            url: BASE_URL + "ControlUnit/updateBallingScores",
-            type: "POST",
-            data: form_data + '&' + $.param(data),
-            success: function (response) {
+                $('#addBattingScoreModal').modal('toggle'); 
+
                 if(response == "empty-fields"){
                     swal({
-                        title: "Scores Updated Successfully",
-                        icon: "success",
+                        title: "Please fill all required fields !",
+                        icon: "warning",
                         button: "ok",
                     });
                 }
@@ -841,8 +813,53 @@ $(document).ready(function(){
                     });
                 }
                 button_content.html('Update');
+                $("#"+playerId).load(location.href + " .abc #"+playerId+">*","");
             }
         });
+    });
+
+    $(".balling-score-update-form").submit(function (e) {
+        e.preventDefault();
+        var form_data = $(this).serialize();
+        var button_content = $(this).find('button[type=submit]');
+        var data = {
+            playerId : button_content.attr('data-id')
+        };
+        button_content.html('please wait..');
+        $.ajax({
+            url: BASE_URL + "ControlUnit/updateBallingScores",
+            type: "POST",
+            data: form_data + '&' + $.param(data),
+            success: function (response) {
+
+                $('#addBallingScoreModal').modal('toggle'); 
+
+                if(response == "empty-fields"){
+                    swal({
+                        title: "Please fill all required fields !",
+                        icon: "warning",
+                        button: "ok",
+                    });
+                }
+                else if(response){
+                    swal({
+                        title: "Scores Updated Successfully",
+                        icon: "success",
+                        button: "ok",
+                    });
+                }
+                else {
+                    swal({
+                        title: "Something went wrong!",
+                        icon: "error",
+                        button: "ok",
+                    });
+                }
+                button_content.html('Update');
+                $(".updated-tag[data-id='"+button_content.attr('data-id')+"']").load(location.href + " .updated-tag>*","");
+            }
+        });
+        
     });
 })
 

@@ -151,13 +151,15 @@
                     </div>
                 </div>
 
-                <div class="row mb-4">
-                    <div class="col-md-12">
-                        <button class="btn btn-primary btn-sm inning-complete-btn float-right" data-id="<?php echo $match_info[0]['match_id']; ?>" >
-                            INNING COMPLETE
-                        </button>
+                <?php if (!$match_info[0]['is_first_inning_complete']) { ?>
+                    <div class="row mb-4">
+                        <div class="col-md-12">
+                            <button class="btn btn-primary btn-sm inning-complete-btn float-right" data-id="<?php echo $match_info[0]['match_id']; ?>">
+                                INNING COMPLETE
+                            </button>
+                        </div>
                     </div>
-                </div>
+                <?php } ?>
 
                 <div class="row mb-4">
                     <div class="col-md-12">
@@ -176,7 +178,7 @@
 
                 <div class="row">
                     <div class="col col-md-6">
-                        <div class="row">
+                        <div class="row abc">
                             <?php
                             $team_player_ids = empty($this->userDatabase->selectAllFromTableWhere('team_relation_table', array('team_id' => $team_a[0]['team_id']), 'user_id')) ? 0 : $this->userDatabase->selectAllFromTableWhere('team_relation_table', array('team_id' => $team_a[0]['team_id']), 'user_id');
                             //Fetch Team Payers
@@ -190,16 +192,21 @@
                                 $count = 0;
                                 foreach ($team_a_players as $team_a_player) {
                                     $count++;
+                                    $isScoreUpdated = $this->userDatabase->selectAllFromTableWhere('user_match_stats',array('user_id'=>$team_a_player['user_id']),'is_batting_score_updated');
                             ?>
                                     <div class="col-md-12">
                                         <div class="card team_a_players pointer" data-id="<?php echo $team_a_player['user_id']; ?>" data-name="<?php echo $team_a_player['full_name']; ?>" data-batting="1">
                                             <div class="team-nums">
                                                 <b><?php echo $count; ?></b>
                                             </div>
+                                            <div class="updated-tag <?php if($isScoreUpdated[0]['is_batting_score_updated']) echo "show-tag"; else echo "hide-tag" ?>" id="<?php echo $team_a_player['user_id']; ?>">
+                                                updated 
+
+                                            </div>
                                             <div class="card-body p-1">
                                                 <div class="d-flex justify-content-between align-items-center">
                                                     <div class="w-25 mr-1">
-                                                        <img class="rounded-circle bg-light" src="<?php echo empty($team_a_player['image_address']) ? base_url() . 'images/team/avatar3.png' : base_url() . $team_a_player['image_address'] ?>" alt="team img" width="35">
+                                                        <img class="rounded-circle bg-light" src="<?php echo empty($team_a_player['image_address']) ? base_url() . 'images/team/avatar3.png' : base_url() . $team_a_player['image_address'] ?>" alt="img" width="35">
                                                     </div>
                                                     <div class="w-75">
                                                         <strong class="card-title mb-0 d-block caps small-text wrap"><?php echo $team_a_player['full_name']; ?></strong>
@@ -236,16 +243,20 @@
                                 $count = 0;
                                 foreach ($team_b_players as $team_b_player) {
                                     $count++;
+                                    $isScoreUpdated = $this->userDatabase->selectAllFromTableWhere('user_match_stats',array('user_id'=>$team_b_player['user_id']),'is_balling_score_updated');
                             ?>
                                     <div class="col-md-12">
                                         <div class="card team_b_players pointer" data-id="<?php echo $team_b_player['user_id']; ?>" data-name="<?php echo $team_b_player['full_name']; ?>" data-batting="0">
                                             <div class="team-nums">
                                                 <b><?php echo $count; ?></b>
                                             </div>
+                                            <div class="updated-tag <?php if($isScoreUpdated[0]['is_balling_score_updated']) echo "show-tag"; else echo "hide-tag" ?>" data-id="<?php echo $team_b_player['user_id']; ?>">
+                                                updated
+                                            </div>
                                             <div class="card-body p-1">
                                                 <div class="d-flex justify-content-between align-items-center">
                                                     <div class="w-25 mr-1">
-                                                        <img class="rounded-circle bg-light" src="<?php echo empty($team_b_player['image_address']) ? base_url() . 'images/team/avatar3.png' : base_url() . $team_b_player['image_address'] ?>" alt="team img" width="35">
+                                                        <img class="rounded-circle bg-light" src="<?php echo empty($team_b_player['image_address']) ? base_url() . 'images/team/avatar3.png' : base_url() . $team_b_player['image_address'] ?>" alt="img" width="35">
                                                     </div>
                                                     <div class="w-75">
                                                         <strong class="card-title mb-0 d-block caps small-text wrap"><?php echo $team_b_player['full_name']; ?></strong>
@@ -319,34 +330,34 @@
                                 </div>
                             </div>
                             <form class="batting-score-update-form" method="POST">
-                            <div class="row mb-3">
-                                <div class="col-md-12">
-                                    <input type="text" name="total-runs" class="input-sm form-control-sm form-control" placeholder="Total runs">
+                                <div class="row mb-3">
+                                    <div class="col-md-12">
+                                        <input type="text" name="total-runs" class="input-sm form-control-sm form-control" placeholder="Total runs" required>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col col-md-6">
-                                    <input type="text" name="sixes" class="input-sm form-control-sm form-control" placeholder="No. of 6s">
+                                <div class="row mb-3">
+                                    <div class="col col-md-6">
+                                        <input type="text" name="sixes" class="input-sm form-control-sm form-control" placeholder="No. of 6s" required>
+                                    </div>
+                                    <div class="col col-md-6">
+                                        <input type="text" name="fours" class="input-sm form-control-sm form-control" placeholder="No. of 4s" required>
+                                    </div>
                                 </div>
-                                <div class="col col-md-6">
-                                    <input type="text" name="fours" class="input-sm form-control-sm form-control" placeholder="No. of 4s">
+                                <div class="row mb-3">
+                                    <div class="col-md-12">
+                                        <input type="text" name="ball-played" class="input-sm form-control-sm form-control" placeholder="Total Ball Played" required>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col-md-12">
-                                    <input type="text" name="ball-played" class="input-sm form-control-sm form-control" placeholder="Total Ball Played">
+                                <div class="row mb-3">
+                                    <div class="col-md-12">
+                                        <input type="checkbox" name="not-out" class="d-inline">&nbsp;&nbsp;<span class="d-inline text-dark small-text">Not Out</span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col-md-12">
-                                    <input type="checkbox" name="not-out" class="d-inline">&nbsp;&nbsp;<span class="d-inline text-dark small-text">Not Out</span>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <button type="submit" class="btn btn-primary btn-sm btn-block batting-score-update-btn">Update</button>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <button type="submit" class="btn btn-primary btn-sm btn-block batting-score-update-btn">Update</button>
-                                </div>
-                            </div>
                             </form>
                         </div>
                     </div>
@@ -376,41 +387,41 @@
                                 </div>
                             </div>
                             <form class="balling-score-update-form" method="POST">
-                            <div class="row mb-3">
-                                <div class="col-md-12">
-                                    <input type="text" name="total-overs" class="input-sm form-control-sm form-control" placeholder="Total Overs">
+                                <div class="row mb-3">
+                                    <div class="col-md-12">
+                                        <input type="text" name="total-overs" class="input-sm form-control-sm form-control" placeholder="Total Overs" required>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col col-md-6">
-                                    <input type="text" name="maidens" class="input-sm form-control-sm form-control" placeholder="No. of Maidens">
+                                <div class="row mb-3">
+                                    <div class="col col-md-6">
+                                        <input type="text" name="maidens" class="input-sm form-control-sm form-control" placeholder="No. of Maidens" required>
+                                    </div>
+                                    <div class="col col-md-6">
+                                        <input type="text" name="wickets" class="input-sm form-control-sm form-control" placeholder="No. of Wickets" required>
+                                    </div>
                                 </div>
-                                <div class="col col-md-6">
-                                    <input type="text" name="wickets" class="input-sm form-control-sm form-control" placeholder="No. of Wickets">
+                                <div class="row mb-3">
+                                    <div class="col col-md-6">
+                                        <input type="text" name="total-runs" class="input-sm form-control-sm form-control" placeholder="Total Runs" required>
+                                    </div>
+                                    <div class="col col-md-6">
+                                        <input type="text" name="total-dot-balls" class="input-sm form-control-sm form-control" placeholder="Total Dot Balls" required>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col col-md-6">
-                                    <input type="text" name="total-runs" class="input-sm form-control-sm form-control" placeholder="Total Runs">
+                                <div class="row mb-3">
+                                    <div class="col col-md-6">
+                                        <input type="text" name="fours" class="input-sm form-control-sm form-control" placeholder="No. of 4s">
+                                    </div>
+                                    <div class="col col-md-6">
+                                        <input type="text" name="sixes" class="input-sm form-control-sm form-control" placeholder="No. of 6s">
+                                    </div>
                                 </div>
-                                <div class="col col-md-6">
-                                    <input type="text" name="total-dot-balls" class="input-sm form-control-sm form-control" placeholder="Total Dot Balls">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <button type="submit" class="btn btn-primary btn-sm btn-block balling-score-update-btn">Update</button>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col col-md-6">
-                                    <input type="text" name="fours" class="input-sm form-control-sm form-control" placeholder="No. of 4s">
-                                </div>
-                                <div class="col col-md-6">
-                                    <input type="text" name="sixes" class="input-sm form-control-sm form-control" placeholder="No. of 6s">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <button type="submit" class="btn btn-primary btn-sm btn-block balling-score-update-btn">Update</button>
-                                </div>
-                            </div>
-                        </form>
+                            </form>
                         </div>
                     </div>
                     <div class="modal-footer">
