@@ -146,23 +146,23 @@
                             foreach ($team_players as $players) {
                     ?>
                     <div class="col-md-6">
-                        <div class="card players" data-id="<?php echo $players->user_id; ?>">
+                        <div class="card players" data-id="<?php echo $players['user_id']; ?>">
                             <i class="fa fa-trash delete-team-btn"></i>
                             <div class="card-body p-2">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="w-25">
-                                        <img class="rounded-circle bg-light" src="<?php echo base_url() . $players->image_address; ?>" alt="team img" width="75">
+                                        <img class="rounded-circle bg-light" src="<?php echo base_url() . $players['image_address']; ?>" alt="team img" width="75">
                                     </div>
                                     <div class="w-75">
-                                        <strong class="card-title mb-0 d-block"><?php echo $players->full_name; ?></strong>
-                                        <p class="card-title mb-0 d-block small-text text-dark"><?php echo $players->playing_role; ?>&nbsp;<?php echo $players->batting_style; ?></p>
+                                        <strong class="card-title mb-0 d-block"><?php echo $players['full_name']; ?></strong>
+                                        <p class="card-title mb-0 d-block small-text text-dark"><?php echo $players['playing_role']; ?>&nbsp;<?php echo $players['batting_style']; ?></p>
                                     </div>
                                 </div>
                             </div>
                             <div class="card-footer">
                                 <div class="col-md-12">
                                     <div class="team-city">
-                                        <i class="fa fa-map-marker" style="font-size: 0.85rem"></i>&nbsp;<small><?php echo $players->city; ?></small>
+                                        <i class="fa fa-map-marker" style="font-size: 0.85rem"></i>&nbsp;<small><?php echo $players['city']; ?></small>
                                     </div>
                                 </div>
                             </div>

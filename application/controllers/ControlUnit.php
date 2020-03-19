@@ -198,7 +198,7 @@ class ControlUnit extends CI_Controller
             $data['update_css_js'] = $this->userDatabase->selectAllFromTableWhere('update_app_table', array('id' => '1'), 'datetime');
             //Fetch Team Player Ids
             $data['team_id'] = $teamId;
-            $data['team_player_ids'] = empty($this->userDatabase->selectAllFromTableWhere('team_relation_table', array('team_id' => $teamId), 'user_id')) ? 0 : $this->userDatabase->selectAllFromTableWhere('team_relation_table', $data['where'], 'user_id');
+            $data['team_player_ids'] = empty($this->userDatabase->selectAllFromTableWhere('team_relation_table', array('team_id' => $teamId), 'user_id')) ? 0 : $this->userDatabase->selectAllFromTableWhere('team_relation_table', array('team_id' => $teamId), 'user_id');
             //Fetch Team Payers
             if ($data['team_player_ids'] != 0) {
                 $data['team_players'] = $this->userDatabase->multipleDataFetch('user_account_table', array_column($data['team_player_ids'], 'user_id'), 'user_id,full_name,playing_role,batting_style,city,image_address');
