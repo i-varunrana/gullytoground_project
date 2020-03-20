@@ -813,7 +813,8 @@ $(document).ready(function(){
                     });
                 }
                 button_content.html('Update');
-                $("#"+playerId).load(location.href + " .abc #"+playerId+">*","");
+                $("#"+playerId).removeClass('hide-tag');
+                $("#"+playerId).show();
             }
         });
     });
@@ -822,6 +823,7 @@ $(document).ready(function(){
         e.preventDefault();
         var form_data = $(this).serialize();
         var button_content = $(this).find('button[type=submit]');
+        var playerId = button_content.attr('data-id')
         var data = {
             playerId : button_content.attr('data-id')
         };
@@ -856,7 +858,8 @@ $(document).ready(function(){
                     });
                 }
                 button_content.html('Update');
-                $(".updated-tag[data-id='"+button_content.attr('data-id')+"']").load(location.href + " .updated-tag>*","");
+                $("#"+playerId).removeClass('hide-tag');
+                $("#"+playerId).show();
             }
         });
         
@@ -880,6 +883,44 @@ $(document).ready(function(){
                     url: BASE_URL + "ControlUnit/firstInningComplete",
                     type: "POST",
                     data: { match_id : matchId },
+                    success: function (response) {
+
+                        if(response){
+                            window.location.reload();
+                        }
+                        else {
+                            swal({
+                                title: "Something went wrong!",
+                                icon: "error",
+                                button: "ok",
+                            });
+                        }
+                        button_content.html('Update');
+                    }
+                });
+                
+            } else {
+                //else code
+            }
+        });
+    });
+
+    $('.match-complete-btn').click(function(){
+        var matchId = $(this).attr('data-match-id');
+        var teamA = $(this).attr('data-teamA-id');
+        var teamB = $(this).attr('data-teamB-id');
+        swal({
+            title: "Are you sure ??",
+            icon: "warning",
+            buttons: ["NO", "YES"],
+        })
+        .then((value) => {
+            if (value) {
+
+                $.ajax({
+                    url: BASE_URL + "ControlUnit/matchComplete",
+                    type: "POST",
+                    data: { match_id : matchId, team_a : teamA, team_b : teamB },
                     success: function (response) {
 
                         if(response){

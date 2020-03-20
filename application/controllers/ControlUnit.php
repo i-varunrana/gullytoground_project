@@ -294,15 +294,15 @@ class ControlUnit extends CI_Controller
 
             $data['match_info'] = $this->userDatabase->selectAllFromTableWhere('match_table', array('tournament_id' => $tournamentId), 'match_id,tournament_id,team_a,team_b,batting_first,batting_second,is_first_inning_complete,date');
 
-            $team_player_ids = empty($this->userDatabase->fetchPlayesIds('team_relation_table', array($data['match_info'][0]['team_a'], $data['match_info'][0]['team_b']), 'user_id')) ?
-                0 : $this->userDatabase->fetchPlayesIds('team_relation_table', array($data['match_info'][0]['team_a'], $data['match_info'][0]['team_b']), 'user_id');
+            $team_player_ids = empty($this->userDatabase->fetchPlayesIds('team_relation_table', array($data['match_info'][0]['team_a'], $data['match_info'][0]['team_b']), 'user_id,team_id')) ?
+                0 : $this->userDatabase->fetchPlayesIds('team_relation_table', array($data['match_info'][0]['team_a'], $data['match_info'][0]['team_b']), 'user_id,team_id');
 
 
             if (empty($this->userDatabase->selectAllFromTableWhere('user_match_stats', array('match_id' => $data['match_info'][0]['match_id']), "user_id")) && !empty($data['match_info'])) {
 
                 $dataToBeInsert = array();
                 foreach ($team_player_ids as $id) {
-                    array_push( $dataToBeInsert,array("user_id" => $id->user_id, "match_id" => $data['match_info'][0]['match_id']));
+                    array_push($dataToBeInsert, array("user_id" => $id->user_id, "match_id" => $data['match_info'][0]['match_id'], "team_id" => $id->team_id));
                 }
 
                 if ($this->userDatabase->insertMultipleData("user_match_stats", $dataToBeInsert)) {
@@ -335,7 +335,6 @@ class ControlUnit extends CI_Controller
                 } else {
                     redirect(__CLASS__ . '/index');
                 }
-
             } else {
 
                 if ($data['match_info']) {
@@ -363,9 +362,7 @@ class ControlUnit extends CI_Controller
                 } else {
                     redirect(__CLASS__ . '/index');
                 }
-
             }
-
         } else {
             $this->load->view('authenticate/login');
         }
@@ -1077,8 +1074,12 @@ class ControlUnit extends CI_Controller
         $fours = $this->input->post('fours');
         $ballPlayed = $this->input->post('ball-played');
         if (isset($totalRuns) && isset($sixes) && isset($fours)  && isset($ballPlayed)) {
-             $notOut = $this->input->post('not-out');
-             if(isset($notOut)){ echo $notOut = 1; }else{ echo $notOut = 0; }
+            $notOut = $this->input->post('not-out');
+            if (isset($notOut)) {
+                echo $notOut = 1;
+            } else {
+                echo $notOut = 0;
+            }
             $data = array(
                 'not_out' => $notOut,
                 'total_runs' =>  $this->input->post('total-runs'),
@@ -1100,11 +1101,19 @@ class ControlUnit extends CI_Controller
 
     public function updateBallingScores()
     {
+
+        $totalOvers = $this->input->post('total-overs');
+        $maidens = $this->input->post('maidens');
+        $wickets = $this->input->post('wickets');
+        $totalRuns = $this->input->post('total-runs');
+        $totalDotBalls = $this->input->post('total-dot-balls');
+        $sixes = $this->input->post('sixes');
+        $fours = $this->input->post('fours');
         if (
-            !empty($this->input->post('total-overs')) && !empty($this->input->post('maidens'))
-            && !empty($this->input->post('wickets')) && !empty($this->input->post('total-runs'))
-            && !empty($this->input->post('total-dot-balls')) && !empty($this->input->post('sixes'))
-            && !empty($this->input->post('fours'))
+            isset($totalOvers) && isset($maidens)
+            && isset($wickets) && isset($totalRuns)
+            && isset($totalDotBalls) && isset($sixes)
+            && isset($fours)
         ) {
             $data = array(
                 'overs' => $this->input->post('total-overs'),
@@ -1135,6 +1144,44 @@ class ControlUnit extends CI_Controller
             echo true;
         } else {
             echo false;
+        }
+    }
+
+    public function matchComplete()
+    {
+        $matchId = $this->input->post('match_id');
+        $teamA = $this->input->post('team_a');
+        $teamB = $this->input->post('team_b');
+
+
+
+        if ($this->userDatabase->selectAllFromTableWhere("match_table", array("match_id" => $matchId), 'is_first_inning_complete')) {
+
+            $match_stats_team_a = $this->userDatabase->selectAllFromTableWhere("user_match_stats", array('match_id' => $matchId, 'team_id' => $teamA), "SUM(runs) AS total,team_id");
+            $match_stats_team_b = $this->userDatabase->selectAllFromTableWhere("user_match_stats", array('match_id' => $matchId, 'team_id' => $teamB), "SUM(runs) AS total,team_id");
+
+            if ($match_stats_team_a[0]['total'] > $match_stats_team_b[0]['total']) {
+                $winningTeam = $match_stats_team_a[0]['team_id'];
+                $lossingTeam = $match_stats_team_b[0]['team_id'];
+                $draw = 0;
+            } else if ($match_stats_team_b[0]['total'] > $match_stats_team_a[0]['total']) {
+                $winningTeam = $match_stats_team_b[0]['team_id'];
+                $lossingTeam = $match_stats_team_a[0]['team_id'];
+                $draw = 0;
+            }
+            if ($match_stats_team_a[0]['total'] == $match_stats_team_b[0]['total']) {
+                $winningTeam = 0;
+                $lossingTeam = 0;
+                $draw = 1;
+            }
+
+            if ($this->userDatabase->matchComplete($matchId, $winningTeam, $lossingTeam, $draw)) {
+                echo true;
+            } else {
+                echo false;
+            }
+        } else {
+            echo "incomplete";
         }
     }
 }

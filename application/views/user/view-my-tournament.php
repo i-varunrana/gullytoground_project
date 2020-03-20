@@ -148,15 +148,66 @@
 
                                 <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                                     <li class="nav-item">
-                                        <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Requests</a>
+                                        <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Participants</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Participants</a>
+                                        <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Requests <span class="badge badge-danger count"><?php echo empty($requested_teams) ? "0" : count($requested_teams); ?> </span></a>
                                     </li>
                                 </ul>
                                 <div class="tab-content" id="pills-tabContent">
                                     <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                                         <div class="row mt-4">
+                                        <div class="col-md-12 mb-3 ">
+                                                <h5 class="text-right small-text text-dark"><?php echo empty($participated_teams) ? "0" : count($participated_teams); ?> Team Participated</h5>
+                                            </div>
+                                            <?php
+                                            if (!empty($participated_teams)) {
+                                                foreach ($participated_teams as $participated_team) {
+                                                    $team = $this->userDatabase->fetchTeamDetail($participated_team['team_id']);
+                                            ?>
+                                                    <div class="col-md-6">
+                                                        <div class="card participated-teams" data-toggle="modal" data-target="#scrollmodal">
+                                                            <p class="card-title mb-0 d-block small-text text-dark total-player-pos"><?php echo empty($team[0]['total_players']) ? "0" : $team[0]['total_players']; ?> Players</p>
+                                                            <div class="card-body p-2">
+                                                                <div class="d-flex justify-content-between align-items-center">
+                                                                    <div class="w-25">
+                                                                        <img class="rounded-circle bg-light" src="<?php echo empty($team[0]['team_dp']) ? base_url() . 'images/team/avatar3.png' : base_url() . $team[0]['team_dp'] ?>" alt="team img" width="75">
+                                                                    </div>
+                                                                    <div class="w-75">
+                                                                        <strong class="card-title mb-0 d-block caps"><?php echo $team[0]['team_name']; ?></strong>
+                                                                        <img src="<?php echo base_url(); ?>images/icon/admin.png" alt="" width="12">&nbsp;<small><?php echo $team[0]['admin_name']; ?></small>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="card-footer p-0 pt-2 pb-2">
+                                                                <div class="d-flex justify-content-between pr-3 pl-3">
+                                                                    <div class="team-city">
+                                                                        <i class="fa fa-map-marker" style="font-size: 0.85rem"></i>&nbsp;<small class="caps"><?php echo $team[0]['team_city']; ?></small>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                <?php
+                                                }
+                                            } else {
+                                                ?>
+
+                                                <div class="col-md-12">
+                                                    <h5 class="text-center m-3">0 Participant</h5>
+                                                </div>
+
+                                            <?php } ?>
+                                        </div>
+
+                                    </div>
+                                    <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                                        <div class="row mt-1">
+                                            <div class="col-md-12 mb-3 ">
+                                                <h5 class="text-right small-text text-dark"><?php echo empty($requested_teams) ? "0" : count($requested_teams); ?> Team Requested</h5>
+                                            </div>
+
                                             <?php
                                             if (!empty($requested_teams)) {
                                                 foreach ($requested_teams as $requested_team) {
@@ -206,54 +257,7 @@
                                             <?php } ?>
 
                                         </div>
-
-                                    </div>
-                                    <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-                                        <div class="row mt-1">
-                                            <div class="col-md-12 mb-3 ">
-                                                <h5 class="text-right small-text text-dark"><?php echo empty($participated_teams) ? "0" : count($participated_teams); ?> Team Participated</h5>
-                                            </div>
-                                            <?php
-                                            if (!empty($participated_teams)) {
-                                                foreach ($participated_teams as $participated_team) {
-                                                    $team = $this->userDatabase->fetchTeamDetail($participated_team['team_id']);
-                                            ?>
-                                                    <div class="col-md-6">
-                                                        <div class="card" data-toggle="modal" data-target="#scrollmodal">
-                                                            <p class="card-title mb-0 d-block small-text text-dark total-player-pos"><?php echo empty($team[0]['total_players']) ? "0" : $team[0]['total_players']; ?> Players</p>
-                                                            <div class="card-body p-2">
-                                                                <div class="d-flex justify-content-between align-items-center">
-                                                                    <div class="w-25">
-                                                                        <img class="rounded-circle bg-light" src="<?php echo empty($team[0]['team_dp']) ? base_url() . 'images/team/avatar3.png' : base_url() . $team[0]['team_dp'] ?>" alt="team img" width="75">
-                                                                    </div>
-                                                                    <div class="w-75">
-                                                                        <strong class="card-title mb-0 d-block caps"><?php echo $team[0]['team_name']; ?></strong>
-                                                                        <img src="<?php echo base_url(); ?>images/icon/admin.png" alt="" width="12">&nbsp;<small><?php echo $team[0]['admin_name']; ?></small>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="card-footer p-0 pt-2 pb-2">
-                                                                <div class="d-flex justify-content-between pr-3 pl-3">
-                                                                    <div class="team-city">
-                                                                        <i class="fa fa-map-marker" style="font-size: 0.85rem"></i>&nbsp;<small class="caps"><?php echo $team[0]['team_city']; ?></small>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                <?php
-                                                }
-                                            } else {
-                                                ?>
-
-                                                <div class="col-md-12">
-                                                    <h5 class="text-center m-3">0 Participant</h5>
-                                                </div>
-
-                                            <?php } ?>
-
-                                        </div>
+                                        
                                     </div>
                                 </div>
 
@@ -262,139 +266,6 @@
                     </div>
 
                 </div>
-
-                <!-- <div class="row">
-                    <div class="col-md-12">
-                        <div class="card p-2 br-green">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="d-flex justify-content-start align-items-center">
-                                    <div class="wh-35 rounded-circle d-flex justify-content-center align-items-center bg-flat-color-3">
-                                        <img src="<?php echo base_url(); ?>images/icon/trophy.png" alt="trophy icon">
-                                    </div>
-                                    <div class="ml-2">
-                                        Requested Teams
-                                    </div>
-                                </div>
-                                <div class="small-text text-up text-dark fw-b">
-                                    <?php echo empty($requested_teams) ? "0" : count($requested_teams); ?> Teams
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="float-right rejected-requests mb-4">
-                            <a data-toggle="modal" data-target="#rejectedteammodal">REJECTED REQUESTS</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <?php
-                    if (!empty($requested_teams)) {
-                        foreach ($requested_teams as $requested_team) {
-                            $team = $this->userDatabase->fetchTeamDetail($requested_team['team_id']);
-                    ?>
-                            <div class="col-md-6">
-                                <div class="card" data-toggle="modal" data-target="#scrollmodal">
-                                    <p class="card-title mb-0 d-block small-text text-dark total-player-pos"><?php echo empty($team[0]['total_players']) ? "0" : $team[0]['total_players']; ?> Players</p>
-                                    <div class="card-body p-2">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="w-25">
-                                                <img class="rounded-circle bg-light" src="<?php echo empty($team[0]['team_dp']) ? base_url() . 'images/team/avatar3.png' : base_url() . $team[0]['team_dp'] ?>" alt="team img" width="75">
-                                            </div>
-                                            <div class="w-75">
-                                                <strong class="card-title mb-0 d-block caps"><?php echo $team[0]['team_name']; ?></strong>
-                                                <img src="<?php echo base_url(); ?>images/icon/admin.png" alt="" width="12">&nbsp;<small><?php echo $team[0]['admin_name']; ?></small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card-footer p-0 pt-2 pb-2">
-                                        <div class="d-flex justify-content-between pr-3 pl-3">
-                                            <div class="team-city">
-                                                <i class="fa fa-map-marker" style="font-size: 0.85rem"></i>&nbsp;<small class="caps"><?php echo $team[0]['team_city']; ?></small>
-                                            </div>
-                                            <div class="d-flex flex-columns">
-                                                <div class="accept-request mr-2 d-block">
-                                                    <button class="accept-team-request" data-team-id="<?php echo $team[0]['team_id']; ?>" data-tournament-id="<?php echo $tournament_id; ?>">ACCEPT</button>
-                                                </div>
-                                                <div class="reject-request d-block">
-                                                    <button class="reject-team-request" data-team-id="<?php echo $team[0]['team_id']; ?>" data-tournament-id="<?php echo $tournament_id; ?>">REJECT</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                    <?php
-                        }
-                    }
-                    ?>
-
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="card p-2 br-green">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="d-flex justify-content-start align-items-center">
-                                    <div class="wh-35 rounded-circle d-flex justify-content-center align-items-center bg-flat-color-3">
-                                        <img src="<?php echo base_url(); ?>images/icon/trophy.png" alt="trophy icon">
-                                    </div>
-                                    <div class="ml-2">
-                                        Participated Teams
-                                    </div>
-                                </div>
-                                <div class="small-text text-up text-dark fw-b">
-                                    <?php echo empty($participated_teams) ? "0" : count($participated_teams); ?> Teams
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <?php
-                    if (!empty($participated_teams)) {
-                        foreach ($participated_teams as $participated_team) {
-                            $team = $this->userDatabase->fetchTeamDetail($participated_team['team_id']);
-                    ?>
-                            <div class="col-md-6">
-                                <div class="card" data-toggle="modal" data-target="#scrollmodal">
-                                    <p class="card-title mb-0 d-block small-text text-dark total-player-pos"><?php echo empty($team[0]['total_players']) ? "0" : $team[0]['total_players']; ?> Players</p>
-                                    <div class="card-body p-2">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="w-25">
-                                                <img class="rounded-circle bg-light" src="<?php echo empty($team[0]['team_dp']) ? base_url() . 'images/team/avatar3.png' : base_url() . $team[0]['team_dp'] ?>" alt="team img" width="75">
-                                            </div>
-                                            <div class="w-75">
-                                                <strong class="card-title mb-0 d-block caps"><?php echo $team[0]['team_name']; ?></strong>
-                                                <img src="<?php echo base_url(); ?>images/icon/admin.png" alt="" width="12">&nbsp;<small><?php echo $team[0]['admin_name']; ?></small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card-footer p-0 pt-2 pb-2">
-                                        <div class="d-flex justify-content-between pr-3 pl-3">
-                                            <div class="team-city">
-                                                <i class="fa fa-map-marker" style="font-size: 0.85rem"></i>&nbsp;<small class="caps"><?php echo $team[0]['team_city']; ?></small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                    <?php
-                        }
-                    }
-                    ?>
-
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="create-team-btn">
-                            <a style="cursor:pointer" data-toggle="modal" data-target="#startmatchmodal">START A MATCH</a>
-                        </div>
-                    </div>
-                </div> -->
             </div>
             <!-- .animated -->
         </div>

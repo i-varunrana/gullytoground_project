@@ -414,7 +414,7 @@ Class UserDatabase extends CI_Model {
         balling_sr = ROUND(((".$data['runs']." * 6) / (".$data['overs']." * 6)),2), 
         give_runs = ".$data['runs'].", five_wickets = IF(".$data['wickets']." >=5, 1, five_wickets), 
         dot_balls = ".$data['total_dot_balls'].", give_sixes = ".$data['sixes'].", 
-        give_fours = ".$data['fours']." is_balling_score_updated = true  WHERE user_id = ". $data['user_id'];
+        give_fours = ".$data['fours'].", is_balling_score_updated = true  WHERE user_id = ". $data['user_id'];
 
         $this->db->query($SQL);
         $this->db->trans_complete();
@@ -473,6 +473,22 @@ Class UserDatabase extends CI_Model {
     public function insertMultipleData($table,$data){
         $this->db->trans_start();
         $this->db->insert_batch($table, $data);
+        $this->db->trans_complete();
+        return $this->db->trans_status() ? TRUE : FALSE;
+    }
+
+    public function matchComplete($matchId, $winningTeam, $lossingTeam, $draw){
+
+        $firstWhere = array('match_id'=> $matchId, 'is_balling_score_updated'=> 0);
+        $secondWhere = array('match_id'=> $matchId, 'is_batting_score_updated'=> 0);
+        $thirdWhere = array('match_id'=> $matchId);
+        $this->db->trans_start();
+        $this->db->where($firstWhere);
+        $this->db->update("user_match_stats",array('matches' => 1,'is_balling_score_updated'=> 1));
+        $this->db->where($secondWhere);
+        $this->db->update("user_match_stats",array('matches' => 1,'is_batting_score_updated'=> 1));
+        $this->db->where($thirdWhere);
+        $this->db->update("match_table",array('winning_team' => $winningTeam,'lossing_team'=> $lossingTeam,'draw'=>$draw, 'active'=> 0));
         $this->db->trans_complete();
         return $this->db->trans_status() ? TRUE : FALSE;
     }

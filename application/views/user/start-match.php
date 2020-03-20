@@ -161,11 +161,13 @@
                     </div>
                 <?php } ?>
 
+                <?php if (!$match_info[0]['is_first_inning_complete']) { ?>
                 <div class="row mb-4">
                     <div class="col-md-12">
                         <p class="text-center text-dark bold">First Inning</p>
                     </div>
                 </div>
+                <?php } ?>
 
                 <div class="row">
                     <div class="col col-md-6">
@@ -250,7 +252,7 @@
                                             <div class="team-nums">
                                                 <b><?php echo $count; ?></b>
                                             </div>
-                                            <div class="updated-tag <?php if($isScoreUpdated[0]['is_balling_score_updated']) echo "show-tag"; else echo "hide-tag" ?>" data-id="<?php echo $team_b_player['user_id']; ?>">
+                                            <div class="updated-tag <?php if($isScoreUpdated[0]['is_balling_score_updated']) echo "show-tag"; else echo "hide-tag" ?>" id="<?php echo $team_b_player['user_id']; ?>">
                                                 updated
                                             </div>
                                             <div class="card-body p-1">
@@ -283,7 +285,7 @@
 
                 <div class="row m-4">
                     <div class="col-md-12 d-flex justify-content-center">
-                        <button class="btn btn-primary btn-sm">
+                        <button class="btn btn-primary btn-sm match-complete-btn" data-teamA-id="<?php echo $team_a[0]['team_id']; ?>" data-teamB-id="<?php echo $team_b[0]['team_id']; ?>" data-match-id="<?php echo $match_info[0]['match_id']; ?>">
                             MATCH COMPLETE
                         </button>
                     </div>
